@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Substitute - EduPlus</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+    /* === THEME VARIABLES === */
+    :root {
+        --primary: #6D28D9;      
+        --primary-hover: #5B21B6;
+        --secondary: #F97316;    
+        --bg-color: #F8FAFC;
+        --text-color: #1E293B;
+        --card-bg: #FFFFFF;
+        --border-color: #E2E8F0;
+        --sidebar-bg: #FFFFFF;
+        --sidebar-hover: #F1F5F9;
+    }
+
+    body.dark-mode {
+        --bg-color: #0F172A;      
+        --text-color: #F1F5F9; 
+        --card-bg: #1E293B;
+        --border-color: #334155;
+        --primary: #8B5CF6;       
+        --primary-hover: #7C3AED;
+        --sidebar-bg: #1E293B;
+        --sidebar-hover: #334155;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        overflow-x: hidden;
+        transition: all 0.3s ease;
+    }
+
+    /* === SIDEBAR (Same as Dashboard) === */
+    .sidebar {
+        width: 260px; height: 100vh; background-color: var(--sidebar-bg);
+        border-right: 1px solid var(--border-color); position: fixed;
+        top: 0; left: 0; z-index: 1000; transition: all 0.3s ease;
+        display: flex; flex-direction: column;
+    }
+    .sidebar-brand {
+        padding: 20px; font-size: 1.5rem; font-weight: 800;
+        color: var(--primary); text-decoration: none;
+        display: flex; align-items: center; gap: 10px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .sidebar-menu { list-style: none; padding: 15px 10px; margin: 0; flex: 1; overflow-y: auto; }
+    .sidebar-menu li { margin-bottom: 5px; }
+    .sidebar-menu a {
+        display: flex; align-items: center; gap: 15px; padding: 12px 15px;
+        color: var(--text-color); text-decoration: none; border-radius: 10px;
+        font-weight: 500; transition: 0.2s;
+    }
+    .sidebar-menu a:hover { background-color: var(--sidebar-hover); color: var(--primary); }
+    .sidebar-menu a.active { background-color: var(--primary); color: white; }
+    .sidebar-menu a i { width: 20px; text-align: center; }
+
+    /* === MAIN CONTENT === */
+    .main-content { margin-left: 260px; padding: 20px; transition: all 0.3s ease; min-height: 100vh; }
+
+    /* === TOP NAVBAR === */
+    .top-navbar {
+        background-color: var(--card-bg); border-radius: 15px; padding: 15px 25px;
+        display: flex; justify-content: space-between; align-items: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
+        margin-bottom: 25px;
+    }
+    .school-info h4 { margin: 0; font-weight: 700; font-size: 1.2rem; }
+    .school-info p { margin: 0; font-size: 0.85rem; color: #64748b; }
+    .top-nav-right { display: flex; align-items: center; gap: 20px; }
+    .icon-btn { background: transparent; border: none; font-size: 1.2rem; color: var(--text-color); cursor: pointer; position: relative; }
+    .icon-btn:hover { color: var(--primary); }
+    .user-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 10px; border-radius: 20px; transition: 0.2s; }
+    .user-profile:hover { background-color: var(--sidebar-hover); }
+    .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
+    .mobile-toggle { display: none; background: transparent; border: none; font-size: 1.5rem; color: var(--text-color); cursor: pointer; }
+
+    /* === FORM & SEARCH === */
+    .page-card {
+        background-color: var(--card-bg); border-radius: 15px; padding: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
+    }
+    .search-container { position: relative; }
+    .search-input {
+        width: 100%; padding: 15px 20px; border-radius: 10px;
+        border: 2px solid var(--border-color); background-color: transparent;
+        color: var(--text-color); font-size: 1rem; transition: 0.3s;
+    }
+    .search-input:focus { border-color: var(--primary); outline: none; }
+    
+    /* Suggestions Dropdown */
+    .suggestions-list {
+        position: absolute; top: 100%; left: 0; right: 0;
+        background-color: var(--card-bg); border: 1px solid var(--border-color);
+        border-radius: 10px; margin-top: 5px; max-height: 200px; overflow-y: auto;
+        z-index: 100; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .suggestion-item { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid var(--border-color); }
+    .suggestion-item:hover { background-color: var(--sidebar-hover); color: var(--primary); }
+
+    /* Selected Teachers Chips */
+    .selected-teachers { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+    .teacher-chip {
+        background-color: #dc2626; color: white; padding: 8px 15px;
+        border-radius: 20px; font-size: 0.9rem; font-weight: 600;
+        display: flex; align-items: center; gap: 10px;
+    }
+    .teacher-chip button {
+        background: rgba(255,255,255,0.3); border: none; color: white;
+        width: 20px; height: 20px; border-radius: 50%; cursor: pointer;
+        display: flex; align-items: center; justify-content: center; font-size: 12px;
+    }
+
+    .btn-find {
+        background-color: var(--primary); color: white; border: none;
+        padding: 15px 30px; border-radius: 10px; font-weight: 700;
+        font-size: 1.1rem; width: 100%; margin-top: 20px; transition: 0.3s;
+    }
+    .btn-find:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
+
+    /* === RESULT CARDS === */
+    .result-card {
+        background-color: var(--card-bg); border-radius: 15px; padding: 25px;
+        margin-bottom: 20px; border-left: 5px solid var(--primary);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .result-card.success { border-left-color: #16a34a; }
+    .result-card h4 { font-weight: 800; color: var(--primary); margin-bottom: 15px; }
+    
+    .class-info { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+    .info-box { background-color: var(--bg-color); padding: 12px 15px; border-radius: 10px; }
+    .info-box small { color: #64748b; font-size: 0.85rem; display: block; margin-bottom: 4px; }
+    .info-box strong { font-size: 1.05rem; color: var(--text-color); }
+
+    .substitute-badge {
+        display: inline-block; background-color: rgba(22, 163, 74, 0.1);
+        color: #16a34a; padding: 8px 15px; border-radius: 20px;
+        font-weight: 700; font-size: 1.05rem;
+    }
+    .alternatives-text { font-size: 0.85rem; color: #64748b; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border-color); }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 991px) {
+        .sidebar { left: -260px; }
+        .sidebar.active { left: 0; }
+        .main-content { margin-left: 0; }
+        .mobile-toggle { display: block; }
+        .class-info { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+
+    <!-- === SIDEBAR === -->
+    <div class="sidebar" id="sidebar">
+        <a href="dashboard.html" class="sidebar-brand"><i class="fas fa-graduation-cap"></i> EduPlus</a>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="find-substitute.html" class="active"><i class="fas fa-search"></i> Find Substitute</a></li>
+            <li><a href="#"><i class="fas fa-users"></i> All Teachers</a></li>
+            <li><a href="#"><i class="fas fa-calendar-alt"></i> Timetable</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Reports & Analytics</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            <li class="mt-4"><a href="login.html" style="color: #dc2626;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- === MAIN CONTENT === -->
+    <div class="main-content">
+        
+        <!-- Top Navbar -->
+        <div class="top-navbar">
+            <div class="d-flex align-items-center gap-3">
+                <button class="mobile-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                <div class="school-info">
+                    <h4>Find Substitute</h4>
+                    <p>Mark absent teachers and find free replacements</p>
+                </div>
+            </div>
+            <div class="top-nav-right">
+                <button class="icon-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
+                <div class="user-profile">
+                    <div class="user-avatar" id="userAvatar">M</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="page-card mb-4">
+            <h4 class="mb-4 fw-bold">Who is absent today?</h4>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="teacherSearch" placeholder="Type teacher's name (e.g. Ahmed, Ali...)" autocomplete="off" oninput="showSuggestions()" onkeypress="if(event.key==='Enter') addTeacher()">
+                <div class="suggestions-list" id="suggestionsList"></div>
+            </div>
+
+            <div class="selected-teachers" id="selectedTeachersContainer"></div>
+
+            <button class="btn-find" onclick="findSubstitutes()">
+                <i class="fas fa-search me-2"></i> Find Substitutes
+            </button>
+        </div>
+
+        <!-- Result Section -->
+        <div id="resultsContainer" style="display: none;">
+            <h4 class="mb-3 fw-bold">Substitution Plan</h4>
+            <div id="resultsList"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // === THEME TOGGLE ===
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('eduplus_theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                localStorage.setItem('eduplus_theme', 'light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // === DUMMY DATA (Baad mein API se aayega) ===
+        const allTeachers = [
+            { name: "Mr. Ahmed Ali", subject: "Math" },
+            { name: "Ms. Fatima Khan", subject: "English" },
+            { name: "Mr. Usman Tariq", subject: "Physics" },
+            { name: "Ms. Zainab Bibi", subject: "Chemistry" },
+            { name: "Mr. Bilal Ahmed", subject: "Computer Science" },
+            { name: "Ms. Ayesha Siddiqua", subject: "Biology" },
+            { name: "Mr. Hamza Sheikh", subject: "Urdu" },
+            { name: "Ms. Sana Malik", subject: "Islamiat" }
+        ];
+
+        let selectedTeachers = [];
+
+        // === UI FUNCTIONS ===
+        function showSuggestions() {
+            const input = document.getElementById('teacherSearch').value.toLowerCase();
+            const suggestionsList = document.getElementById('suggestionsList');
+            
+            if (input.length < 1) {
+                suggestionsList.style.display = 'none';
+                return;
+            }
+
+            const matches = allTeachers.filter(t => 
+                t.name.toLowerCase().includes(input) && !selectedTeachers.includes(t.name)
+            );
+
+            if (matches.length > 0) {
+                suggestionsList.innerHTML = matches.map(t => 
+                    `<div class="suggestion-item" onclick="selectTeacher('${t.name}')">
+                        <strong>${t.name}</strong> <span style="color: #64748b; font-size: 0.85rem;">(${t.subject})</span>
+                    </div>`
+                ).join('');
+                suggestionsList.style.display = 'block';
+            } else {
+                suggestionsList.style.display = 'none';
+            }
+        }
+
+        function selectTeacher(name) {
+            document.getElementById('teacherSearch').value = '';
+            document.getElementById('suggestionsList').style.display = 'none';
+            addTeacher(name);
+        }
+
+        function addTeacher(nameToAdd) {
+            let name = nameToAdd;
+            
+            if (!name) {
+                name = document.getElementById('teacherSearch').value.trim();
+            }
+            
+            if (!name) return;
+
+            // Check if teacher exists
+            const teacherExists = allTeachers.find(t => t.name.toLowerCase() === name.toLowerCase());
+            
+            if (!teacherExists) {
+                alert("Teacher not found in database!");
+                return;
+            }
+
+            if (selectedTeachers.includes(teacherExists.name)) {
+                alert("Teacher already added!");
+                return;
+            }
+
+            selectedTeachers.push(teacherExists.name);
+            document.getElementById('teacherSearch').value = '';
+            renderSelectedTeachers();
+        }
+
+        function removeTeacher(name) {
+            selectedTeachers = selectedTeachers.filter(t => t !== name);
+            renderSelectedTeachers();
+        }
+
+        function renderSelectedTeachers() {
+            const container = document.getElementById('selectedTeachersContainer');
+            container.innerHTML = selectedTeachers.map(name => 
+                `<div class="teacher-chip">
+                    ${name}
+                    <button onclick="removeTeacher('${name}')"><i class="fas fa-times"></i></button>
+                </div>`
+            ).join('');
+        }
+
+        // === FIND SUBSTITUTE LOGIC (Demo) ===
+        function findSubstitutes() {
+            if (selectedTeachers.length === 0) {
+                alert("Please select at least one absent teacher.");
+                return;
+            }
+
+            const resultsContainer = document.getElementById('resultsContainer');
+            const resultsList = document.getElementById('resultsList');
+            
+            resultsContainer.style.display = 'block';
+            resultsList.innerHTML = '<div class="text-center py-4"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">Searching for available teachers...</p></div>';
+
+            // Fake delay to show loading
+            setTimeout(() => {
+                resultsList.innerHTML = '';
+                
+                // Dummy logic: Just assign random free teachers
+                selectedTeachers.forEach((absentTeacher, index) => {
+                    // Pick a random teacher who is not absent
+                    const available = allTeachers.filter(t => !selectedTeachers.includes(t.name));
+                    const randomSub = available[Math.floor(Math.random() * available.length)];
+                    const alt1 = available[Math.floor(Math.random() * available.length)];
+                    const alt2 = available[Math.floor(Math.random() * available.length)];
+
+                    resultsList.innerHTML += `
+                        <div class="result-card success">
+                            <h4><i class="fas fa-check-circle me-2"></i> Period ${index + 1} (9:00 AM - 9:45 AM)</h4>
+                            <div class="class-info">
+                                <div class="info-box">
+                                    <small>Absent Teacher</small>
+                                    <strong style="color: #dc2626;">${absentTeacher}</strong>
+                                </div>
+                                <div class="info-box">
+                                    <small>Class</small>
+                                    <strong>Class 10-A</strong>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <small class="text-muted d-block mb-1">Assigned Substitute:</small>
+                                <div class="substitute-badge">
+                                    <i class="fas fa-user-check me-2"></i>${randomSub.name} (${randomSub.subject})
+                                </div>
+                            </div>
+                            <div class="alternatives-text">
+                                <strong>Alternatives:</strong> ${alt1.name}, ${alt2.name}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                selectedTeachers = [];
+                renderSelectedTeachers();
+            }, 1500);
+        }
+
+        // === LOAD USER DATA ===
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem('eduplus_theme');
+            const icon = document.getElementById('theme-icon');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+
+            const userStr = localStorage.getItem('eduplus_user');
+            if (userStr) {
+                const user = JSON.parse(userStr);
+                document.getElementById('userAvatar').innerText = (user.name || "A").charAt(0).toUpperCase();
+            }
+        });
+    </script>
+</body>
+</html>
