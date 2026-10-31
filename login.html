@@ -7,12 +7,24 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
+    /* === THEME VARIABLES === */
     :root {
-        --primary: #2a5298;
-        --primary-hover: #1e3c72;
-        --bg-color: #f8f9fa;
-        --text-color: #333333;
-        --card-bg: #ffffff;
+        --primary: #6D28D9;      
+        --primary-hover: #5B21B6;
+        --secondary: #F97316;    
+        --bg-color: #F8FAFC;
+        --text-color: #1E293B;
+        --card-bg: #FFFFFF;
+        --border-color: #E2E8F0;
+    }
+
+    body.dark-mode {
+        --bg-color: #0F172A;      
+        --text-color: #F1F5F9; 
+        --card-bg: #1E293B;
+        --border-color: #334155;
+        --primary: #8B5CF6;       
+        --primary-hover: #7C3AED;
     }
 
     body {
@@ -21,7 +33,7 @@
         color: var(--text-color);
         height: 100vh;
         margin: 0;
-        overflow: hidden; /* Scrollbar hatane ke liye */
+        overflow: hidden;
     }
 
     .login-wrapper {
@@ -34,14 +46,14 @@
         flex: 1;
         background: url('https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/EduPlus%20Pakistani%20School%20Welcome.png') center/cover no-repeat;
         position: relative;
-        display: none; /* Mobile par hide rahega */
+        display: none; 
     }
 
     .login-left::before {
         content: '';
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        background: linear-gradient(135deg, rgba(42,82,152,0.85) 0%, rgba(30,60,114,0.9) 100%);
+        background: linear-gradient(135deg, rgba(109, 40, 217, 0.85) 0%, rgba(15, 23, 42, 0.9) 100%);
     }
 
     .login-left-content {
@@ -59,12 +71,14 @@
         font-size: 3rem;
         font-weight: 800;
         margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
 
     .login-left-content p {
         font-size: 1.2rem;
         opacity: 0.9;
         line-height: 1.6;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
 
     /* Right Side Form */
@@ -75,7 +89,15 @@
         justify-content: center;
         padding: 20px;
         background-color: var(--bg-color);
+        position: relative;
     }
+
+    .theme-toggle-btn { 
+        position: absolute; top: 20px; right: 20px;
+        background: transparent; border: none; color: var(--text-color); 
+        font-size: 1.5rem; cursor: pointer; transition: 0.3s; 
+    }
+    .theme-toggle-btn:hover { color: var(--primary); }
 
     .login-box {
         width: 100%;
@@ -84,6 +106,7 @@
         padding: 40px;
         border-radius: 20px;
         box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        border: 1px solid var(--border-color);
     }
 
     .brand-logo {
@@ -106,27 +129,32 @@
     .form-label {
         font-weight: 600;
         font-size: 0.9rem;
+        color: var(--text-color);
     }
 
     .form-control {
         padding: 12px 15px;
         border-radius: 10px;
-        border: 2px solid #e2e8f0;
+        border: 2px solid var(--border-color);
         font-size: 1rem;
         transition: 0.3s;
+        background-color: transparent;
+        color: var(--text-color);
     }
 
     .form-control:focus {
         border-color: var(--primary);
         box-shadow: none;
+        background-color: transparent;
+        color: var(--text-color);
     }
 
     .input-group-text {
         background: transparent;
-        border: 2px solid #e2e8f0;
+        border: 2px solid var(--border-color);
         border-right: none;
         border-radius: 10px 0 0 10px;
-        color: #888;
+        color: var(--primary);
     }
 
     .form-control.with-icon {
@@ -160,6 +188,7 @@
         text-align: center;
         margin-top: 20px;
         font-size: 0.95rem;
+        color: var(--text-color);
     }
 
     .register-link a {
@@ -172,7 +201,6 @@
         text-decoration: underline;
     }
 
-    /* Show Password Icon */
     .password-toggle {
         position: absolute;
         right: 15px;
@@ -182,10 +210,9 @@
         z-index: 10;
     }
 
-    /* Media Query for Desktop */
     @media (min-width: 992px) {
         .login-left {
-            display: block; /* Desktop par image show hogi */
+            display: block; 
         }
     }
 </style>
@@ -204,8 +231,11 @@
 
         <!-- Right Side (Login Form) -->
         <div class="login-right">
+            
+            <!-- Theme Toggle -->
+            <button class="theme-toggle-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
+
             <div class="login-box">
-                <!-- Mobile Logo (Sirf mobile par dikhega) -->
                 <a href="index.html" class="brand-logo d-lg-none"><i class="fas fa-graduation-cap me-2"></i>EduPlus</a>
                 
                 <h3>Sign In to Your Account</h3>
@@ -227,11 +257,9 @@
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             <input type="password" class="form-control with-icon" id="password" placeholder="Enter your password" required>
                         </div>
-                        <!-- Eye Icon -->
                         <i class="fas fa-eye password-toggle" onclick="togglePassword()" id="toggleIcon"></i>
                     </div>
 
-                    <!-- Remember Me & Forgot Password -->
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="rememberMe">
@@ -240,16 +268,13 @@
                         <a href="#" style="color: var(--primary); font-size: 0.9rem; text-decoration: none; font-weight: 600;">Forgot Password?</a>
                     </div>
 
-                    <!-- Login Button -->
                     <button type="submit" class="btn-login" id="loginBtn">
                         Login <i class="fas fa-arrow-right ms-2"></i>
                     </button>
                     
-                    <!-- Error Message -->
                     <div id="errorMsg" class="text-danger text-center mt-3" style="display: none; font-weight: 600;"></div>
                 </form>
 
-                <!-- Register Link -->
                 <div class="register-link">
                     Don't have an account? <a href="register.html">Register here</a>
                 </div>
@@ -258,11 +283,36 @@
     </div>
 
     <script>
-        // Password Show/Hide Function
+        // === THEME TOGGLE ===
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('eduplus_theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                localStorage.setItem('eduplus_theme', 'light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem('eduplus_theme');
+            const icon = document.getElementById('theme-icon');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        });
+
+        // === PASSWORD TOGGLE ===
         function togglePassword() {
             const passwordInput = document.getElementById('password');
             const toggleIcon = document.getElementById('toggleIcon');
-            
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleIcon.classList.remove('fa-eye');
@@ -274,31 +324,25 @@
             }
         }
 
-        // Handle Login Form Submission
+        // === LOGIN FUNCTION (Demo) ===
         function handleLogin(event) {
-            event.preventDefault(); // Page refresh hone se rokne ke liye
-            
+            event.preventDefault(); 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const btn = document.getElementById('loginBtn');
             const errorMsg = document.getElementById('errorMsg');
 
-            // Button ko loading state mein dalein
             btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Logging in...';
             btn.disabled = true;
             errorMsg.style.display = 'none';
 
-            // Yahan baad mein hum Google Apps Script ka API call lagayenge
-            // Abhi ke liye hum ek fake delay create kar rahe hain (Testing ke liye)
+            // Fake delay (API integration baad mein hogi)
             setTimeout(() => {
-                
-                // DEMO: Agar email aur password sahi hai
                 if(email === "admin@school.com" && password === "admin123") {
-                    // Login successful
                     btn.innerHTML = '<i class="fas fa-check me-2"></i> Success!';
                     btn.style.background = '#28a745';
                     
-                    // User info save karein (baad mein dynamic hoga)
+                    // Save user info
                     localStorage.setItem('eduplus_user', JSON.stringify({
                         name: "Mariam Khan",
                         email: email,
@@ -306,22 +350,19 @@
                         school_name: "Al-Noor Public School"
                     }));
 
-                    // 1 second baad dashboard par bhej dein
+                    // Redirect to dashboard
                     setTimeout(() => {
-                        window.location.href = "dashboard.html"; // Humne abhi dashboard nahi banaya
+                        window.location.href = "dashboard.html"; 
                     }, 1000);
 
                 } else {
-                    // Login failed
                     btn.innerHTML = 'Login <i class="fas fa-arrow-right ms-2"></i>';
                     btn.disabled = false;
                     btn.style.background = 'var(--primary)';
-                    
                     errorMsg.innerHTML = '<i class="fas fa-exclamation-circle me-1"></i> Invalid email or password';
                     errorMsg.style.display = 'block';
                 }
-
-            }, 1500); // 1.5 second ka fake wait
+            }, 1500);
         }
     </script>
 </body>
