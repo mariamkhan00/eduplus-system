@@ -46,28 +46,70 @@
         cursor: pointer; transition: 0.3s;
     }
     
-    /* Hero Section (Modified for Image) */
+    /* Hero Section with Background Image */
     .hero {
-        padding: 80px 0;
-        background: linear-gradient(135deg, rgba(42,82,152,0.05) 0%, rgba(42,82,152,0.01) 100%);
+        position: relative;
+        /* Yahan Aapki Picture Lagi Hai */
+        background: url('https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/EduPlus%20Pakistani%20School%20Welcome.png') center/cover no-repeat;
+        height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
-    .hero-text h1 { font-size: 3.2rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; line-height: 1.2; }
-    .hero-text p { font-size: 1.15rem; color: var(--text-color); opacity: 0.8; margin-bottom: 30px; }
-    .hero-img { width: 100%; max-width: 500px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: 0.3s; }
     
+    /* Dark Overlay taake text saaf parha jaye */
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(10, 25, 41, 0.75); /* Dark shade */
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        padding: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .hero-content .underline {
+        width: 120px;
+        height: 4px;
+        background-color: var(--primary);
+        margin: 0 auto 30px;
+        border-radius: 2px;
+    }
+
+    .hero-content p {
+        font-size: 1.25rem;
+        color: #e2e8f0;
+        line-height: 1.8;
+        margin-bottom: 40px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+
     /* Buttons */
     .btn-primary-custom {
-        background-color: var(--primary); color: white; padding: 12px 30px;
+        background-color: var(--primary); color: white; padding: 12px 35px;
         border-radius: 30px; font-weight: 600; font-size: 1.1rem;
         text-decoration: none; transition: 0.3s; border: none; display: inline-block;
     }
-    .btn-primary-custom:hover { background-color: var(--primary-hover); color: white; transform: translateY(-3px); }
+    .btn-primary-custom:hover { background-color: var(--primary-hover); color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
     .btn-outline-custom {
-        border: 2px solid var(--primary); color: var(--primary); padding: 12px 30px;
+        border: 2px solid #ffffff; color: #ffffff; padding: 12px 35px;
         border-radius: 30px; font-weight: 600; font-size: 1.1rem;
         text-decoration: none; transition: 0.3s; display: inline-block; margin-left: 10px;
     }
-    .btn-outline-custom:hover { background-color: var(--primary); color: white; }
+    .btn-outline-custom:hover { background-color: #ffffff; color: var(--primary); }
 
     /* Features */
     .feature-card {
@@ -114,24 +156,15 @@
         </div>
     </nav>
 
-    <!-- Hero Section (Text Left, Image Right) -->
+    <!-- Hero Section (Background Image Wala) -->
     <section class="hero">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Left Text -->
-                <div class="col-lg-6 hero-text text-center text-lg-start">
-                    <h1>Automate Your School's Substitute System</h1>
-                    <p>EduPlus is a smart web and mobile application that automatically finds the best substitute teacher when someone is absent, ensuring no class is left behind.</p>
-                    <div class="d-flex justify-content-center justify-content-lg-start flex-wrap gap-3">
-                        <a href="register.html" class="btn-primary-custom">Start Free Trial <i class="fas fa-arrow-right ms-2"></i></a>
-                        <a href="#how-it-works" class="btn-outline-custom">See How it Works</a>
-                    </div>
-                </div>
-                <!-- Right Image -->
-                <div class="col-lg-6 text-center mt-5 mt-lg-0">
-                    <!-- Yahan Image Lagi Hai -->
-                    <img src="https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/EduPlus%20Pakistani%20School%20Welcome.png" alt="EduPlus Pakistan" class="hero-img">
-                </div>
+        <div class="hero-content">
+            <h1>Smart Teacher Substitute System</h1>
+            <div class="underline"></div>
+            <p>When a teacher is absent, EduPlus automatically finds another teacher to take their place, so no class is left without a teacher.</p>
+            <div class="d-flex justify-content-center flex-wrap gap-3">
+                <a href="register.html" class="btn-primary-custom">Start Free Trial <i class="fas fa-arrow-right ms-2"></i></a>
+                <a href="#how-it-works" class="btn-outline-custom">See How it Works</a>
             </div>
         </div>
     </section>
