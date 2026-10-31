@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduPlus - Smart Substitute System</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+    /* Theme Variables */
+    :root {
+        --primary: #2a5298;
+        --primary-hover: #1e3c72;
+        --bg-color: #f8f9fa;
+        --text-color: #333333;
+        --nav-bg: #ffffff;
+        --card-bg: #ffffff;
+        --footer-bg: #1e3c72;
+    }
+
+    body.dark-mode {
+        --bg-color: #0f172a;
+        --text-color: #e2e8f0;
+        --nav-bg: #1e293b;
+        --card-bg: #1e293b;
+        --footer-bg: #020617;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: all 0.3s ease;
+    }
+
+    /* Navbar */
+    .navbar {
+        background-color: var(--nav-bg) !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        transition: 0.3s;
+    }
+    .navbar-brand { font-weight: 700; color: var(--primary) !important; font-size: 1.5rem; }
+    .nav-link { color: var(--text-color) !important; font-weight: 500; }
+    .theme-toggle-btn {
+        background: transparent; border: none; color: var(--text-color); font-size: 1.2rem;
+        cursor: pointer; transition: 0.3s;
+    }
+    
+    /* Hero Section */
+    .hero {
+        padding: 100px 0;
+        background: linear-gradient(135deg, rgba(42,82,152,0.1) 0%, rgba(42,82,152,0.05) 100%);
+        text-align: center;
+    }
+    .hero h1 { font-size: 3.5rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; }
+    .hero p { font-size: 1.2rem; color: var(--text-color); opacity: 0.8; max-width: 700px; margin: 0 auto 30px; }
+    
+    /* Buttons */
+    .btn-primary-custom {
+        background-color: var(--primary); color: white; padding: 12px 30px;
+        border-radius: 30px; font-weight: 600; font-size: 1.1rem;
+        text-decoration: none; transition: 0.3s; border: none;
+    }
+    .btn-primary-custom:hover { background-color: var(--primary-hover); color: white; transform: translateY(-3px); }
+    .btn-outline-custom {
+        border: 2px solid var(--primary); color: var(--primary); padding: 12px 30px;
+        border-radius: 30px; font-weight: 600; font-size: 1.1rem;
+        text-decoration: none; transition: 0.3s; margin-left: 10px;
+    }
+    .btn-outline-custom:hover { background-color: var(--primary); color: white; }
+
+    /* Features */
+    .feature-card {
+        background-color: var(--card-bg); border-radius: 15px; padding: 30px;
+        height: 100%; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        transition: 0.3s; text-align: center;
+    }
+    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+    .feature-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+    .feature-card h4 { font-weight: 700; margin-bottom: 15px; }
+    .feature-card p { color: var(--text-color); opacity: 0.8; }
+
+    /* Footer */
+    footer { background-color: var(--footer-bg); color: #a0aec0; padding: 40px 0; margin-top: 50px; }
+    footer a { color: #a0aec0; text-decoration: none; }
+    footer a:hover { color: white; }
+</style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-graduation-cap me-2"></i>EduPlus</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#how-it-works">How it Works</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                    <li class="nav-item ms-3">
+                        <a href="login.html" class="btn btn-primary-custom" style="padding: 8px 20px; font-size: 1rem;">Login</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                            <i class="fas fa-moon" id="theme-icon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Automate Your School's Substitute System</h1>
+            <p>EduPlus is a smart web and mobile application that automatically finds the best substitute teacher when someone is absent, ensuring no class is left behind.</p>
+            <div class="d-flex justify-content-center flex-wrap gap-3">
+                <a href="register.html" class="btn-primary-custom">Start Free Trial <i class="fas fa-arrow-right ms-2"></i></a>
+                <a href="#how-it-works" class="btn-outline-custom">See How it Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Why Choose EduPlus?</h2>
+                <p class="text-muted">Built for modern educational institutions</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-robot feature-icon"></i>
+                        <h4>Smart Algorithm</h4>
+                        <p>Automatically finds the free teacher with the lowest workload to ensure fair substitution.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-chart-pie feature-icon"></i>
+                        <h4>Analytics & Reports</h4>
+                        <p>Track teacher absences, substitutions, and generate monthly/yearly PDF reports easily.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt feature-icon"></i>
+                        <h4>Mobile & Offline</h4>
+                        <p>Works on both laptop and mobile. Install it as an app and use it even without internet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <h4 class="text-white mb-3">EduPlus</h4>
+            <p>Smart Substitute & Absentee Management System</p>
+            <div class="d-flex justify-content-center gap-4 mt-4">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+            <hr class="my-4 border-secondary">
+            <p class="mb-0">© 2026 EduPlus. Developed by <strong>Mariam Khan</strong>. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Theme Toggle Logic
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('eduplus_theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                localStorage.setItem('eduplus_theme', 'light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        // Load saved theme
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem('eduplus_theme');
+            const icon = document.getElementById('theme-icon');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                if(icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
