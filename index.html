@@ -7,7 +7,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
-    /* === UNIQUE THEME VARIABLES (Deep Purple & Vibrant Orange) === */
+    /* === THEME VARIABLES === */
     :root {
         --primary: #6D28D9;      
         --primary-hover: #5B21B6;
@@ -19,10 +19,10 @@
         --footer-bg: #1E1B4B;    
     }
 
-    /* Dark Mode Colors */
+    /* Dark Mode Colors (Text color fixed) */
     body.dark-mode {
         --bg-color: #0F172A;      
-        --text-color: #F1F5F9;
+        --text-color: #F1F5F9; /* Pure White text */
         --nav-bg: #1E293B;
         --card-bg: #1E293B;
         --primary: #8B5CF6;       
@@ -57,11 +57,10 @@
         text-align: center;
     }
     
-    /* Overlay halka kar diya taake picture nazar aaye */
     .hero::before {
         content: '';
         position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(15, 23, 42, 0.5); /* Sirf 50% dark shade */
+        background: rgba(15, 23, 42, 0.5); 
     }
     
     .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
@@ -84,20 +83,20 @@
     .section-title { text-align: center; font-weight: 800; font-size: 2.2rem; margin-bottom: 50px; color: var(--primary); }
     
     /* How It Works Steps */
-    .step-card { background: var(--card-bg); border-radius: 15px; padding: 30px; text-align: center; height: 100%; box-shadow: 0 5px 20px rgba(0,0,0,0.05); position: relative; border: 1px solid rgba(0,0,0,0.05); }
+    .step-card { background: var(--card-bg); border-radius: 15px; padding: 30px; text-align: center; height: 100%; box-shadow: 0 5px 20px rgba(0,0,0,0.05); position: relative; border: 1px solid rgba(0,0,0,0.05); color: var(--text-color); }
     body.dark-mode .step-card { border: 1px solid rgba(255,255,255,0.1); }
     .step-number { width: 50px; height: 50px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; margin: 0 auto 20px; box-shadow: 0 4px 10px rgba(109, 40, 217, 0.4); }
     .step-card h4 { font-weight: 700; font-size: 1.3rem; margin-bottom: 15px; color: var(--primary); }
 
     /* Features */
-    .feature-card { background: var(--card-bg); border-radius: 15px; padding: 30px; height: 100%; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: 0.3s; border-left: 4px solid var(--primary); border-top: 1px solid rgba(0,0,0,0.05); }
+    .feature-card { background: var(--card-bg); border-radius: 15px; padding: 30px; height: 100%; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: 0.3s; border-left: 4px solid var(--primary); border-top: 1px solid rgba(0,0,0,0.05); color: var(--text-color); }
     body.dark-mode .feature-card { border-top: 1px solid rgba(255,255,255,0.1); }
     .feature-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
     .feature-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
     .feature-card h4 { font-weight: 700; margin-bottom: 15px; }
 
     /* Pricing */
-    .pricing-card { background: var(--card-bg); border-radius: 20px; padding: 40px 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 2px solid transparent; transition: 0.3s; height: 100%; position: relative; }
+    .pricing-card { background: var(--card-bg); border-radius: 20px; padding: 40px 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 2px solid transparent; transition: 0.3s; height: 100%; position: relative; color: var(--text-color); }
     .pricing-card.popular { border-color: var(--primary); transform: scale(1.05); z-index: 1; box-shadow: 0 15px 40px rgba(109, 40, 217, 0.15); }
     .popular-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--secondary); color: #fff; padding: 5px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; }
     .price { font-size: 2.5rem; font-weight: 800; color: var(--primary); margin: 20px 0; }
@@ -109,7 +108,7 @@
     /* FAQ */
     .accordion-button { font-weight: 700; color: var(--text-color); background: var(--card-bg); border: 1px solid rgba(0,0,0,0.05); }
     .accordion-button:not(.collapsed) { background: var(--primary); color: white; }
-    .accordion-item { background: var(--card-bg); border-color: rgba(0,0,0,0.1); margin-bottom: 10px; border-radius: 10px !important; overflow: hidden; }
+    .accordion-item { background: var(--card-bg); border-color: rgba(0,0,0,0.1); margin-bottom: 10px; border-radius: 10px !important; overflow: hidden; color: var(--text-color); }
 
     /* Footer */
     footer { background-color: var(--footer-bg); color: #94a3b8; padding: 30px 0 20px; margin-top: 50px; text-align: center; }
@@ -124,6 +123,16 @@
         font-size: 1rem; transition: 0.3s; text-decoration: none;
     }
     .footer-icons a:hover { background: var(--primary); color: #fff; transform: translateY(-3px); }
+
+    /* Dark Mode mein white outline buttons fix */
+    body.dark-mode .btn-outline-dark {
+        color: #fff;
+        border-color: #fff;
+    }
+    body.dark-mode .btn-outline-dark:hover {
+        background: #fff;
+        color: #000;
+    }
 </style>
 </head>
 <body>
@@ -158,7 +167,8 @@
             <h1>Smart Teacher Substitute System</h1>
             <p>When a teacher is absent, EduPlus automatically finds another teacher to take their place, so no class is left without a teacher.</p>
             <div class="d-flex justify-content-center flex-wrap gap-3">
-                <a href="register.html" class="btn-primary-custom">Start 14-Day Free Trial <i class="fas fa-arrow-right ms-2"></i></a>
+                <!-- Trial Update Here -->
+                <a href="register.html" class="btn-primary-custom">Start 2-Month Free Trial <i class="fas fa-arrow-right ms-2"></i></a>
                 <a href="#how-it-works" class="btn-outline-custom">How it Works?</a>
             </div>
             <p class="mt-4" style="font-size: 0.9rem; color: #ccc;">No Credit Card Required. Cancel Anytime.</p>
@@ -257,13 +267,13 @@
     <section id="pricing" class="py-5" style="background-color: var(--bg-color);">
         <div class="container">
             <h2 class="section-title">Simple & Transparent Pricing</h2>
-            <p class="text-center mb-5" style="font-size: 1.1rem;">Start free for 14 days. Upgrade when you are ready.</p>
+            <p class="text-center mb-5" style="font-size: 1.1rem;">Start free for 2 months. Upgrade when you are ready.</p>
             <div class="row g-4 justify-content-center">
-                <!-- Free Plan -->
+                <!-- Free Plan (2 Months Update) -->
                 <div class="col-md-4">
                     <div class="pricing-card">
                         <h3 class="fw-bold">Free Trial</h3>
-                        <div class="price">Rs. 0 <small>/ 14 Days</small></div>
+                        <div class="price">Rs. 0 <small>/ 2 Months</small></div>
                         <p class="text-muted">Perfect to test the system.</p>
                         <ul class="pricing-list">
                             <li><i class="fas fa-check-circle"></i> Up to 20 Teachers</li>
@@ -311,7 +321,7 @@
         </div>
     </section>
 
-    <!-- FAQ Section (Updated Questions) -->
+    <!-- FAQ Section -->
     <section id="faq" class="py-5" style="background-color: var(--card-bg);">
         <div class="container" style="max-width: 800px;">
             <h2 class="section-title">Frequently Asked Questions</h2>
