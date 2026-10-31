@@ -7,23 +7,27 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
-    /* Theme Variables */
+    /* === UNIQUE THEME VARIABLES (Deep Purple & Vibrant Orange) === */
     :root {
-        --primary: #2a5298;
-        --primary-hover: #1e3c72;
-        --bg-color: #f8f9fa;
-        --text-color: #333333;
-        --nav-bg: #ffffff;
-        --card-bg: #ffffff;
-        --footer-bg: #1e3c72;
+        --primary: #6D28D9;      /* Deep Purple */
+        --primary-hover: #5B21B6;
+        --secondary: #F97316;    /* Vibrant Orange */
+        --bg-color: #F8FAFC;
+        --text-color: #1E293B;
+        --nav-bg: #FFFFFF;
+        --card-bg: #FFFFFF;
+        --footer-bg: #1E1B4B;    /* Very Dark Purple/Black */
     }
 
+    /* Dark Mode Colors */
     body.dark-mode {
-        --bg-color: #0f172a;
-        --text-color: #e2e8f0;
-        --nav-bg: #1e293b;
-        --card-bg: #1e293b;
-        --footer-bg: #020617;
+        --bg-color: #0F172A;      /* Dark Navy/Slate */
+        --text-color: #F1F5F9;
+        --nav-bg: #1E293B;
+        --card-bg: #1E293B;
+        --primary: #8B5CF6;       /* Bright Purple for Dark Mode */
+        --primary-hover: #7C3AED;
+        --secondary: #FB923C;     /* Bright Orange for Dark Mode */
     }
 
     body {
@@ -36,97 +40,78 @@
     /* Navbar */
     .navbar {
         background-color: var(--nav-bg) !important;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         transition: 0.3s;
+        padding: 15px 0;
     }
-    .navbar-brand { font-weight: 700; color: var(--primary) !important; font-size: 1.5rem; }
-    .nav-link { color: var(--text-color) !important; font-weight: 500; }
-    .theme-toggle-btn {
-        background: transparent; border: none; color: var(--text-color); font-size: 1.2rem;
-        cursor: pointer; transition: 0.3s;
-    }
-    
-    /* Hero Section with Background Image */
+    .navbar-brand { font-weight: 800; color: var(--primary) !important; font-size: 1.6rem; }
+    .nav-link { color: var(--text-color) !important; font-weight: 600; margin: 0 10px; transition: 0.3s; }
+    .nav-link:hover { color: var(--primary) !important; }
+    .theme-toggle-btn { background: transparent; border: none; color: var(--text-color); font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
+
+    /* Hero Section */
     .hero {
         position: relative;
-        /* Yahan Aapki Picture Lagi Hai */
         background: url('https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/EduPlus%20Pakistani%20School%20Welcome.png') center/cover no-repeat;
-        height: 85vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        padding: 120px 0;
         text-align: center;
     }
-    
-    /* Dark Overlay taake text saaf parha jaye */
+    /* Hero ke upar Purple/Black shade */
     .hero::before {
         content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(10, 25, 41, 0.75); /* Dark shade */
+        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(135deg, rgba(109, 40, 217, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
     }
-
-    .hero-content {
-        position: relative;
-        z-index: 1;
-        max-width: 900px;
-        padding: 20px;
-    }
-
-    .hero-content h1 {
-        font-size: 3.5rem;
-        font-weight: 800;
-        color: #ffffff;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-    }
-
-    .hero-content .underline {
-        width: 120px;
-        height: 4px;
-        background-color: var(--primary);
-        margin: 0 auto 30px;
-        border-radius: 2px;
-    }
-
-    .hero-content p {
-        font-size: 1.25rem;
-        color: #e2e8f0;
-        line-height: 1.8;
-        margin-bottom: 40px;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+    .hero-content h1 { font-size: 3.5rem; font-weight: 800; color: #ffffff; margin-bottom: 20px; text-shadow: 2px 2px 5px rgba(0,0,0,0.5); }
+    .hero-content p { font-size: 1.2rem; color: #e2e8f0; margin-bottom: 30px; }
 
     /* Buttons */
-    .btn-primary-custom {
-        background-color: var(--primary); color: white; padding: 12px 35px;
-        border-radius: 30px; font-weight: 600; font-size: 1.1rem;
-        text-decoration: none; transition: 0.3s; border: none; display: inline-block;
+    .btn-primary-custom { 
+        background-color: var(--secondary); /* Orange Button */
+        color: #fff; 
+        padding: 12px 30px; border-radius: 30px; font-weight: 800; font-size: 1.1rem; 
+        text-decoration: none; transition: 0.3s; border: none; 
     }
-    .btn-primary-custom:hover { background-color: var(--primary-hover); color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-    .btn-outline-custom {
-        border: 2px solid #ffffff; color: #ffffff; padding: 12px 35px;
-        border-radius: 30px; font-weight: 600; font-size: 1.1rem;
-        text-decoration: none; transition: 0.3s; display: inline-block; margin-left: 10px;
-    }
-    .btn-outline-custom:hover { background-color: #ffffff; color: var(--primary); }
+    .btn-primary-custom:hover { background-color: #EA580C; color: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(249, 115, 22, 0.4); }
+    
+    .btn-outline-custom { border: 2px solid white; color: white; padding: 12px 30px; border-radius: 30px; font-weight: 700; font-size: 1.1rem; text-decoration: none; transition: 0.3s; }
+    .btn-outline-custom:hover { background: white; color: var(--primary); }
+
+    /* Sections */
+    .section-title { text-align: center; font-weight: 800; font-size: 2.2rem; margin-bottom: 50px; color: var(--primary); }
+    
+    /* How It Works Steps */
+    .step-card { background: var(--card-bg); border-radius: 15px; padding: 30px; text-align: center; height: 100%; box-shadow: 0 5px 20px rgba(0,0,0,0.05); position: relative; border: 1px solid rgba(0,0,0,0.05); }
+    body.dark-mode .step-card { border: 1px solid rgba(255,255,255,0.1); }
+    .step-number { width: 50px; height: 50px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; margin: 0 auto 20px; box-shadow: 0 4px 10px rgba(109, 40, 217, 0.4); }
+    .step-card h4 { font-weight: 700; font-size: 1.3rem; margin-bottom: 15px; color: var(--primary); }
 
     /* Features */
-    .feature-card {
-        background-color: var(--card-bg); border-radius: 15px; padding: 30px;
-        height: 100%; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        transition: 0.3s; text-align: center;
-    }
+    .feature-card { background: var(--card-bg); border-radius: 15px; padding: 30px; height: 100%; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: 0.3s; border-left: 4px solid var(--primary); border-top: 1px solid rgba(0,0,0,0.05); }
+    body.dark-mode .feature-card { border-top: 1px solid rgba(255,255,255,0.1); }
     .feature-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
     .feature-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
     .feature-card h4 { font-weight: 700; margin-bottom: 15px; }
-    .feature-card p { color: var(--text-color); opacity: 0.8; }
 
-    /* Compact Footer */
-    footer { background-color: var(--footer-bg); color: #a0aec0; padding: 20px 0; margin-top: 50px; }
-    footer p { margin: 0; font-size: 0.9rem; }
-    footer a { color: #a0aec0; text-decoration: none; margin: 0 10px; font-size: 1.2rem; transition: 0.3s; }
-    footer a:hover { color: white; }
+    /* Pricing */
+    .pricing-card { background: var(--card-bg); border-radius: 20px; padding: 40px 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 2px solid transparent; transition: 0.3s; height: 100%; position: relative; }
+    .pricing-card.popular { border-color: var(--primary); transform: scale(1.05); z-index: 1; box-shadow: 0 15px 40px rgba(109, 40, 217, 0.15); }
+    .popular-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--secondary); color: #fff; padding: 5px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; }
+    .price { font-size: 2.5rem; font-weight: 800; color: var(--primary); margin: 20px 0; }
+    .price small { font-size: 1rem; color: var(--text-color); font-weight: 400; }
+    .pricing-list { list-style: none; padding: 0; text-align: left; margin-bottom: 30px; }
+    .pricing-list li { margin-bottom: 12px; font-size: 0.95rem; }
+    .pricing-list li i { color: var(--primary); margin-right: 10px; }
+
+    /* FAQ */
+    .accordion-button { font-weight: 700; color: var(--text-color); background: var(--card-bg); border: 1px solid rgba(0,0,0,0.05); }
+    .accordion-button:not(.collapsed) { background: var(--primary); color: white; }
+    .accordion-item { background: var(--card-bg); border-color: rgba(0,0,0,0.1); margin-bottom: 10px; border-radius: 10px !important; overflow: hidden; }
+
+    /* Footer */
+    footer { background-color: var(--footer-bg); color: #94a3b8; padding: 30px 0; margin-top: 50px; text-align: center; }
+    footer p { margin: 0; font-size: 0.95rem; }
 </style>
 </head>
 <body>
@@ -140,77 +125,250 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
                     <li class="nav-item"><a class="nav-link" href="#how-it-works">How it Works</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
                     <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
                     <li class="nav-item ms-3">
                         <a href="login.html" class="btn btn-primary-custom" style="padding: 8px 20px; font-size: 1rem;">Login</a>
                     </li>
                     <li class="nav-item ms-2">
-                        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-                            <i class="fas fa-moon" id="theme-icon"></i>
-                        </button>
+                        <button class="theme-toggle-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section (Background Image Wala) -->
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
+        <div class="container hero-content">
             <h1>Smart Teacher Substitute System</h1>
-            <div class="underline"></div>
             <p>When a teacher is absent, EduPlus automatically finds another teacher to take their place, so no class is left without a teacher.</p>
             <div class="d-flex justify-content-center flex-wrap gap-3">
-                <a href="register.html" class="btn-primary-custom">Start Free Trial <i class="fas fa-arrow-right ms-2"></i></a>
-                <a href="#features" class="btn-outline-custom">View Live Demo</a>
+                <a href="register.html" class="btn-primary-custom">Start 14-Day Free Trial <i class="fas fa-arrow-right ms-2"></i></a>
+                <a href="#how-it-works" class="btn-outline-custom">How it Works?</a>
+            </div>
+            <p class="mt-4" style="font-size: 0.9rem; color: #ccc;">No Credit Card Required. Cancel Anytime.</p>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-5" style="background-color: var(--bg-color);">
+        <div class="container">
+            <h2 class="section-title">How It Works?</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Register School</h4>
+                        <p>Create your school account and add your teachers, classes and timetable.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Mark Absent</h4>
+                        <p>If a teacher is absent, just select their name on the dashboard.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Smart Suggest</h4>
+                        <p>EduPlus automatically finds free teachers for that specific period.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h4>Get Report</h4>
+                        <p>At the end of the month, download detailed reports and charts.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-5">
+    <section id="features" class="py-5" style="background-color: var(--card-bg);">
         <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Why Choose EduPlus?</h2>
-                <p class="text-muted">Built for modern educational institutions</p>
-            </div>
+            <h2 class="section-title">Powerful Features</h2>
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="feature-card">
                         <i class="fas fa-robot feature-icon"></i>
                         <h4>Smart Algorithm</h4>
-                        <p>Automatically finds the free teacher with the lowest workload to ensure fair substitution.</p>
+                        <p>Finds the teacher with the lowest workload. Automatically balances substitutions so no single teacher gets overloaded.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <i class="fas fa-chart-pie feature-icon"></i>
+                        <i class="fas fa-calendar-alt feature-icon"></i>
+                        <h4>Live Timetable</h4>
+                        <p>Manage timetables for multiple shifts (Morning/Evening). View who is teaching which class right now.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line feature-icon"></i>
                         <h4>Analytics & Reports</h4>
-                        <p>Track teacher absences, substitutions, and generate monthly/yearly PDF reports easily.</p>
+                        <p>Get beautiful graphs showing absentees and substitutions. Download PDF reports for the government or management.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
                         <i class="fas fa-mobile-alt feature-icon"></i>
-                        <h4>Mobile & Offline</h4>
-                        <p>Works on both laptop and mobile. Install it as an app and use it even without internet.</p>
+                        <h4>Mobile App (PWA)</h4>
+                        <p>Install it on any phone. Works completely offline for attendance and syncs automatically when internet returns.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <h4>Secure Data</h4>
+                        <p>Data is stored securely. Only your school's admin can see your data. Completely private.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-user-graduate feature-icon"></i>
+                        <h4>Multi-School Support</h4>
+                        <p>One platform for multiple branches. Perfect for large school networks and colleges.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Compact Footer -->
-    <footer>
-        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
-            <p>© 2026 <strong>EduPlus</strong>. Developed by Mariam Khan.</p>
-            <div class="mt-2 mt-md-0">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-5" style="background-color: var(--bg-color);">
+        <div class="container">
+            <h2 class="section-title">Simple & Transparent Pricing</h2>
+            <p class="text-center mb-5" style="font-size: 1.1rem;">Start free for 14 days. Upgrade when you are ready.</p>
+            <div class="row g-4 justify-content-center">
+                <!-- Free Plan -->
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <h3 class="fw-bold">Free Trial</h3>
+                        <div class="price">Rs. 0 <small>/ 14 Days</small></div>
+                        <p class="text-muted">Perfect to test the system.</p>
+                        <ul class="pricing-list">
+                            <li><i class="fas fa-check-circle"></i> Up to 10 Teachers</li>
+                            <li><i class="fas fa-check-circle"></i> Single Shift</li>
+                            <li><i class="fas fa-check-circle"></i> Basic Timetable</li>
+                            <li><i class="fas fa-times-circle text-danger"></i> No Reports</li>
+                        </ul>
+                        <a href="register.html" class="btn btn-outline-dark w-100 rounded-pill fw-bold">Start Free Trial</a>
+                    </div>
+                </div>
+                
+                <!-- Basic Plan -->
+                <div class="col-md-4">
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">MOST POPULAR</div>
+                        <h3 class="fw-bold">Basic Plan</h3>
+                        <div class="price">Rs. 3,000 <small>/ Month</small></div>
+                        <p class="text-muted">For small schools.</p>
+                        <ul class="pricing-list">
+                            <li><i class="fas fa-check-circle"></i> Up to 50 Teachers</li>
+                            <li><i class="fas fa-check-circle"></i> Morning & Evening Shifts</li>
+                            <li><i class="fas fa-check-circle"></i> Smart Substitution</li>
+                            <li><i class="fas fa-check-circle"></i> Monthly PDF Reports</li>
+                        </ul>
+                        <a href="register.html" class="btn btn-primary w-100 rounded-pill fw-bold" style="background: var(--primary); border: none;">Upgrade to Basic</a>
+                    </div>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <h3 class="fw-bold">Premium</h3>
+                        <div class="price">Rs. 7,000 <small>/ Month</small></div>
+                        <p class="text-muted">For colleges & universities.</p>
+                        <ul class="pricing-list">
+                            <li><i class="fas fa-check-circle"></i> Unlimited Teachers</li>
+                            <li><i class="fas fa-check-circle"></i> Multi-Branch Support</li>
+                            <li><i class="fas fa-check-circle"></i> Advanced Analytics Graphs</li>
+                            <li><i class="fas fa-check-circle"></i> 24/7 Priority Support</li>
+                        </ul>
+                        <a href="register.html" class="btn btn-outline-dark w-100 rounded-pill fw-bold">Upgrade to Premium</a>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-5" style="background-color: var(--card-bg);">
+        <div class="container" style="max-width: 800px;">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            What happens after the 14-day free trial?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            After 14 days, you can choose to upgrade to a paid plan. If you don't upgrade, your account will be paused (your data will not be deleted, you can resume anytime).
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            Do we need a credit card for the free trial?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            No! You do not need any credit card or payment method to start the free trial. Just register and start using it.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Is our school data safe and private?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Absolutely. We use Google's secure servers. Your data is completely isolated. No other school can see your teachers or students.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            Does it work without internet?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, our app is PWA-based. Once you open it on mobile, it gets installed. You can mark absences offline, and it will sync when you get internet.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5 text-center" style="background: linear-gradient(135deg, var(--primary), #1E1B4B); color: white;">
+        <div class="container">
+            <h2 class="fw-bold mb-3" style="font-size: 2.5rem;">Ready to Automate Your School?</h2>
+            <p class="mb-4" style="font-size: 1.2rem; opacity: 0.9;">Join the modern schools using EduPlus.</p>
+            <a href="register.html" class="btn btn-light btn-lg rounded-pill fw-bold px-5 py-3" style="color: var(--primary);">Start Your Free Trial Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2026 <strong>EduPlus</strong>. Developed by Mariam Khan. All Rights Reserved.</p>
         </div>
     </footer>
 
