@@ -49,11 +49,12 @@
         display: none; 
     }
 
+    /* Overlay halka kar diya hai taake image wazeh nazar aaye */
     .login-left::before {
         content: '';
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        background: linear-gradient(135deg, rgba(109, 40, 217, 0.85) 0%, rgba(15, 23, 42, 0.9) 100%);
+        background: linear-gradient(135deg, rgba(109, 40, 217, 0.4) 0%, rgba(15, 23, 42, 0.7) 100%);
     }
 
     .login-left-content {
@@ -71,14 +72,14 @@
         font-size: 3rem;
         font-weight: 800;
         margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.8); /* Text ko dark shadow di hai taake image par wazeh parha jaye */
     }
 
     .login-left-content p {
         font-size: 1.2rem;
-        opacity: 0.9;
+        opacity: 0.95;
         line-height: 1.6;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
     }
 
     /* Right Side Form */
@@ -187,14 +188,15 @@
     .register-link {
         text-align: center;
         margin-top: 20px;
-        font-size: 0.95rem;
+        font-size: 1rem;
         color: var(--text-color);
     }
 
     .register-link a {
-        color: var(--primary);
-        font-weight: 700;
+        color: var(--secondary);
+        font-weight: 800;
         text-decoration: none;
+        margin-left: 5px;
     }
 
     .register-link a:hover {
@@ -275,8 +277,10 @@
                     <div id="errorMsg" class="text-danger text-center mt-3" style="display: none; font-weight: 600;"></div>
                 </form>
 
-                <div class="register-link">
-                    Don't have an account? <a href="register.html">Register here</a>
+                <!-- Updated Link Section -->
+                <div class="register-link mt-4 pt-3 border-top" style="border-color: var(--border-color) !important;">
+                    Don't have an account? 
+                    <a href="register.html">Register here <i class="fas fa-arrow-right ms-1"></i></a>
                 </div>
             </div>
         </div>
@@ -336,13 +340,11 @@
             btn.disabled = true;
             errorMsg.style.display = 'none';
 
-            // Fake delay (API integration baad mein hogi)
             setTimeout(() => {
                 if(email === "admin@school.com" && password === "admin123") {
                     btn.innerHTML = '<i class="fas fa-check me-2"></i> Success!';
                     btn.style.background = '#28a745';
                     
-                    // Save user info
                     localStorage.setItem('eduplus_user', JSON.stringify({
                         name: "Mariam Khan",
                         email: email,
@@ -350,7 +352,6 @@
                         school_name: "Al-Noor Public School"
                     }));
 
-                    // Redirect to dashboard
                     setTimeout(() => {
                         window.location.href = "dashboard.html"; 
                     }, 1000);
