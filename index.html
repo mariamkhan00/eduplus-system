@@ -19,10 +19,10 @@
         --footer-bg: #1E1B4B;    
     }
 
-    /* Dark Mode Colors (Text color fixed) */
+    /* Dark Mode Colors */
     body.dark-mode {
         --bg-color: #0F172A;      
-        --text-color: #F1F5F9; /* Pure White text */
+        --text-color: #F1F5F9; 
         --nav-bg: #1E293B;
         --card-bg: #1E293B;
         --primary: #8B5CF6;       
@@ -114,7 +114,6 @@
     footer { background-color: var(--footer-bg); color: #94a3b8; padding: 30px 0 20px; margin-top: 50px; text-align: center; }
     footer p { margin: 0; font-size: 0.95rem; }
     
-    /* Footer Contact Icons */
     .footer-icons { margin-top: 15px; display: flex; justify-content: center; gap: 15px; }
     .footer-icons a { 
         display: inline-flex; align-items: center; justify-content: center;
@@ -124,7 +123,6 @@
     }
     .footer-icons a:hover { background: var(--primary); color: #fff; transform: translateY(-3px); }
 
-    /* Dark Mode mein white outline buttons fix */
     body.dark-mode .btn-outline-dark {
         color: #fff;
         border-color: #fff;
@@ -167,7 +165,6 @@
             <h1>Smart Teacher Substitute System</h1>
             <p>When a teacher is absent, EduPlus automatically finds another teacher to take their place, so no class is left without a teacher.</p>
             <div class="d-flex justify-content-center flex-wrap gap-3">
-                <!-- Trial Update Here -->
                 <a href="register.html" class="btn-primary-custom">Start 2-Month Free Trial <i class="fas fa-arrow-right ms-2"></i></a>
                 <a href="#how-it-works" class="btn-outline-custom">How it Works?</a>
             </div>
@@ -219,6 +216,13 @@
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="feature-card">
+                        <i class="fas fa-file-upload feature-icon"></i>
+                        <h4>Easy Data Upload</h4>
+                        <p>Upload your school's PDF/Excel timetable and all data fills automatically. No manual entry required.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
                         <i class="fas fa-robot feature-icon"></i>
                         <h4>Smart Algorithm</h4>
                         <p>Finds the teacher with the lowest workload. Automatically balances substitutions so no single teacher gets overloaded.</p>
@@ -226,50 +230,44 @@
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <i class="fas fa-calendar-alt feature-icon"></i>
-                        <h4>Live Timetable</h4>
-                        <p>Manage timetables for multiple shifts (Morning/Evening). View who is teaching which class right now.</p>
+                        <i class="fas fa-whatsapp feature-icon"></i>
+                        <h4>WhatsApp Alerts</h4>
+                        <p>Get instant WhatsApp notifications for absent teachers and substitution assignments.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
                         <i class="fas fa-chart-line feature-icon"></i>
                         <h4>Analytics & Reports</h4>
-                        <p>Get beautiful graphs showing absentees and substitutions. Download PDF reports for the government or management.</p>
+                        <p>Get beautiful graphs showing absentees and substitutions. Download PDF/Excel reports for management.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <i class="fas fa-mobile-alt feature-icon"></i>
-                        <h4>Mobile App (PWA)</h4>
-                        <p>Install it on any phone. Works completely offline for attendance and syncs automatically when internet returns.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card">
-                        <i class="fas fa-shield-alt feature-icon"></i>
-                        <h4>Secure Data</h4>
-                        <p>Data is stored securely. Only your school's admin can see your data. Completely private.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card">
-                        <i class="fas fa-user-graduate feature-icon"></i>
-                        <h4>Multi-School Support</h4>
+                        <i class="fas fa-network-wired feature-icon"></i>
+                        <h4>Multi-Branch Support</h4>
                         <p>One platform for multiple branches. Perfect for large school networks and colleges.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-brain feature-icon"></i>
+                        <h4>AI Substitute Assistant</h4>
+                        <p>Our premium AI matches free teachers not just by free period, but by subject expertise to maintain quality.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
+    <!-- Pricing Section (Updated) -->
     <section id="pricing" class="py-5" style="background-color: var(--bg-color);">
         <div class="container">
             <h2 class="section-title">Simple & Transparent Pricing</h2>
             <p class="text-center mb-5" style="font-size: 1.1rem;">Start free for 2 months. Upgrade when you are ready.</p>
             <div class="row g-4 justify-content-center">
-                <!-- Free Plan (2 Months Update) -->
+                
+                <!-- Free Plan -->
                 <div class="col-md-4">
                     <div class="pricing-card">
                         <h3 class="fw-bold">Free Trial</h3>
@@ -277,41 +275,47 @@
                         <p class="text-muted">Perfect to test the system.</p>
                         <ul class="pricing-list">
                             <li><i class="fas fa-check-circle"></i> Up to 20 Teachers</li>
-                            <li><i class="fas fa-check-circle"></i> Single Shift</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Upload Timetable via PDF/Excel</strong></li>
                             <li><i class="fas fa-check-circle"></i> Smart Substitution</li>
-                            <li><i class="fas fa-check-circle"></i> Monthly PDF Reports</li>
+                            <li><i class="fas fa-check-circle"></i> Basic Reports & Graphs</li>
+                            <li><i class="fas fa-check-circle"></i> Export Data (PDF)</li>
                         </ul>
                         <a href="register.html" class="btn btn-outline-dark w-100 rounded-pill fw-bold">Start Free Trial</a>
                     </div>
                 </div>
                 
-                <!-- Basic Plan -->
+                <!-- Basic Plan (Schools) -->
                 <div class="col-md-4">
                     <div class="pricing-card popular">
-                        <div class="popular-badge">MOST POPULAR</div>
+                        <div class="popular-badge">FOR SCHOOLS</div>
                         <h3 class="fw-bold">Basic Plan</h3>
-                        <div class="price">Rs. 3,000 <small>/ Month</small></div>
-                        <p class="text-muted">For small schools.</p>
+                        <div class="price">Rs. 5,000 <small>/ Month</small></div>
+                        <p class="text-muted">Best for small & medium schools.</p>
                         <ul class="pricing-list">
                             <li><i class="fas fa-check-circle"></i> Up to 50 Teachers</li>
-                            <li><i class="fas fa-check-circle"></i> Morning & Evening Shifts</li>
-                            <li><i class="fas fa-check-circle"></i> Smart Substitution</li>
-                            <li><i class="fas fa-check-circle"></i> Monthly PDF Reports</li>
+                            <li><i class="fas fa-check-circle"></i> Single Shift (Morning)</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>WhatsApp Absent Alerts</strong></li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Teacher Self-Service Portal</strong></li>
+                            <li><i class="fas fa-check-circle"></i> Monthly Reports & Graphs</li>
+                            <li><i class="fas fa-check-circle"></i> Export Data (PDF/Excel)</li>
                         </ul>
                         <a href="register.html" class="btn btn-primary w-100 rounded-pill fw-bold" style="background: var(--primary); border: none;">Upgrade to Basic</a>
                     </div>
                 </div>
 
-                <!-- Premium Plan -->
+                <!-- Premium Plan (Colleges/Universities) -->
                 <div class="col-md-4">
                     <div class="pricing-card">
                         <h3 class="fw-bold">Premium</h3>
-                        <div class="price">Rs. 7,000 <small>/ Month</small></div>
+                        <div class="price">Rs. 10,000 <small>/ Month</small></div>
                         <p class="text-muted">For colleges & universities.</p>
                         <ul class="pricing-list">
                             <li><i class="fas fa-check-circle"></i> Unlimited Teachers</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Dual Shifts (Morning & Evening)</strong></li>
                             <li><i class="fas fa-check-circle"></i> Multi-Branch Support</li>
-                            <li><i class="fas fa-check-circle"></i> Advanced Analytics Graphs</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>AI Substitute Assistant</strong></li>
+                            <li><i class="fas fa-check-circle"></i> Advanced Analytics & Custom Graphs</li>
+                            <li><i class="fas fa-check-circle"></i> Export Data (PDF/Excel)</li>
                             <li><i class="fas fa-check-circle"></i> 24/7 Priority Support</li>
                         </ul>
                         <a href="register.html" class="btn btn-outline-dark w-100 rounded-pill fw-bold">Upgrade to Premium</a>
@@ -346,19 +350,19 @@
                     </h2>
                     <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
-                            Once you register, you will get a dashboard. You can easily add teachers, classes, and create a timetable without any technical knowledge. We also provide a simple tutorial.
+                            Once you register, you can simply upload your school's timetable in Excel or PDF format. Our system will automatically fill in the data.
                         </div>
                     </div>
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                            What if a teacher refuses to take a substitute class?
+                            What makes Basic and Premium Plans different?
                         </button>
                     </h2>
                     <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
-                            The Principal or Admin has full authority. The system suggests a free teacher, but the Admin can always manually change the substitute teacher if needed.
+                            The Basic plan is for schools with a single shift and includes WhatsApp alerts. The Premium plan is for colleges with dual shifts and includes an AI Assistant that matches teachers by subject expertise.
                         </div>
                     </div>
                 </div>
@@ -405,7 +409,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Theme Toggle Logic
         function toggleTheme() {
             const body = document.body;
             const icon = document.getElementById('theme-icon');
@@ -423,7 +426,6 @@
             }
         }
 
-        // Load saved theme
         document.addEventListener("DOMContentLoaded", () => {
             const savedTheme = localStorage.getItem('eduplus_theme');
             const icon = document.getElementById('theme-icon');
