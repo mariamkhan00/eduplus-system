@@ -7,42 +7,23 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
-    /* === THEME VARIABLES === */
     :root {
-        --primary: #6D28D9;      
-        --primary-hover: #5B21B6;
-        --secondary: #F97316;    
-        --bg-color: #F8FAFC;
-        --text-color: #1E293B;
-        --card-bg: #FFFFFF;
-        --border-color: #E2E8F0;
-        --sidebar-bg: #FFFFFF;
-        --sidebar-hover: #F1F5F9;
-        --table-row-hover: #f8fafc;
+        --primary: #6D28D9; --primary-hover: #5B21B6; --secondary: #F97316;
+        --bg-color: #F8FAFC; --text-color: #1E293B; --card-bg: #FFFFFF;
+        --border-color: #E2E8F0; --sidebar-bg: #FFFFFF; --sidebar-hover: #F1F5F9;
+        --table-row-hover: #f8fafc; --muted-text: #64748b;
     }
-
     body.dark-mode {
-        --bg-color: #0F172A;      
-        --text-color: #F1F5F9; 
-        --card-bg: #1E293B;
-        --border-color: #334155;
-        --primary: #8B5CF6;       
-        --primary-hover: #7C3AED;
-        --sidebar-bg: #1E293B;
-        --sidebar-hover: #334155;
-        --table-row-hover: #334155;
+        --bg-color: #0F172A; --text-color: #F1F5F9; --card-bg: #1E293B;
+        --border-color: #334155; --primary: #8B5CF6; --primary-hover: #7C3AED;
+        --sidebar-bg: #1E293B; --sidebar-hover: #334155; --table-row-hover: #334155;
+        --muted-text: #94a3b8;
     }
-
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        margin: 0;
-        overflow-x: hidden;
-        transition: all 0.3s ease;
+        background-color: var(--bg-color); color: var(--text-color);
+        margin: 0; overflow-x: hidden; transition: all 0.3s ease;
     }
-
-    /* === SIDEBAR === */
     .sidebar {
         width: 260px; height: 100vh; background-color: var(--sidebar-bg);
         border-right: 1px solid var(--border-color); position: fixed;
@@ -65,11 +46,7 @@
     .sidebar-menu a:hover { background-color: var(--sidebar-hover); color: var(--primary); }
     .sidebar-menu a.active { background-color: var(--primary); color: white; }
     .sidebar-menu a i { width: 20px; text-align: center; }
-
-    /* === MAIN CONTENT === */
     .main-content { margin-left: 260px; padding: 20px; transition: all 0.3s ease; min-height: 100vh; }
-
-    /* === TOP NAVBAR === */
     .top-navbar {
         background-color: var(--card-bg); border-radius: 15px; padding: 15px 25px;
         display: flex; justify-content: space-between; align-items: center;
@@ -77,326 +54,212 @@
         margin-bottom: 25px;
     }
     .school-info h4 { margin: 0; font-weight: 700; font-size: 1.2rem; }
-    .school-info p { margin: 0; font-size: 0.85rem; color: #64748b; }
+    .school-info p { margin: 0; font-size: 0.85rem; color: var(--muted-text); }
     .top-nav-right { display: flex; align-items: center; gap: 20px; }
-    .icon-btn { background: transparent; border: none; font-size: 1.2rem; color: var(--text-color); cursor: pointer; position: relative; }
+    .icon-btn { background: transparent; border: none; font-size: 1.2rem; color: var(--text-color); cursor: pointer; }
     .icon-btn:hover { color: var(--primary); }
-    .user-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 10px; border-radius: 20px; transition: 0.2s; }
+    .user-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 10px; border-radius: 20px; }
     .user-profile:hover { background-color: var(--sidebar-hover); }
-    .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
+    .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; }
     .mobile-toggle { display: none; background: transparent; border: none; font-size: 1.5rem; color: var(--text-color); cursor: pointer; }
-
-    /* === PAGE CONTENT === */
     .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
     .page-header h2 { font-weight: 800; margin: 0; }
-    
-    .btn-add {
-        background-color: var(--primary); color: white; border: none;
-        padding: 10px 20px; border-radius: 10px; font-weight: 600;
-        display: flex; align-items: center; gap: 8px; transition: 0.3s;
-    }
+    .btn-add { background-color: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 10px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
     .btn-add:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
+    .table-card { background-color: var(--card-bg); border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color); }
 
-    .table-card {
-        background-color: var(--card-bg); border-radius: 15px; padding: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
-    }
-
-    /* Table Fixes for Dark Mode */
-    .table { margin: 0; color: var(--text-color) !important; }
-    .table thead th { 
-        background-color: var(--bg-color) !important; border-bottom: 2px solid var(--border-color) !important; 
+    /* ===== DARK MODE TABLE FIX ===== */
+    .table { margin: 0; --bs-table-color: var(--text-color); --bs-table-bg: transparent; --bs-table-border-color: var(--border-color); --bs-table-hover-color: var(--text-color); --bs-table-hover-bg: var(--table-row-hover); color: var(--text-color) !important; }
+    .table thead th {
+        background-color: var(--bg-color) !important;
+        border-bottom: 2px solid var(--border-color) !important;
         color: var(--text-color) !important; font-weight: 700; padding: 15px;
     }
-    .table tbody td { 
-        padding: 15px; vertical-align: middle; background-color: transparent !important;
-        border-bottom: 1px solid var(--border-color) !important; color: var(--text-color) !important; 
+    .table tbody td {
+        padding: 15px; vertical-align: middle;
+        background-color: transparent !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        color: var(--text-color) !important;
     }
     .table tbody tr:hover { background-color: var(--table-row-hover) !important; }
-    .table tbody tr:hover td { color: var(--text-color) !important; }
+    .table tbody tr:hover td { color: var(--text-color) !important; background-color: transparent !important; }
+    /* Bootstrap badge fix in dark mode */
+    .badge.bg-success { color: #fff !important; }
+    /* ================================ */
 
-    .subject-badge {
-        background-color: rgba(109, 40, 217, 0.1); color: var(--primary);
-        padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
-    }
-
-    .action-btn {
-        background: transparent; border: none; font-size: 1rem; cursor: pointer;
-        padding: 8px; border-radius: 8px; transition: 0.2s;
-    }
-    .btn-edit { color: #0284c7; }
-    .btn-edit:hover { background-color: rgba(2, 132, 199, 0.1); }
-    .btn-delete { color: #dc2626; }
-    .btn-delete:hover { background-color: rgba(220, 38, 38, 0.1); }
-
-    /* === MODAL === */
+    .subject-badge { background-color: rgba(109, 40, 217, 0.15); color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    .action-btn { background: transparent; border: none; font-size: 1rem; cursor: pointer; padding: 8px; border-radius: 8px; transition: 0.2s; }
+    .btn-edit { color: #0284c7; } .btn-edit:hover { background-color: rgba(2, 132, 199, 0.1); }
+    .btn-delete { color: #dc2626; } .btn-delete:hover { background-color: rgba(220, 38, 38, 0.1); }
     .modal-content { background-color: var(--card-bg); color: var(--text-color); border-radius: 15px; border: 1px solid var(--border-color); }
-    .modal-header { border-bottom: 1px solid var(--border-color); }
-    .modal-footer { border-top: 1px solid var(--border-color); }
+    .modal-header, .modal-footer { border-color: var(--border-color); }
     .modal-title { font-weight: 700; }
-    .form-control, .form-select {
-        padding: 12px; border-radius: 10px; border: 1px solid var(--border-color);
-        background-color: var(--bg-color); color: var(--text-color);
-    }
-    .form-control:focus, .form-select:focus {
-        border-color: var(--primary); box-shadow: none; background-color: var(--bg-color); color: var(--text-color);
-    }
-    .btn-close { filter: invert(1); }
-    body:not(.dark-mode) .btn-close { filter: none; }
-
-    /* === RESPONSIVE === */
+    .form-control, .form-select { padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color); }
+    .form-control:focus, .form-select:focus { border-color: var(--primary); box-shadow: none; background-color: var(--bg-color); color: var(--text-color); }
+    .btn-close { filter: invert(1); } body:not(.dark-mode) .btn-close { filter: none; }
     @media (max-width: 991px) {
-        .sidebar { left: -260px; }
-        .sidebar.active { left: 0; }
-        .main-content { margin-left: 0; }
-        .mobile-toggle { display: block; }
+        .sidebar { left: -260px; } .sidebar.active { left: 0; }
+        .main-content { margin-left: 0; } .mobile-toggle { display: block; }
     }
 </style>
 </head>
 <body>
 
-    <!-- === SIDEBAR === -->
-    <div class="sidebar" id="sidebar">
-        <a href="dashboard.html" class="sidebar-brand"><i class="fas fa-graduation-cap"></i> EduPlus</a>
-        <ul class="sidebar-menu">
-            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="find-substitute.html"><i class="fas fa-search"></i> Find Substitute</a></li>
-            <li><a href="teachers.html" class="active"><i class="fas fa-users"></i> All Teachers</a></li>
-            <li><a href="timetable.html"><i class="fas fa-calendar-alt"></i> Timetable</a></li>
-            <li><a href="#"><i class="fas fa-chart-line"></i> Reports & Analytics</a></li>
-            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-            <li class="mt-4"><a href="login.html" style="color: #dc2626;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-        </ul>
-    </div>
+<div class="sidebar" id="sidebar">
+    <a href="dashboard.html" class="sidebar-brand"><i class="fas fa-graduation-cap"></i> EduPlus</a>
+    <ul class="sidebar-menu">
+        <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="find-substitute.html"><i class="fas fa-search"></i> Find Substitute</a></li>
+        <li><a href="teachers.html" class="active"><i class="fas fa-users"></i> All Teachers</a></li>
+        <li><a href="timetable.html"><i class="fas fa-calendar-alt"></i> Timetable</a></li>
+        <li><a href="#"><i class="fas fa-chart-line"></i> Reports & Analytics</a></li>
+        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        <li class="mt-4"><a href="login.html" style="color: #dc2626;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</div>
 
-    <!-- === MAIN CONTENT === -->
-    <div class="main-content">
-        
-        <!-- Top Navbar -->
-        <div class="top-navbar">
-            <div class="d-flex align-items-center gap-3">
-                <button class="mobile-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-                <div class="school-info">
-                    <h4>All Teachers</h4>
-                    <p>Manage your institution's teaching staff</p>
-                </div>
-            </div>
-            <div class="top-nav-right">
-                <button class="icon-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
-                <div class="user-profile">
-                    <div class="user-avatar" id="userAvatar">M</div>
-                </div>
-            </div>
+<div class="main-content">
+    <div class="top-navbar">
+        <div class="d-flex align-items-center gap-3">
+            <button class="mobile-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+            <div class="school-info"><h4>All Teachers</h4><p>Manage your institution's teaching staff</p></div>
         </div>
-
-        <!-- Page Header -->
-        <div class="page-header">
-            <h2>Teacher Directory</h2>
-            <button class="btn-add" onclick="openAddModal()">
-                <i class="fas fa-plus"></i> Add New Teacher
-            </button>
-        </div>
-
-        <!-- Table Card -->
-        <div class="table-card">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Teacher Name</th>
-                            <th>Primary Subject</th>
-                            <th>Phone Number</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="teacherTableBody">
-                        <!-- Data will be loaded here by JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- === ADD TEACHER MODAL === -->
-    <div class="modal fade" id="addTeacherModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Add New Teacher</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="teacherForm" onsubmit="saveTeacher(event)">
-                        <input type="hidden" id="editIndex" value="-1">
-                        
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Teacher Name</label>
-                            <input type="text" class="form-control" id="teacherName" placeholder="e.g. Mr. Ahmed Ali" required>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Primary Subject</label>
-                            <input type="text" class="form-control" id="teacherSubject" placeholder="e.g. Mathematics" required>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Phone Number (Optional)</label>
-                            <input type="tel" class="form-control" id="teacherPhone" placeholder="e.g. 03001234567">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" form="teacherForm" class="btn btn-primary" style="background: var(--primary); border:none;">Save Teacher</button>
-                </div>
-            </div>
+        <div class="top-nav-right">
+            <button class="icon-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
+            <div class="user-profile"><div class="user-avatar" id="userAvatar">M</div></div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // === THEME TOGGLE ===
-        function toggleTheme() {
-            const body = document.body;
-            const icon = document.getElementById('theme-icon');
-            body.classList.toggle('dark-mode');
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('eduplus_theme', 'dark');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                localStorage.setItem('eduplus_theme', 'light');
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
+    <div class="page-header">
+        <h2>Teacher Directory</h2>
+        <button class="btn-add" onclick="openAddModal()"><i class="fas fa-plus"></i> Add New Teacher</button>
+    </div>
+
+    <div class="table-card">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr><th>#</th><th>Teacher Name</th><th>Primary Subject</th><th>Phone Number</th><th>Status</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="teacherTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addTeacherModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Add New Teacher</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="teacherForm" onsubmit="saveTeacher(event)">
+                    <input type="hidden" id="editIndex" value="-1">
+                    <div class="mb-3"><label class="form-label fw-bold">Teacher Name</label><input type="text" class="form-control" id="teacherName" placeholder="e.g. Mr. Ahmed Ali" required></div>
+                    <div class="mb-3"><label class="form-label fw-bold">Primary Subject</label><input type="text" class="form-control" id="teacherSubject" placeholder="e.g. Mathematics" required></div>
+                    <div class="mb-3"><label class="form-label fw-bold">Phone Number (Optional)</label><input type="tel" class="form-control" id="teacherPhone" placeholder="e.g. 03001234567"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="teacherForm" class="btn btn-primary" style="background: var(--primary); border:none;">Save Teacher</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function toggleTheme() {
+        const body = document.body, icon = document.getElementById('theme-icon');
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('eduplus_theme', 'dark');
+            icon.classList.remove('fa-moon'); icon.classList.add('fa-sun');
+        } else {
+            localStorage.setItem('eduplus_theme', 'light');
+            icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
         }
+    }
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
 
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
+    let teachersData = [
+        { name: "Mr. Ahmed Ali", subject: "Mathematics", phone: "03001234567", status: "Active" },
+        { name: "Ms. Fatima Khan", subject: "English", phone: "03211234567", status: "Active" },
+        { name: "Mr. Usman Tariq", subject: "Physics", phone: "03331234567", status: "Active" },
+        { name: "Ms. Zainab Bibi", subject: "Chemistry", phone: "03451234567", status: "Active" },
+        { name: "Mr. Bilal Ahmed", subject: "Computer Science", phone: "-", status: "Active" }
+    ];
+
+    function renderTable() {
+        const tbody = document.getElementById('teacherTableBody');
+        tbody.innerHTML = '';
+        if (teachersData.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4" style="color: var(--muted-text);">No teachers added yet.</td></tr>';
+            return;
         }
+        teachersData.forEach((teacher, index) => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td class="fw-bold">${teacher.name}</td>
+                    <td><span class="subject-badge">${teacher.subject}</span></td>
+                    <td>${teacher.phone}</td>
+                    <td><span class="badge bg-success">${teacher.status}</span></td>
+                    <td>
+                        <button class="action-btn btn-edit" onclick="editTeacher(${index})" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn btn-delete" onclick="deleteTeacher(${index})" title="Delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`;
+        });
+    }
 
-        // === DUMMY DATA (Baad mein API se aayega) ===
-        let teachersData = [
-            { name: "Mr. Ahmed Ali", subject: "Mathematics", phone: "03001234567", status: "Active" },
-            { name: "Ms. Fatima Khan", subject: "English", phone: "03211234567", status: "Active" },
-            { name: "Mr. Usman Tariq", subject: "Physics", phone: "03331234567", status: "Active" },
-            { name: "Ms. Zainab Bibi", subject: "Chemistry", phone: "03451234567", status: "Active" },
-            { name: "Mr. Bilal Ahmed", subject: "Computer Science", phone: "-", status: "Active" }
-        ];
-
-        // === RENDER TABLE ===
-        function renderTable() {
-            const tbody = document.getElementById('teacherTableBody');
-            tbody.innerHTML = '';
-
-            if (teachersData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">No teachers added yet.</td></tr>';
-                return;
-            }
-
-            teachersData.forEach((teacher, index) => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td class="fw-bold">${teacher.name}</td>
-                        <td><span class="subject-badge">${teacher.subject}</span></td>
-                        <td>${teacher.phone}</td>
-                        <td><span class="badge bg-success">${teacher.status}</span></td>
-                        <td>
-                            <button class="action-btn btn-edit" onclick="editTeacher(${index})" title="Edit">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="action-btn btn-delete" onclick="deleteTeacher(${index})" title="Delete">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        // === MODAL FUNCTIONS ===
-        let addModal;
-
-        function openAddModal() {
-            document.getElementById('modalTitle').innerText = "Add New Teacher";
-            document.getElementById('teacherForm').reset();
-            document.getElementById('editIndex').value = "-1";
-            addModal.show();
-        }
-
-        function editTeacher(index) {
-            document.getElementById('modalTitle').innerText = "Edit Teacher Details";
-            document.getElementById('teacherName').value = teachersData[index].name;
-            document.getElementById('teacherSubject').value = teachersData[index].subject;
-            document.getElementById('teacherPhone').value = teachersData[index].phone !== '-' ? teachersData[index].phone : '';
-            document.getElementById('editIndex').value = index;
-            addModal.show();
-        }
-
-        function saveTeacher(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('teacherName').value;
-            const subject = document.getElementById('teacherSubject').value;
-            const phone = document.getElementById('teacherPhone').value || '-';
-            const editIndex = document.getElementById('editIndex').value;
-
-            if (editIndex === "-1") {
-                // Add New
-                teachersData.push({ name: name, subject: subject, phone: phone, status: "Active" });
-            } else {
-                // Update Existing
-                teachersData[editIndex].name = name;
-                teachersData[editIndex].subject = subject;
-                teachersData[editIndex].phone = phone;
-            }
-
-            addModal.hide();
-            renderTable();
-            
-            // Data ko localStorage mein save karein taake Find Substitute page par bhi mil sake
+    let addModal;
+    function openAddModal() {
+        document.getElementById('modalTitle').innerText = "Add New Teacher";
+        document.getElementById('teacherForm').reset();
+        document.getElementById('editIndex').value = "-1";
+        addModal.show();
+    }
+    function editTeacher(index) {
+        document.getElementById('modalTitle').innerText = "Edit Teacher Details";
+        document.getElementById('teacherName').value = teachersData[index].name;
+        document.getElementById('teacherSubject').value = teachersData[index].subject;
+        document.getElementById('teacherPhone').value = teachersData[index].phone !== '-' ? teachersData[index].phone : '';
+        document.getElementById('editIndex').value = index;
+        addModal.show();
+    }
+    function saveTeacher(event) {
+        event.preventDefault();
+        const name = document.getElementById('teacherName').value;
+        const subject = document.getElementById('teacherSubject').value;
+        const phone = document.getElementById('teacherPhone').value || '-';
+        const editIndex = document.getElementById('editIndex').value;
+        if (editIndex === "-1") teachersData.push({ name, subject, phone, status: "Active" });
+        else { teachersData[editIndex].name = name; teachersData[editIndex].subject = subject; teachersData[editIndex].phone = phone; }
+        addModal.hide(); renderTable();
+        localStorage.setItem('eduplus_teachers', JSON.stringify(teachersData));
+    }
+    function deleteTeacher(index) {
+        if (confirm("Are you sure you want to delete this teacher?")) {
+            teachersData.splice(index, 1); renderTable();
             localStorage.setItem('eduplus_teachers', JSON.stringify(teachersData));
         }
+    }
 
-        function deleteTeacher(index) {
-            if (confirm("Are you sure you want to delete this teacher?")) {
-                teachersData.splice(index, 1);
-                renderTable();
-                localStorage.setItem('eduplus_teachers', JSON.stringify(teachersData));
-            }
-        }
-
-        // === LOAD ON START ===
-        document.addEventListener("DOMContentLoaded", () => {
-            // Theme
-            const savedTheme = localStorage.getItem('eduplus_theme');
-            const icon = document.getElementById('theme-icon');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            }
-
-            // User
-            const userStr = localStorage.getItem('eduplus_user');
-            if (userStr) {
-                const user = JSON.parse(userStr);
-                document.getElementById('userAvatar').innerText = (user.name || "A").charAt(0).toUpperCase();
-            }
-
-            // Check if teachers already saved in local storage
-            const savedTeachers = localStorage.getItem('eduplus_teachers');
-            if (savedTeachers) {
-                teachersData = JSON.parse(savedTeachers);
-            }
-
-            renderTable();
-            addModal = new bootstrap.Modal(document.getElementById('addTeacherModal'));
-        });
-    </script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem('eduplus_theme');
+        const icon = document.getElementById('theme-icon');
+        if (savedTheme === 'dark') { document.body.classList.add('dark-mode'); icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+        const userStr = localStorage.getItem('eduplus_user');
+        if (userStr) { const user = JSON.parse(userStr); document.getElementById('userAvatar').innerText = (user.name || "A").charAt(0).toUpperCase(); }
+        const savedTeachers = localStorage.getItem('eduplus_teachers');
+        if (savedTeachers) teachersData = JSON.parse(savedTeachers);
+        renderTable();
+        addModal = new bootstrap.Modal(document.getElementById('addTeacherModal'));
+    });
+</script>
 </body>
 </html>
