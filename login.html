@@ -1,370 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login - EduPlus</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<style>
-    /* === THEME VARIABLES === */
-    :root {
-        --primary: #6D28D9;      
-        --primary-hover: #5B21B6;
-        --secondary: #F97316;    
-        --bg-color: #F8FAFC;
-        --text-color: #1E293B;
-        --card-bg: #FFFFFF;
-        --border-color: #E2E8F0;
-    }
-
-    body.dark-mode {
-        --bg-color: #0F172A;      
-        --text-color: #F1F5F9; 
-        --card-bg: #1E293B;
-        --border-color: #334155;
-        --primary: #8B5CF6;       
-        --primary-hover: #7C3AED;
-    }
-
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        height: 100vh;
-        margin: 0;
-        overflow: hidden;
-    }
-
-    .login-wrapper {
-        display: flex;
-        height: 100vh;
-    }
-
-    /* Left Side Image */
-    .login-left {
-        flex: 1;
-        background: url('https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/EduPlus%20Pakistani%20School%20Welcome.png') center/cover no-repeat;
-        position: relative;
-        display: none; 
-    }
-
-    /* Overlay halka kar diya hai taake image wazeh nazar aaye */
-    .login-left::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: linear-gradient(135deg, rgba(109, 40, 217, 0.4) 0%, rgba(15, 23, 42, 0.7) 100%);
-    }
-
-    .login-left-content {
-        position: relative;
-        z-index: 1;
-        color: white;
-        padding: 50px;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .login-left-content h1 {
-        font-size: 3rem;
-        font-weight: 800;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 5px rgba(0,0,0,0.8); /* Text ko dark shadow di hai taake image par wazeh parha jaye */
-    }
-
-    .login-left-content p {
-        font-size: 1.2rem;
-        opacity: 0.95;
-        line-height: 1.6;
-        text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-    }
-
-    /* Right Side Form */
-    .login-right {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        background-color: var(--bg-color);
-        position: relative;
-    }
-
-    .theme-toggle-btn { 
-        position: absolute; top: 20px; right: 20px;
-        background: transparent; border: none; color: var(--text-color); 
-        font-size: 1.5rem; cursor: pointer; transition: 0.3s; 
-    }
-    .theme-toggle-btn:hover { color: var(--primary); }
-
-    .login-box {
-        width: 100%;
-        max-width: 450px;
-        background: var(--card-bg);
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-        border: 1px solid var(--border-color);
-    }
-
-    .brand-logo {
-        font-size: 1.8rem;
-        font-weight: 800;
-        color: var(--primary);
-        text-align: center;
-        margin-bottom: 10px;
-        display: block;
-        text-decoration: none;
-    }
-
-    .login-box h3 {
-        text-align: center;
-        font-weight: 700;
-        margin-bottom: 30px;
-        color: var(--text-color);
-    }
-
-    .form-label {
-        font-weight: 600;
-        font-size: 0.9rem;
-        color: var(--text-color);
-    }
-
-    .form-control {
-        padding: 12px 15px;
-        border-radius: 10px;
-        border: 2px solid var(--border-color);
-        font-size: 1rem;
-        transition: 0.3s;
-        background-color: transparent;
-        color: var(--text-color);
-    }
-
-    .form-control:focus {
-        border-color: var(--primary);
-        box-shadow: none;
-        background-color: transparent;
-        color: var(--text-color);
-    }
-
-    .input-group-text {
-        background: transparent;
-        border: 2px solid var(--border-color);
-        border-right: none;
-        border-radius: 10px 0 0 10px;
-        color: var(--primary);
-    }
-
-    .form-control.with-icon {
-        border-left: none;
-        border-radius: 0 10px 10px 0;
-    }
-
-    .form-control.with-icon:focus {
-        border-left: none;
-    }
-
-    .btn-login {
-        background-color: var(--primary);
-        color: white;
-        padding: 12px;
-        border-radius: 10px;
-        font-weight: 700;
-        font-size: 1.1rem;
-        width: 100%;
-        border: none;
-        transition: 0.3s;
-        margin-top: 10px;
-    }
-
-    .btn-login:hover {
-        background-color: var(--primary-hover);
-        transform: translateY(-2px);
-    }
-
-    .register-link {
-        text-align: center;
-        margin-top: 20px;
-        font-size: 1rem;
-        color: var(--text-color);
-    }
-
-    .register-link a {
-        color: var(--secondary);
-        font-weight: 800;
-        text-decoration: none;
-        margin-left: 5px;
-    }
-
-    .register-link a:hover {
-        text-decoration: underline;
-    }
-
-    .password-toggle {
-        position: absolute;
-        right: 15px;
-        top: 42px;
-        cursor: pointer;
-        color: #888;
-        z-index: 10;
-    }
-
-    @media (min-width: 992px) {
-        .login-left {
-            display: block; 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPlus - Login</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
         }
-    }
-</style>
+
+        body {
+            background-color: #0b0b0b; /* Andhera Background */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: background-color 1s ease;
+            position: relative;
+        }
+
+        /* Jab Light On hogi tab background thora roshan hoga */
+        body.light-on {
+            background-color: #1a1a1a;
+        }
+
+        /* ================= LAMP DESIGN ================= */
+        .lamp-container {
+            position: absolute;
+            top: 0;
+            left: 20%; /* Lamp left side par hoga */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+        }
+
+        /* Lamp ka Wire */
+        .lamp-wire {
+            width: 4px;
+            height: 150px;
+            background-color: #333;
+        }
+
+        /* Lamp ka Cover (Shade) */
+        .lamp-shade {
+            width: 120px;
+            height: 60px;
+            background-color: #222;
+            border-top-left-radius: 60px;
+            border-top-right-radius: 60px;
+            position: relative;
+            z-index: 2;
+            transition: box-shadow 0.5s ease;
+        }
+
+        /* Bulb */
+        .lamp-bulb {
+            width: 30px;
+            height: 30px;
+            background-color: #444;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: background-color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        /* Pull String (Zanjeer) */
+        .pull-string {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            width: 2px;
+            height: 80px;
+            background-color: #555;
+            cursor: pointer;
+            transition: height 0.2s ease;
+        }
+        .pull-string::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: -5px;
+            width: 12px;
+            height: 12px;
+            background-color: #c98a2d;
+            border-radius: 50%;
+        }
+        /* Hover effect on string */
+        .pull-string:hover {
+            height: 90px;
+        }
+
+        /* LIGHT CONE (Roshnii) */
+        .light-beam {
+            position: absolute;
+            top: 210px; /* Shade ke neechay se start */
+            width: 0;
+            height: 0;
+            border-left: 250px solid transparent;
+            border-right: 250px solid transparent;
+            border-top: 500px solid rgba(255, 235, 150, 0.15);
+            transition: border-top-color 0.5s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* ======= JAB LIGHT ON HOGI ======= */
+        body.light-on .lamp-bulb {
+            background-color: #ffea94;
+            box-shadow: 0 0 50px 20px rgba(255, 234, 148, 0.8);
+        }
+        body.light-on .light-beam {
+            border-top-color: rgba(255, 235, 150, 0.4);
+        }
+
+
+        /* ================= LOGIN FORM ================= */
+        .login-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            width: 400px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            z-index: 100;
+            
+            /* Pehle form invisible hoga */
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none; /* Click nahi ho sakta jab tak light on na ho */
+        }
+
+        /* Jab light on hogi tab form samne aayega */
+        body.light-on .login-container {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .login-container h2 {
+            color: #fff;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .login-container p {
+            color: #aaa;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #6D28D9; /* Aapka Purple Theme */
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: #6D28D9;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background: #5B21B6;
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .lamp-container { left: 50%; transform: translateX(-50%); }
+            .light-beam { border-left-width: 150px; border-right-width: 150px; border-top-width: 300px; }
+            .login-container { width: 90%; padding: 30px; }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="login-wrapper">
-        <!-- Left Side (Image & Text) -->
-        <div class="login-left">
-            <div class="login-left-content">
-                <a href="index.html" class="brand-logo text-white mb-4"><i class="fas fa-graduation-cap me-2"></i>EduPlus</a>
-                <h1>Welcome Back!</h1>
-                <p>Log in to manage your institution's timetable, track absentees, and find the perfect substitute teachers automatically.</p>
-            </div>
+    <!-- Lamp Section -->
+    <div class="lamp-container">
+        <div class="lamp-wire"></div>
+        <div class="lamp-shade">
+            <div class="lamp-bulb"></div>
+            <!-- Pull string par click karne se kya hoga -->
+            <div class="pull-string" id="pullString" title="Click to turn on the light"></div>
         </div>
-
-        <!-- Right Side (Login Form) -->
-        <div class="login-right">
-            
-            <!-- Theme Toggle -->
-            <button class="theme-toggle-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
-
-            <div class="login-box">
-                <a href="index.html" class="brand-logo d-lg-none"><i class="fas fa-graduation-cap me-2"></i>EduPlus</a>
-                
-                <h3>Sign In to Your Account</h3>
-
-                <form id="loginForm" onsubmit="handleLogin(event)">
-                    <!-- Email -->
-                    <div class="mb-3">
-                        <label class="form-label">Email Address</label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                            <input type="email" class="form-control with-icon" id="email" placeholder="admin@school.com" required>
-                        </div>
-                    </div>
-
-                    <!-- Password -->
-                    <div class="mb-4 position-relative">
-                        <label class="form-label">Password</label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                            <input type="password" class="form-control with-icon" id="password" placeholder="Enter your password" required>
-                        </div>
-                        <i class="fas fa-eye password-toggle" onclick="togglePassword()" id="toggleIcon"></i>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe" style="font-size: 0.9rem;">Remember me</label>
-                        </div>
-                        <a href="#" style="color: var(--primary); font-size: 0.9rem; text-decoration: none; font-weight: 600;">Forgot Password?</a>
-                    </div>
-
-                    <button type="submit" class="btn-login" id="loginBtn">
-                        Login <i class="fas fa-arrow-right ms-2"></i>
-                    </button>
-                    
-                    <div id="errorMsg" class="text-danger text-center mt-3" style="display: none; font-weight: 600;"></div>
-                </form>
-
-                <!-- Updated Link Section -->
-                <div class="register-link mt-4 pt-3 border-top" style="border-color: var(--border-color) !important;">
-                    Don't have an account? 
-                    <a href="register.html">Register here <i class="fas fa-arrow-right ms-1"></i></a>
-                </div>
-            </div>
-        </div>
+        <!-- Roshni ka beam -->
+        <div class="light-beam"></div>
     </div>
 
+    <!-- Login Form Section -->
+    <div class="login-container">
+        <h2>Welcome Back</h2>
+        <p>Enter your details to access your account</p>
+        
+        <form action="dashboard.html">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Email Address" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Password" required>
+            </div>
+            
+            <button type="submit" class="btn-login">Sign In</button>
+        </form>
+    </div>
+
+    <!-- JavaScript Animation Logic -->
     <script>
-        // === THEME TOGGLE ===
-        function toggleTheme() {
-            const body = document.body;
-            const icon = document.getElementById('theme-icon');
-            body.classList.toggle('dark-mode');
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('eduplus_theme', 'dark');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                localStorage.setItem('eduplus_theme', 'light');
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
-        }
+        const pullString = document.getElementById('pullString');
+        const body = document.body;
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const savedTheme = localStorage.getItem('eduplus_theme');
-            const icon = document.getElementById('theme-icon');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            }
+        // Jab lamp ki zanjeer par click ho
+        pullString.addEventListener('click', () => {
+            // Light On / Off toggle karein
+            body.classList.toggle('light-on');
         });
-
-        // === PASSWORD TOGGLE ===
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggleIcon = document.getElementById('toggleIcon');
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleIcon.classList.remove('fa-eye');
-                toggleIcon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                toggleIcon.classList.remove('fa-eye-slash');
-                toggleIcon.classList.add('fa-eye');
-            }
-        }
-
-        // === LOGIN FUNCTION (Demo) ===
-        function handleLogin(event) {
-            event.preventDefault(); 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const btn = document.getElementById('loginBtn');
-            const errorMsg = document.getElementById('errorMsg');
-
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Logging in...';
-            btn.disabled = true;
-            errorMsg.style.display = 'none';
-
-            setTimeout(() => {
-                if(email === "admin@school.com" && password === "admin123") {
-                    btn.innerHTML = '<i class="fas fa-check me-2"></i> Success!';
-                    btn.style.background = '#28a745';
-                    
-                    localStorage.setItem('eduplus_user', JSON.stringify({
-                        name: "Mariam Khan",
-                        email: email,
-                        role: "admin",
-                        school_name: "Al-Noor Public School"
-                    }));
-
-                    setTimeout(() => {
-                        window.location.href = "dashboard.html"; 
-                    }, 1000);
-
-                } else {
-                    btn.innerHTML = 'Login <i class="fas fa-arrow-right ms-2"></i>';
-                    btn.disabled = false;
-                    btn.style.background = 'var(--primary)';
-                    errorMsg.innerHTML = '<i class="fas fa-exclamation-circle me-1"></i> Invalid email or password';
-                    errorMsg.style.display = 'block';
-                }
-            }, 1500);
-        }
     </script>
 </body>
 </html>
