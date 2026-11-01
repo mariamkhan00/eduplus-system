@@ -9,26 +9,31 @@
 <style>
     /* === THEME VARIABLES === */
     :root {
-        --primary: #6D28D9;      
+        --primary: #6D28D9;
         --primary-hover: #5B21B6;
-        --secondary: #F97316;    
+        --secondary: #F97316;
         --bg-color: #F8FAFC;
         --text-color: #1E293B;
         --card-bg: #FFFFFF;
         --border-color: #E2E8F0;
         --sidebar-bg: #FFFFFF;
         --sidebar-hover: #F1F5F9;
+        --table-row-hover: #f8fafc;
+        --muted-text: #64748b;
     }
 
     body.dark-mode {
-        --bg-color: #0F172A;      
-        --text-color: #F1F5F9; 
+        --bg-color: #0F172A;
+        --text-color: #F1F5F9;
         --card-bg: #1E293B;
         --border-color: #334155;
-        --primary: #8B5CF6;       
+        --primary: #8B5CF6;
         --primary-hover: #7C3AED;
+        --secondary: #FB923C;
         --sidebar-bg: #1E293B;
         --sidebar-hover: #334155;
+        --table-row-hover: #334155;
+        --muted-text: #94a3b8;
     }
 
     body {
@@ -75,7 +80,7 @@
         margin-bottom: 25px;
     }
     .school-info h4 { margin: 0; font-weight: 700; font-size: 1.2rem; }
-    .school-info p { margin: 0; font-size: 0.85rem; color: #64748b; }
+    .school-info p { margin: 0; font-size: 0.85rem; color: var(--muted-text); }
     .top-nav-right { display: flex; align-items: center; gap: 20px; }
     .icon-btn { background: transparent; border: none; font-size: 1.2rem; color: var(--text-color); cursor: pointer; position: relative; }
     .icon-btn:hover { color: var(--primary); }
@@ -87,7 +92,7 @@
     /* === PAGE CONTENT === */
     .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
     .page-header h2 { font-weight: 800; margin: 0; }
-    
+
     .btn-upload {
         background-color: var(--secondary); color: white; border: none;
         padding: 10px 20px; border-radius: 10px; font-weight: 600;
@@ -101,13 +106,16 @@
         margin-bottom: 25px;
     }
 
+    .form-label { color: var(--text-color); font-weight: 600; }
     .form-control, .form-select {
         padding: 12px; border-radius: 10px; border: 1px solid var(--border-color);
         background-color: var(--bg-color); color: var(--text-color);
     }
     .form-control:focus, .form-select:focus {
-        border-color: var(--primary); box-shadow: none; background-color: var(--bg-color); color: var(--text-color);
+        border-color: var(--primary); box-shadow: none;
+        background-color: var(--bg-color); color: var(--text-color);
     }
+    .form-control::placeholder { color: var(--muted-text); }
 
     .btn-add-schedule {
         background-color: var(--primary); color: white; border: none;
@@ -121,23 +129,42 @@
         background-color: var(--card-bg); border-radius: 15px; padding: 20px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
     }
-    .table { margin: 0; color: var(--text-color); }
-    .table thead th { 
-        background-color: var(--bg-color); border-bottom: 2px solid var(--border-color); 
-        color: var(--text-color); font-weight: 700; padding: 15px;
+
+    /* ===== DARK MODE TABLE FIX ===== */
+    .table {
+        margin: 0;
+        --bs-table-color: var(--text-color);
+        --bs-table-bg: transparent;
+        --bs-table-border-color: var(--border-color);
+        --bs-table-hover-color: var(--text-color);
+        --bs-table-hover-bg: var(--table-row-hover);
+        color: var(--text-color) !important;
     }
-    .table tbody td { 
-        padding: 15px; vertical-align: middle; 
-        border-bottom: 1px solid var(--border-color); color: var(--text-color); 
+    .table thead th {
+        background-color: var(--bg-color) !important;
+        border-bottom: 2px solid var(--border-color) !important;
+        color: var(--text-color) !important;
+        font-weight: 700; padding: 15px;
     }
-    .table tbody tr:hover { background-color: var(--sidebar-hover); }
-    
-    .class-badge { background-color: rgba(109, 40, 217, 0.1); color: var(--primary); padding: 5px 12px; border-radius: 20px; font-weight: 600; }
-    .subject-badge { background-color: rgba(249, 115, 22, 0.1); color: var(--secondary); padding: 5px 12px; border-radius: 20px; font-weight: 600; }
+    .table tbody td {
+        padding: 15px; vertical-align: middle;
+        background-color: transparent !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        color: var(--text-color) !important;
+    }
+    .table tbody tr:hover { background-color: var(--table-row-hover) !important; }
+    .table tbody tr:hover td {
+        color: var(--text-color) !important;
+        background-color: transparent !important;
+    }
+    /* ================================ */
+
+    .class-badge { background-color: rgba(109, 40, 217, 0.15); color: var(--primary); padding: 5px 12px; border-radius: 20px; font-weight: 600; display: inline-block; }
+    .subject-badge { background-color: rgba(249, 115, 22, 0.15); color: var(--secondary); padding: 5px 12px; border-radius: 20px; font-weight: 600; display: inline-block; }
 
     .action-btn { background: transparent; border: none; font-size: 1rem; cursor: pointer; padding: 8px; border-radius: 8px; transition: 0.2s; }
     .btn-delete { color: #dc2626; }
-    .btn-delete:hover { background-color: rgba(220, 38, 38, 0.1); }
+    .btn-delete:hover { background-color: rgba(220, 38, 38, 0.15); }
 
     /* === RESPONSIVE === */
     @media (max-width: 991px) {
@@ -158,15 +185,15 @@
             <li><a href="find-substitute.html"><i class="fas fa-search"></i> Find Substitute</a></li>
             <li><a href="teachers.html"><i class="fas fa-users"></i> All Teachers</a></li>
             <li><a href="timetable.html" class="active"><i class="fas fa-calendar-alt"></i> Timetable</a></li>
-            <li><a href="#"><i class="fas fa-chart-line"></i> Reports & Analytics</a></li>
-            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports & Analytics</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
             <li class="mt-4"><a href="login.html" style="color: #dc2626;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>
 
     <!-- === MAIN CONTENT === -->
     <div class="main-content">
-        
+
         <!-- Top Navbar -->
         <div class="top-navbar">
             <div class="d-flex align-items-center gap-3">
@@ -233,7 +260,6 @@
                         <label class="form-label">Teacher</label>
                         <select class="form-select" id="teacher" required>
                             <option value="" disabled selected>Select Teacher</option>
-                            <!-- Options will be loaded by JS -->
                         </select>
                     </div>
                     <div class="col-md-4 d-flex align-items-end">
@@ -299,7 +325,6 @@
             if (savedTeachers) {
                 teachersData = JSON.parse(savedTeachers);
             } else {
-                // Default dummy data if no teachers added yet
                 teachersData = [
                     { name: "Mr. Ahmed Ali", subject: "Mathematics" },
                     { name: "Ms. Fatima Khan", subject: "English" }
@@ -307,9 +332,8 @@
             }
 
             const dropdown = document.getElementById('teacher');
-            // Clear existing options except the first one
             dropdown.innerHTML = '<option value="" disabled selected>Select Teacher</option>';
-            
+
             teachersData.forEach(t => {
                 dropdown.innerHTML += `<option value="${t.name}">${t.name} (${t.subject})</option>`;
             });
@@ -326,11 +350,10 @@
             tbody.innerHTML = '';
 
             if (timetableData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">No schedule added yet. Add your first class above.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4" style="color: var(--muted-text);">No schedule added yet. Add your first class above.</td></tr>';
                 return;
             }
 
-            // Sort by Day and then Period
             const dayOrder = { "Monday": 1, "Tuesday": 2, "Wednesday": 3, "Thursday": 4, "Friday": 5, "Saturday": 6 };
             timetableData.sort((a, b) => {
                 if (dayOrder[a.day] !== dayOrder[b.day]) return dayOrder[a.day] - dayOrder[b.day];
@@ -361,18 +384,21 @@
 
             const day = document.getElementById('day').value;
             const period = document.getElementById('period').value;
-            const className = document.getElementById('class').value;
-            const subject = document.getElementById('subject').value;
+            const className = document.getElementById('class').value.trim();
+            const subject = document.getElementById('subject').value.trim();
             const teacher = document.getElementById('teacher').value;
 
+            if (!className || !subject || !teacher) {
+                alert('Please fill all fields!');
+                return;
+            }
+
             const newEntry = { day, period, class: className, subject, teacher };
-            
             timetableData.push(newEntry);
             localStorage.setItem('eduplus_timetable', JSON.stringify(timetableData));
 
-            // Reset form but keep day and period
             document.getElementById('timetableForm').reset();
-            
+            loadTeachersDropdown();
             renderTimetable();
         }
 
@@ -392,7 +418,6 @@
 
         // === LOAD ON START ===
         document.addEventListener("DOMContentLoaded", () => {
-            // Theme
             const savedTheme = localStorage.getItem('eduplus_theme');
             const icon = document.getElementById('theme-icon');
             if (savedTheme === 'dark') {
@@ -401,7 +426,6 @@
                 icon.classList.add('fa-sun');
             }
 
-            // User Profile
             const userStr = localStorage.getItem('eduplus_user');
             if (userStr) {
                 const user = JSON.parse(userStr);
