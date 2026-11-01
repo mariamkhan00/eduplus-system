@@ -7,91 +7,41 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
-    /* === THEME VARIABLES === */
     :root {
-        --primary: #6D28D9;      
-        --primary-hover: #5B21B6;
-        --secondary: #F97316;    
-        --bg-color: #F8FAFC;
-        --text-color: #1E293B;
-        --card-bg: #FFFFFF;
-        --border-color: #E2E8F0;
-        --sidebar-bg: #FFFFFF;
-        --sidebar-hover: #F1F5F9;
+        --primary: #6D28D9; --primary-hover: #5B21B6; --secondary: #F97316;    
+        --bg-color: #F8FAFC; --text-color: #1E293B; --card-bg: #FFFFFF;
+        --border-color: #E2E8F0; --sidebar-bg: #FFFFFF; --sidebar-hover: #F1F5F9;
     }
-
     body.dark-mode {
-        --bg-color: #0F172A;      
-        --text-color: #F1F5F9; 
-        --card-bg: #1E293B;
-        --border-color: #334155;
-        --primary: #8B5CF6;       
-        --primary-hover: #7C3AED;
-        --sidebar-bg: #1E293B;
-        --sidebar-hover: #334155;
+        --bg-color: #0F172A; --text-color: #F1F5F9; --card-bg: #1E293B;
+        --border-color: #334155; --primary: #8B5CF6; --primary-hover: #7C3AED;
+        --sidebar-bg: #1E293B; --sidebar-hover: #334155;
     }
-
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        margin: 0;
-        overflow-x: hidden;
-        transition: all 0.3s ease;
-    }
-
-    /* === SIDEBAR === */
-    .sidebar {
-        width: 260px; height: 100vh; background-color: var(--sidebar-bg);
-        border-right: 1px solid var(--border-color); position: fixed;
-        top: 0; left: 0; z-index: 1000; transition: all 0.3s ease;
-        display: flex; flex-direction: column;
-    }
-    .sidebar-brand {
-        padding: 20px; font-size: 1.5rem; font-weight: 800;
-        color: var(--primary); text-decoration: none;
-        display: flex; align-items: center; gap: 10px;
-        border-bottom: 1px solid var(--border-color);
-    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; overflow-x: hidden; transition: all 0.3s ease; }
+    
+    .sidebar { width: 260px; height: 100vh; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-color); position: fixed; top: 0; left: 0; z-index: 1000; transition: all 0.3s ease; display: flex; flex-direction: column; }
+    .sidebar-brand { padding: 20px; font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border-color); }
     .sidebar-menu { list-style: none; padding: 15px 10px; margin: 0; flex: 1; overflow-y: auto; }
     .sidebar-menu li { margin-bottom: 5px; }
-    .sidebar-menu a {
-        display: flex; align-items: center; gap: 15px; padding: 12px 15px;
-        color: var(--text-color); text-decoration: none; border-radius: 10px;
-        font-weight: 500; transition: 0.2s;
-    }
+    .sidebar-menu a { display: flex; align-items: center; gap: 15px; padding: 12px 15px; color: var(--text-color); text-decoration: none; border-radius: 10px; font-weight: 500; transition: 0.2s; }
     .sidebar-menu a:hover { background-color: var(--sidebar-hover); color: var(--primary); }
     .sidebar-menu a.active { background-color: var(--primary); color: white; }
     .sidebar-menu a i { width: 20px; text-align: center; }
 
-    /* === MAIN CONTENT === */
     .main-content { margin-left: 260px; padding: 20px; transition: all 0.3s ease; min-height: 100vh; }
-
-    /* === TOP NAVBAR === */
-    .top-navbar {
-        background-color: var(--card-bg); border-radius: 15px; padding: 15px 25px;
-        display: flex; justify-content: space-between; align-items: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
-        margin-bottom: 25px;
-    }
+    .top-navbar { background-color: var(--card-bg); border-radius: 15px; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color); margin-bottom: 25px; }
     .school-info h4 { margin: 0; font-weight: 700; font-size: 1.2rem; }
     .school-info p { margin: 0; font-size: 0.85rem; color: #64748b; }
     .top-nav-right { display: flex; align-items: center; gap: 20px; }
     .icon-btn { background: transparent; border: none; font-size: 1.2rem; color: var(--text-color); cursor: pointer; position: relative; }
     .icon-btn:hover { color: var(--primary); }
-    
     .notification-dot { position: absolute; top: 0; right: 0; width: 8px; height: 8px; background-color: var(--secondary); border-radius: 50%; }
     .user-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 10px; border-radius: 20px; transition: 0.2s; }
     .user-profile:hover { background-color: var(--sidebar-hover); }
     .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
     .mobile-toggle { display: none; background: transparent; border: none; font-size: 1.5rem; color: var(--text-color); cursor: pointer; }
 
-    /* === STATS CARDS === */
-    .stat-card {
-        background-color: var(--card-bg); border-radius: 15px; padding: 25px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
-        display: flex; justify-content: space-between; align-items: center; transition: 0.3s;
-    }
+    .stat-card { background-color: var(--card-bg); border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
     .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
     .stat-info h3 { margin: 0; font-size: 2rem; font-weight: 800; color: var(--text-color); }
     .stat-info p { margin: 0; font-size: 0.95rem; color: #64748b; font-weight: 600; }
@@ -101,24 +51,15 @@
     .icon-green { background-color: rgba(22, 163, 74, 0.1); color: #16a34a; }
     .icon-orange { background-color: rgba(249, 115, 22, 0.1); color: var(--secondary); }
 
-    /* === QUICK ACTIONS === */
     .section-title { font-weight: 700; font-size: 1.3rem; margin: 35px 0 20px; }
-    .action-btn {
-        display: flex; align-items: center; gap: 15px; background-color: var(--card-bg);
-        border: 1px solid var(--border-color); padding: 20px; border-radius: 15px;
-        text-decoration: none; color: var(--text-color); transition: 0.3s; font-weight: 600;
-    }
+    .action-btn { display: flex; align-items: center; gap: 15px; background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 15px; text-decoration: none; color: var(--text-color); transition: 0.3s; font-weight: 600; }
     .action-btn:hover { border-color: var(--primary); transform: translateY(-3px); color: var(--primary); }
     .action-btn i { font-size: 1.5rem; color: var(--primary); }
 
-    /* === DARK MODE TABLE FIX === */
     .table { margin: 0; --bs-table-color: var(--text-color); --bs-table-bg: transparent; --bs-table-border-color: var(--border-color); --bs-table-hover-color: var(--text-color); --bs-table-hover-bg: var(--sidebar-hover); color: var(--text-color) !important; }
     .table thead th { background-color: transparent !important; border-bottom: 2px solid var(--border-color) !important; color: var(--text-color) !important; font-weight: 700; padding: 15px; }
     .table tbody td { padding: 15px; border-bottom: 1px solid var(--border-color) !important; color: var(--text-color) !important; }
-    .table tbody tr:hover { background-color: var(--sidebar-hover) !important; }
-    .badge.bg-success { color: #fff !important; }
 
-    /* === RESPONSIVE === */
     @media (max-width: 991px) {
         .sidebar { left: -260px; }
         .sidebar.active { left: 0; }
@@ -129,29 +70,23 @@
 </head>
 <body>
 
-    <!-- === SIDEBAR === -->
     <div class="sidebar" id="sidebar">
         <a href="dashboard.html" class="sidebar-brand">
             <i class="fas fa-graduation-cap"></i> EduPlus
         </a>
         <ul class="sidebar-menu">
+            <!-- YAHAN SAARE LINKS SAHI KAR DIYE HAIN -->
             <li><a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="find-substitute.html"><i class="fas fa-search"></i> Find Substitute</a></li>
-            <!-- Yahan '#' hata kar 'teachers.html' laga diya hai -->
             <li><a href="teachers.html"><i class="fas fa-users"></i> All Teachers</a></li>
-            <!-- Yahan '#' hata kar 'timetable.html' laga diya hai -->
             <li><a href="timetable.html"><i class="fas fa-calendar-alt"></i> Timetable</a></li>
-            <!-- Reports aur Settings future ke liye hain, jab pages banein to inka link update kar lena -->
             <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports & Analytics</a></li>
             <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
             <li class="mt-4"><a href="login.html" style="color: #dc2626;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>
 
-    <!-- === MAIN CONTENT === -->
     <div class="main-content">
-        
-        <!-- Top Navbar -->
         <div class="top-navbar">
             <div class="d-flex align-items-center gap-3">
                 <button class="mobile-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
@@ -162,158 +97,87 @@
             </div>
             
             <div class="top-nav-right">
-                <!-- Theme Toggle -->
                 <button class="icon-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
-                
-                <!-- Notifications -->
                 <button class="icon-btn">
                     <i class="fas fa-bell"></i>
                     <span class="notification-dot"></span>
                 </button>
-                
-                <!-- User Profile -->
                 <div class="user-profile">
                     <div class="user-avatar" id="userAvatar">M</div>
                 </div>
             </div>
         </div>
 
-        <!-- Stats Cards -->
         <div class="row g-4">
             <div class="col-md-6 col-lg-3">
                 <div class="stat-card">
-                    <div class="stat-info">
-                        <h3>50</h3>
-                        <p>Total Teachers</p>
-                    </div>
+                    <div class="stat-info"><h3>50</h3><p>Total Teachers</p></div>
                     <div class="stat-icon icon-purple"><i class="fas fa-users"></i></div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="stat-card">
-                    <div class="stat-info">
-                        <h3>5</h3>
-                        <p>Absent Today</p>
-                    </div>
+                    <div class="stat-info"><h3>5</h3><p>Absent Today</p></div>
                     <div class="stat-icon icon-red"><i class="fas fa-user-times"></i></div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="stat-card">
-                    <div class="stat-info">
-                        <h3>45</h3>
-                        <p>Available Teachers</p>
-                    </div>
+                    <div class="stat-info"><h3>45</h3><p>Available Teachers</p></div>
                     <div class="stat-icon icon-green"><i class="fas fa-user-check"></i></div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="stat-card">
-                    <div class="stat-info">
-                        <h3>12</h3>
-                        <p>Substitutes Assigned</p>
-                    </div>
+                    <div class="stat-info"><h3>12</h3><p>Substitutes Assigned</p></div>
                     <div class="stat-icon icon-orange"><i class="fas fa-random"></i></div>
                 </div>
             </div>
         </div>
 
-        <!-- Quick Actions -->
         <h3 class="section-title">Quick Actions</h3>
         <div class="row g-4">
             <div class="col-md-4">
-                <!-- Find Substitute link update -->
-                <a href="find-substitute.html" class="action-btn">
-                    <i class="fas fa-user-minus"></i>
-                    Mark Teacher Absent
-                </a>
+                <a href="find-substitute.html" class="action-btn"><i class="fas fa-user-minus"></i> Mark Teacher Absent</a>
             </div>
             <div class="col-md-4">
-                <!-- Upload Timetable link update -->
-                <a href="timetable.html" class="action-btn">
-                    <i class="fas fa-file-upload"></i>
-                    Upload Timetable
-                </a>
+                <a href="timetable.html" class="action-btn"><i class="fas fa-file-upload"></i> Upload Timetable</a>
             </div>
             <div class="col-md-4">
-                <!-- Reports link (currently empty) -->
-                <a href="reports.html" class="action-btn">
-                    <i class="fas fa-download"></i>
-                    Download Reports
-                </a>
+                <a href="reports.html" class="action-btn"><i class="fas fa-download"></i> Download Reports</a>
             </div>
         </div>
 
-        <!-- Recent Activity (Placeholder) -->
         <h3 class="section-title mt-5">Recent Substitutions</h3>
         <div class="stat-card" style="display: block; padding: 20px;">
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Absent Teacher</th>
-                            <th>Class</th>
-                            <th>Substitute</th>
-                            <th>Status</th>
-                        </tr>
+                        <tr><th>Date</th><th>Absent Teacher</th><th>Class</th><th>Substitute</th><th>Status</th></tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Today, 9:30 AM</td>
-                            <td>Mr. Ahmed</td>
-                            <td>Class 10-A</td>
-                            <td>Ms. Fatima</td>
-                            <td><span class="badge bg-success">Assigned</span></td>
-                        </tr>
-                        <tr>
-                            <td>Today, 11:00 AM</td>
-                            <td>Mr. Ali</td>
-                            <td>Class 9-B</td>
-                            <td>Mr. Usman</td>
-                            <td><span class="badge bg-success">Assigned</span></td>
-                        </tr>
+                        <tr><td>Today, 9:30 AM</td><td>Mr. Ahmed</td><td>Class 10-A</td><td>Ms. Fatima</td><td><span class="badge bg-success">Assigned</span></td></tr>
+                        <tr><td>Today, 11:00 AM</td><td>Mr. Ali</td><td>Class 9-B</td><td>Mr. Usman</td><td><span class="badge bg-success">Assigned</span></td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
     </div>
 
     <script>
-        // === SIDEBAR TOGGLE (Mobile) ===
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-        }
-
-        // === THEME TOGGLE ===
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
         function toggleTheme() {
-            const body = document.body;
-            const icon = document.getElementById('theme-icon');
+            const body = document.body, icon = document.getElementById('theme-icon');
             body.classList.toggle('dark-mode');
             if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('eduplus_theme', 'dark');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
+                localStorage.setItem('eduplus_theme', 'dark'); icon.classList.remove('fa-moon'); icon.classList.add('fa-sun');
             } else {
-                localStorage.setItem('eduplus_theme', 'light');
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
+                localStorage.setItem('eduplus_theme', 'light'); icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
             }
         }
-
-        // === LOAD USER DATA ON PAGE LOAD ===
         document.addEventListener("DOMContentLoaded", () => {
-            // Theme Load
-            const savedTheme = localStorage.getItem('eduplus_theme');
-            const icon = document.getElementById('theme-icon');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            }
-
-            // User Data Load
+            const savedTheme = localStorage.getItem('eduplus_theme'), icon = document.getElementById('theme-icon');
+            if (savedTheme === 'dark') { document.body.classList.add('dark-mode'); icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
             const userStr = localStorage.getItem('eduplus_user');
             if (userStr) {
                 const user = JSON.parse(userStr);
