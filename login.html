@@ -16,18 +16,18 @@
         }
 
         body {
-            background-color: #050505; /* Full Black */
-            height: 100vh;
+            background-color: #050505;
+            min-height: 100vh; /* Height fix */
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
             transition: background-color 1s ease;
             position: relative;
         }
 
         body.light-on {
-            background-color: #121212; /* Thora roshan */
+            background-color: #121212;
         }
 
         /* ================= TOP CORNER LOGO ================= */
@@ -53,12 +53,12 @@
             display: flex;
             width: 100%;
             max-width: 1200px;
-            height: 100vh;
+            min-height: 100vh; /* Height fix */
             position: relative;
             z-index: 10;
         }
 
-        /* ================= LAMP SECTION (LEFT) ================= */
+        /* ================= LAMP SECTION ================= */
         .lamp-side {
             flex: 1;
             position: relative;
@@ -73,10 +73,9 @@
             flex-direction: column;
             align-items: center;
             z-index: 10;
-            margin-top: -100px; 
+            margin-top: -50px; 
         }
 
-        /* Lamp Stand (Base & Pole) */
         .lamp-base {
             width: 80px;
             height: 15px;
@@ -99,7 +98,6 @@
             z-index: 1;
         }
 
-        /* Lamp Shade */
         .lamp-shade {
             width: 140px;
             height: 70px;
@@ -112,7 +110,6 @@
             box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5);
         }
 
-        /* Bulb */
         .lamp-bulb {
             width: 35px;
             height: 35px;
@@ -125,7 +122,6 @@
             transition: background-color 0.5s ease, box-shadow 0.5s ease;
         }
 
-        /* Chain & Text */
         .pull-string-wrapper {
             position: absolute;
             top: 40px;
@@ -176,7 +172,6 @@
             100% { opacity: 0.5; transform: scale(0.95); }
         }
 
-        /* Light Beam */
         .light-beam {
             position: absolute;
             top: 70px;
@@ -190,7 +185,6 @@
             pointer-events: none;
         }
 
-        /* Jab Light On ho */
         body.light-on .lamp-shade {
             box-shadow: 0 -10px 30px rgba(255, 234, 148, 0.2), inset 0 -10px 20px rgba(0,0,0,0.5);
         }
@@ -205,12 +199,13 @@
             display: none;
         }
 
-        /* ================= LOGIN FORM (RIGHT) ================= */
+        /* ================= LOGIN FORM ================= */
         .form-side {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
         .login-container {
@@ -330,30 +325,45 @@
             color: #FB923C;
         }
         
-        /* Responsive */
+        /* ================= MOBILE RESPONSIVE FIX ================= */
         @media (max-width: 991px) {
             .main-wrapper {
                 flex-direction: column;
                 justify-content: flex-start;
-                padding-top: 20px;
+                padding-top: 80px; /* Logo ke liye jagah */
+                padding-bottom: 40px;
             }
             .lamp-side {
                 flex: none;
-                height: 45vh;
-                align-items: flex-end;
-                padding-bottom: 20px;
+                height: auto;
+                min-height: 250px;
+                align-items: flex-start;
+                margin-bottom: 20px;
             }
             .lamp-container {
-                margin-top: 0;
-                transform: scale(0.8);
+                transform: scale(0.8); /* Lamp chota */
+                margin-top: -30px;
+            }
+            .light-beam {
+                border-left-width: 150px;
+                border-right-width: 150px;
+                border-top-width: 300px;
             }
             .form-side {
                 flex: none;
-                padding: 0 20px;
-                margin-top: -30px;
+                padding: 0 15px;
+                width: 100%;
             }
-            .login-container { width: 100%; }
-            .top-logo { top: 15px; left: 20px; font-size: 1.5rem; }
+            .login-container { 
+                width: 100%; 
+                padding: 30px 20px;
+            }
+            .top-logo { 
+                top: 20px; 
+                left: 20px; 
+                font-size: 1.5rem; 
+                z-index: 9999;
+            }
         }
     </style>
 </head>
@@ -364,24 +374,19 @@
 
     <div class="main-wrapper">
         
-        <!-- LEFT: LAMP WITH STAND -->
+        <!-- LEFT: LAMP -->
         <div class="lamp-side">
             <div class="lamp-container">
-                
                 <div class="lamp-shade">
                     <div class="lamp-bulb"></div>
-                    
                     <div class="pull-string-wrapper" id="pullString">
                         <div class="pull-string"></div>
-                        <div class="click-text">Click here to turn on</div>
+                        <div class="click-text">Click to turn on</div>
                     </div>
                 </div>
-                
                 <div class="light-beam"></div>
-
                 <div class="lamp-pole"></div>
                 <div class="lamp-base"></div>
-
             </div>
         </div>
 
@@ -417,24 +422,20 @@
         const pullString = document.getElementById('pullString');
         const body = document.body;
 
-        // 1. Manual Click (Chain kheenchna)
         pullString.addEventListener('click', () => {
             body.classList.toggle('light-on');
         });
 
-        // 2. Scroll karne par Auto Light On
         window.addEventListener('scroll', () => {
             body.classList.add('light-on');
-        }, { once: true }); // Sirf ek baar trigger hoga
+        }, { once: true });
 
-        // 3. Mobile par screen touch karne par Auto Light On
         window.addEventListener('touchstart', () => {
             if(!body.classList.contains('light-on')) {
                 body.classList.add('light-on');
             }
-        }, { once: true }); // Sirf ek baar trigger hoga
+        }, { once: true });
 
-        // Fake Login
         function handleLogin(event) {
             event.preventDefault();
             const btn = document.getElementById('loginBtn');
