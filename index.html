@@ -6,6 +6,9 @@
 <title>EduPlus - Smart Substitute System</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<!-- AOS Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 <style>
     /* === THEME VARIABLES === */
     :root {
@@ -29,87 +32,91 @@
     /* Hero Section */
     .hero {
         position: relative;
-        background: url('https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/EduPlus%20Pakistani%20School%20Welcome.png') center/cover no-repeat;
-        padding: 120px 0; /* Mobile pe isko adjust karenge */
+        /* Naya Background Image Add Kar Diya Hai */
+        background: url('https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/WhatsApp%20Image%202026-11-02%20at%209.25.30%20PM.jpeg') center/cover no-repeat;
+        padding: 150px 0; 
         text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.65); }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.7); }
     .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 0 15px; }
-    .hero-content h1 { font-size: 3.2rem; font-weight: 800; color: #ffffff; margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
-    .hero-content p { font-size: 1.1rem; color: #f1f5f9; margin-bottom: 30px; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
+    .hero-content h1 { font-size: 3.5rem; font-weight: 800; color: #ffffff; margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
+    .hero-content p { font-size: 1.2rem; color: #f1f5f9; margin-bottom: 30px; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
 
     /* Buttons */
-    .btn-primary-custom { background-color: var(--secondary); color: #fff; padding: 12px 25px; border-radius: 30px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: 0.3s; border: none; display: inline-block; }
+    .btn-primary-custom { background-color: var(--secondary); color: #fff; padding: 12px 30px; border-radius: 30px; font-weight: 700; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: none; display: inline-block; }
     .btn-primary-custom:hover { background-color: #EA580C; color: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(249, 115, 22, 0.4); }
-    .btn-outline-custom { border: 2px solid white; color: white; padding: 12px 25px; border-radius: 30px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: 0.3s; background: rgba(0,0,0,0.3); display: inline-block; }
+    .btn-outline-custom { border: 2px solid white; color: white; padding: 12px 30px; border-radius: 30px; font-weight: 700; font-size: 1.1rem; text-decoration: none; transition: 0.3s; background: rgba(0,0,0,0.3); display: inline-block; }
     .btn-outline-custom:hover { background: white; color: var(--primary); }
 
     /* Sections */
-    .section-title { text-align: center; font-weight: 800; font-size: 2rem; margin-bottom: 40px; color: var(--primary); }
+    .section-title { text-align: center; font-weight: 800; font-size: 2.2rem; margin-bottom: 50px; color: var(--primary); }
     
     /* Modern Cards */
-    .step-card, .feature-card { background: var(--card-bg); border-radius: 15px; padding: 20px; text-align: center; height: 100%; box-shadow: 0 5px 20px rgba(0,0,0,0.05); position: relative; border: 1px solid rgba(0,0,0,0.05); color: var(--text-color); transition: 0.3s; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    .step-card:hover, .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .step-card, .feature-card { background: var(--card-bg); border-radius: 20px; padding: 25px; text-align: center; height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; border: 1px solid rgba(0,0,0,0.05); color: var(--text-color); transition: 0.3s; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .step-card:hover, .feature-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(109, 40, 217, 0.15); border-color: var(--primary); }
     body.dark-mode .step-card, body.dark-mode .feature-card { border: 1px solid rgba(255,255,255,0.1); }
     
-    .step-number { width: 45px; height: 45px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; margin: 0 auto 15px; box-shadow: 0 4px 10px rgba(109, 40, 217, 0.4); }
-    .step-card h4 { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; color: var(--primary); }
-    .step-card p { font-size: 0.85rem; margin: 0; }
+    .step-number { width: 50px; height: 50px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 800; margin: 0 auto 15px; box-shadow: 0 4px 10px rgba(109, 40, 217, 0.4); }
+    .step-card h4 { font-weight: 700; font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); }
+    .step-card p { font-size: 0.9rem; margin: 0; color: #64748b; }
     
-    .feature-icon { font-size: 2rem; color: var(--primary); margin-bottom: 15px; }
-    .feature-card h4 { font-weight: 700; margin-bottom: 10px; font-size: 1.1rem; }
-    .feature-card p { font-size: 0.85rem; color: #64748b; margin: 0; }
-    body.dark-mode .feature-card p { color: #94a3b8; }
+    .feature-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; transition: 0.3s; }
+    .feature-card:hover .feature-icon { transform: scale(1.1); }
+    .feature-card h4 { font-weight: 700; margin-bottom: 10px; font-size: 1.2rem; }
+    .feature-card p { font-size: 0.9rem; color: #64748b; margin: 0; }
+    body.dark-mode .step-card p, body.dark-mode .feature-card p { color: #94a3b8; }
 
     /* Pricing */
-    .pricing-card { background: var(--card-bg); border-radius: 20px; padding: 30px 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 2px solid transparent; transition: 0.3s; height: 100%; position: relative; color: var(--text-color); }
-    .pricing-card.popular { border-color: var(--primary); transform: scale(1.02); z-index: 1; box-shadow: 0 15px 40px rgba(109, 40, 217, 0.15); }
-    .popular-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--secondary); color: #fff; padding: 5px 20px; border-radius: 20px; font-weight: 800; font-size: 0.8rem; }
-    .price { font-size: 2.2rem; font-weight: 800; color: var(--primary); margin: 15px 0; }
-    .price small { font-size: 0.9rem; color: var(--text-color); font-weight: 400; }
+    .pricing-card { background: var(--card-bg); border-radius: 20px; padding: 40px 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 2px solid transparent; transition: 0.3s; height: 100%; position: relative; color: var(--text-color); }
+    .pricing-card:hover { transform: translateY(-10px); }
+    .pricing-card.popular { border-color: var(--primary); transform: scale(1.03); z-index: 1; box-shadow: 0 15px 40px rgba(109, 40, 217, 0.15); }
+    .popular-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--secondary); color: #fff; padding: 5px 20px; border-radius: 20px; font-weight: 800; font-size: 0.85rem; }
+    .price { font-size: 2.5rem; font-weight: 800; color: var(--primary); margin: 20px 0; }
+    .price small { font-size: 1rem; color: var(--text-color); font-weight: 400; }
     .pricing-list { list-style: none; padding: 0; text-align: left; margin-bottom: 25px; }
-    .pricing-list li { margin-bottom: 10px; font-size: 0.9rem; }
-    .pricing-list li i { color: var(--primary); margin-right: 8px; }
+    .pricing-list li { margin-bottom: 12px; font-size: 0.95rem; }
+    .pricing-list li i { color: var(--primary); margin-right: 10px; }
 
     /* FAQ */
-    .accordion-button { font-weight: 700; color: var(--text-color); background: var(--card-bg); border: 1px solid rgba(0,0,0,0.05); font-size: 1rem; }
+    .accordion-button { font-weight: 700; color: var(--text-color); background: var(--card-bg); border: 1px solid rgba(0,0,0,0.05); font-size: 1rem; padding: 20px; }
     .accordion-button:not(.collapsed) { background: var(--primary); color: white; }
-    .accordion-item { background: var(--card-bg); border-color: rgba(0,0,0,0.1); margin-bottom: 10px; border-radius: 10px !important; overflow: hidden; color: var(--text-color); }
+    .accordion-item { background: var(--card-bg); border-color: rgba(0,0,0,0.1); margin-bottom: 15px; border-radius: 10px !important; overflow: hidden; color: var(--text-color); }
 
     /* Footer */
-    footer { background-color: var(--footer-bg); color: #94a3b8; padding: 30px 0 20px; margin-top: 40px; text-align: center; }
-    .footer-icons { margin-top: 15px; display: flex; justify-content: center; gap: 15px; }
-    .footer-icons a { display: inline-flex; align-items: center; justify-content: center; width: 35px; height: 35px; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; transition: 0.3s; text-decoration: none; }
-    .footer-icons a:hover { background: var(--primary); transform: translateY(-3px); }
+    footer { background-color: var(--footer-bg); color: #94a3b8; padding: 40px 0 20px; margin-top: 50px; text-align: center; }
+    .footer-icons { margin-top: 20px; display: flex; justify-content: center; gap: 20px; }
+    .footer-icons a { display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; font-size: 1.2rem; transition: 0.3s; text-decoration: none; }
+    .footer-icons a:hover { background: var(--primary); transform: translateY(-5px); }
     
     body.dark-mode .btn-outline-dark { color: #fff; border-color: #fff; }
     body.dark-mode .btn-outline-dark:hover { background: #fff; color: #000; }
 
     /* ===== MOBILE RESPONSIVE FIXES ===== */
     @media (max-width: 768px) {
-        /* Hero Fix for Mobile */
+        /* Hero Mobile Fix */
         .hero { 
-            padding: 80px 0; 
-            min-height: 60vh; /* Image ko poori screen cover karne ke liye */
-            background-position: center top; /* Image upar se center ho */
+            padding: 100px 0; 
+            min-height: 70vh;
+            background-position: center;
         }
-        .hero-content h1 { font-size: 2rem; }
-        .hero-content p { font-size: 0.95rem; }
+        .hero-content h1 { font-size: 2.2rem; }
+        .hero-content p { font-size: 1rem; }
+        .btn-primary-custom, .btn-outline-custom { width: 100%; margin-bottom: 10px; padding: 12px 20px;}
         
-        .section-title { font-size: 1.6rem; margin-bottom: 25px; }
+        .section-title { font-size: 1.8rem; margin-bottom: 30px; }
         
-        /* Navbar collapse fix */
-        .navbar-collapse { background: var(--nav-bg); padding: 15px; border-radius: 10px; margin-top: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .nav-item.ms-3, .nav-item.ms-2 { margin-left: 0 !important; margin-top: 10px; text-align: center; }
+        /* Navbar mobile */
+        .navbar-collapse { background: var(--nav-bg); padding: 20px; border-radius: 15px; margin-top: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .nav-item.ms-3, .nav-item.ms-2 { margin-left: 0 !important; margin-top: 15px; text-align: center; }
         
-        /* Cards ko mobile par compact kiya */
-        .step-card, .feature-card { padding: 15px 10px; }
-        .step-card h4, .feature-card h4 { font-size: 0.95rem; }
-        .step-card p, .feature-card p { font-size: 0.75rem; }
-        .feature-icon { font-size: 1.6rem; margin-bottom: 8px; }
+        /* Cards Side by Side (2 columns) */
+        .step-card, .feature-card { padding: 20px 15px; border-radius: 15px; }
+        .step-card h4, .feature-card h4 { font-size: 1rem; }
+        .step-card p, .feature-card p { font-size: 0.8rem; }
+        .feature-icon { font-size: 2rem; }
     }
 </style>
 </head>
@@ -128,7 +135,7 @@
                     <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
                     <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
                     <li class="nav-item ms-3">
-                        <a href="login.html" class="btn btn-primary-custom" style="padding: 8px 20px; font-size: 1rem;">Login</a>
+                        <a href="login.html" class="btn btn-primary-custom" style="padding: 8px 25px; font-size: 1rem;">Login</a>
                     </li>
                     <li class="nav-item ms-2">
                         <button class="theme-toggle-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
@@ -138,111 +145,113 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="container hero-content">
+        <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
             <h1>Smart Teacher Substitute System</h1>
             <p>When a teacher is absent, EduPlus automatically finds another teacher to take their place, so no class is left without a teacher.</p>
             <div class="d-flex justify-content-center flex-wrap gap-3">
                 <a href="register.html" class="btn-primary-custom">Start 2-Month Free Trial <i class="fas fa-arrow-right ms-2"></i></a>
                 <a href="#how-it-works" class="btn-outline-custom">How it Works?</a>
             </div>
-            <p class="mt-4" style="font-size: 0.85rem; color: #ccc;">No Credit Card Required. Cancel Anytime.</p>
         </div>
     </section>
 
+    <!-- How It Works Section -->
     <section id="how-it-works" class="py-5" style="background-color: var(--bg-color);">
         <div class="container">
-            <h2 class="section-title">How It Works?</h2>
+            <h2 class="section-title" data-aos="fade-up">How It Works?</h2>
             <div class="row g-3">
-                <!-- Mobile par 2 columns (col-6) ke liye -->
-                <div class="col-6 col-lg-3">
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
                     <div class="step-card">
                         <div class="step-number">1</div>
-                        <h4>Register School</h4>
-                        <p>Create your school account and add your teachers, classes and timetable.</p>
+                        <h4>Register</h4>
+                        <p>Create your school account and add your teachers, classes.</p>
                     </div>
                 </div>
-                <div class="col-6 col-lg-3">
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
                     <div class="step-card">
                         <div class="step-number">2</div>
                         <h4>Mark Absent</h4>
-                        <p>If a teacher is absent, just select their name on the dashboard.</p>
+                        <p>If a teacher is absent, just select their name.</p>
                     </div>
                 </div>
-                <div class="col-6 col-lg-3">
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
                     <div class="step-card">
                         <div class="step-number">3</div>
                         <h4>Smart Suggest</h4>
-                        <p>EduPlus automatically finds free teachers for that specific period.</p>
+                        <p>EduPlus automatically finds free teachers for that period.</p>
                     </div>
                 </div>
-                <div class="col-6 col-lg-3">
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
                     <div class="step-card">
                         <div class="step-number">4</div>
                         <h4>Get Report</h4>
-                        <p>At the end of the month, download detailed reports and charts.</p>
+                        <p>At the end of the month, download detailed reports.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Features Section -->
     <section id="features" class="py-5" style="background-color: var(--card-bg);">
         <div class="container">
-            <h2 class="section-title">Powerful Features</h2>
+            <h2 class="section-title" data-aos="fade-up">Powerful Features</h2>
             <div class="row g-3">
-                <!-- Mobile par 2 columns (col-6) ke liye -->
-                <div class="col-6 col-lg-4">
+                <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="feature-card">
                         <i class="fas fa-file-upload feature-icon"></i>
-                        <h4>Easy Data Upload</h4>
-                        <p>Upload your school's PDF/Excel timetable and all data fills automatically.</p>
+                        <h4>Easy Upload</h4>
+                        <p>Upload timetable in PDF/Excel, data fills automatically.</p>
                     </div>
                 </div>
-                <div class="col-6 col-lg-4">
+                <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="feature-card">
                         <i class="fas fa-robot feature-icon"></i>
                         <h4>Smart Algorithm</h4>
-                        <p>Finds the teacher with the lowest workload to balance substitutions.</p>
+                        <p>Finds the teacher with the lowest workload.</p>
                     </div>
                 </div>
-                <div class="col-6 col-lg-4">
+                <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="feature-card">
                         <i class="fas fa-whatsapp feature-icon"></i>
                         <h4>WhatsApp Alerts</h4>
-                        <p>Get instant WhatsApp notifications for absent teachers.</p>
+                        <p>Get instant WhatsApp notifications for absentees.</p>
                     </div>
                 </div>
-                <div class="col-6 col-lg-4">
+                <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="feature-card">
                         <i class="fas fa-chart-line feature-icon"></i>
-                        <h4>Analytics & Reports</h4>
-                        <p>Get beautiful graphs showing absentees. Download PDF/Excel reports.</p>
+                        <h4>Analytics</h4>
+                        <p>Beautiful graphs showing absentees. Download PDF reports.</p>
                     </div>
                 </div>
-                <div class="col-6 col-lg-4">
+                <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="feature-card">
                         <i class="fas fa-network-wired feature-icon"></i>
-                        <h4>Multi-Branch Support</h4>
-                        <p>One platform for multiple branches and large school networks.</p>
+                        <h4>Multi-Branch</h4>
+                        <p>One platform for multiple branches and school networks.</p>
                     </div>
                 </div>
-                <div class="col-6 col-lg-4">
+                <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="feature-card">
                         <i class="fas fa-brain feature-icon"></i>
                         <h4>AI Assistant</h4>
-                        <p>Our premium AI matches free teachers by subject expertise.</p>
+                        <p>Premium AI matches free teachers by subject expertise.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Pricing Section -->
     <section id="pricing" class="py-5" style="background-color: var(--bg-color);">
         <div class="container">
-            <h2 class="section-title">Simple Pricing</h2>
+            <h2 class="section-title" data-aos="fade-up">Simple Pricing</h2>
+            <p class="text-center mb-5" style="font-size: 1rem;" data-aos="fade-up">Start free for 2 months. Upgrade when you are ready.</p>
             <div class="row g-4 justify-content-center">
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="pricing-card">
                         <h3 class="fw-bold">Free Trial</h3>
                         <div class="price">Rs. 0 <small>/ 2 Months</small></div>
@@ -251,36 +260,33 @@
                             <li><i class="fas fa-check-circle"></i> Up to 20 Teachers</li>
                             <li><i class="fas fa-check-circle"></i> <strong>Upload via PDF/Excel</strong></li>
                             <li><i class="fas fa-check-circle"></i> Smart Substitution</li>
-                            <li><i class="fas fa-check-circle"></i> Basic Reports</li>
                         </ul>
                         <a href="register.html" class="btn btn-outline-dark w-100 rounded-pill fw-bold">Start Free Trial</a>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="pricing-card popular">
                         <div class="popular-badge">FOR SCHOOLS</div>
                         <h3 class="fw-bold">Basic Plan</h3>
                         <div class="price">Rs. 5,000 <small>/ Month</small></div>
-                        <p class="text-muted" style="font-size: 0.9rem;">Best for small & medium schools.</p>
+                        <p class="text-muted" style="font-size: 0.9rem;">Best for small schools.</p>
                         <ul class="pricing-list">
                             <li><i class="fas fa-check-circle"></i> Up to 50 Teachers</li>
-                            <li><i class="fas fa-check-circle"></i> Single Shift</li>
                             <li><i class="fas fa-check-circle"></i> <strong>WhatsApp Alerts</strong></li>
                             <li><i class="fas fa-check-circle"></i> Monthly Reports</li>
                         </ul>
                         <a href="register.html" class="btn btn-primary w-100 rounded-pill fw-bold" style="background: var(--primary); border: none;">Upgrade to Basic</a>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="pricing-card">
                         <h3 class="fw-bold">Premium</h3>
                         <div class="price">Rs. 10,000 <small>/ Month</small></div>
                         <p class="text-muted" style="font-size: 0.9rem;">For colleges & universities.</p>
                         <ul class="pricing-list">
                             <li><i class="fas fa-check-circle"></i> Unlimited Teachers</li>
-                            <li><i class="fas fa-check-circle"></i> <strong>Dual Shifts</strong></li>
-                            <li><i class="fas fa-check-circle"></i> Multi-Branch</li>
                             <li><i class="fas fa-check-circle"></i> <strong>AI Assistant</strong></li>
+                            <li><i class="fas fa-check-circle"></i> 24/7 Priority Support</li>
                         </ul>
                         <a href="register.html" class="btn btn-outline-dark w-100 rounded-pill fw-bold">Upgrade to Premium</a>
                     </div>
@@ -289,10 +295,12 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
     <section id="faq" class="py-5" style="background-color: var(--card-bg);">
         <div class="container" style="max-width: 800px;">
-            <h2 class="section-title">FAQ</h2>
-            <div class="accordion" id="faqAccordion">
+            <h2 class="section-title" data-aos="fade-up">Frequently Asked Questions</h2>
+            <div class="accordion" id="faqAccordion" data-aos="fade-up">
+                <!-- FAQ 1 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
@@ -301,10 +309,11 @@
                     </h2>
                     <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
-                            When a teacher is marked absent, our system checks the timetable and finds a free teacher who has no class in that period.
+                            It's very simple. When a teacher is marked absent, our system automatically checks the timetable and finds a free teacher who has no class in that specific period and assigns them as a substitute.
                         </div>
                     </div>
                 </div>
+                <!-- FAQ 2 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
@@ -313,7 +322,33 @@
                     </h2>
                     <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
-                            Once you register, simply upload your timetable in Excel or PDF. The system fills the data automatically.
+                            Once you register, you can simply upload your school's timetable in Excel or PDF format. Our system will automatically fill in the data.
+                        </div>
+                    </div>
+                </div>
+                <!-- FAQ 3 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            What makes Basic and Premium Plans different?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            The Basic plan is for schools with a single shift and includes WhatsApp alerts. The Premium plan includes an AI Assistant that matches teachers by subject expertise and supports multiple branches.
+                        </div>
+                    </div>
+                </div>
+                <!-- FAQ 4 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            Is this system approved for Government schools?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, EduPlus is built to generate proper monthly PDF reports and statistics which are exactly what government officials and management need for auditing.
                         </div>
                     </div>
                 </div>
@@ -321,26 +356,38 @@
         </div>
     </section>
 
-    <section class="py-5 text-center" style="background: linear-gradient(135deg, var(--primary), #1E1B4B); color: white;">
+    <!-- Call to Action -->
+    <section class="py-5 text-center" style="background: linear-gradient(135deg, var(--primary), #1E1B4B); color: white;" data-aos="zoom-in">
         <div class="container">
-            <h2 class="fw-bold mb-3" style="font-size: 1.8rem;">Ready to Automate Your School?</h2>
-            <p class="mb-4" style="font-size: 0.95rem; opacity: 0.9;">Join the modern schools using EduPlus.</p>
-            <a href="register.html" class="btn btn-light btn-lg rounded-pill fw-bold px-4 py-2" style="color: var(--primary); font-size: 1rem;">Start Free Trial</a>
+            <h2 class="fw-bold mb-3" style="font-size: 2rem;">Ready to Automate Your School?</h2>
+            <p class="mb-4" style="font-size: 1rem; opacity: 0.9;">Join the modern schools using EduPlus.</p>
+            <a href="register.html" class="btn btn-light btn-lg rounded-pill fw-bold px-5 py-3" style="color: var(--primary); font-size: 1rem;">Start Free Trial Now</a>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>© 2026 <strong>EduPlus</strong>. Developed by Mariam Khan.</p>
+            <p>© 2026 <strong>EduPlus</strong>. Developed by Mariam Khan. All Rights Reserved.</p>
             <div class="footer-icons">
-                <a href="https://wa.me/923352528514" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:info@eduplus.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://wa.me/923352528514" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:info@eduplus.com" title="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
+        // === INITIALIZE AOS (SMOOTH SCROLL ANIMATION) ===
+        AOS.init({
+            duration: 800, // Animation kitni dair chalay (800ms)
+            once: true,    // Sirf ek baar animate ho jab scroll karein
+            offset: 100    // Screen se 100px pehle animate ho
+        });
+
         function toggleTheme() {
             const body = document.body, icon = document.getElementById('theme-icon');
             body.classList.toggle('dark-mode');
@@ -350,6 +397,7 @@
                 localStorage.setItem('eduplus_theme', 'light'); icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
             }
         }
+        
         document.addEventListener("DOMContentLoaded", () => {
             const savedTheme = localStorage.getItem('eduplus_theme'), icon = document.getElementById('theme-icon');
             if (savedTheme === 'dark') { document.body.classList.add('dark-mode'); if(icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); } }
