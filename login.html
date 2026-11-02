@@ -64,7 +64,7 @@
             position: relative;
             display: flex;
             justify-content: center;
-            align-items: center; /* Lamp ko center vertically kiya */
+            align-items: center;
         }
 
         .lamp-container {
@@ -73,7 +73,6 @@
             flex-direction: column;
             align-items: center;
             z-index: 10;
-            /* Position adjust ki hai taake beam neechay se nikle */
             margin-top: -100px; 
         }
 
@@ -83,7 +82,7 @@
             height: 15px;
             background-color: #333;
             border-radius: 50%;
-            margin-top: 180px; /* Pole ki height ke mutabiq */
+            margin-top: 180px;
             position: relative;
             z-index: 2;
             box-shadow: 0 10px 20px rgba(0,0,0,0.8);
@@ -91,7 +90,7 @@
 
         .lamp-pole {
             position: absolute;
-            bottom: 10px; /* Base ke upar */
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             width: 6px;
@@ -100,7 +99,7 @@
             z-index: 1;
         }
 
-        /* Lamp Shade (Top part) */
+        /* Lamp Shade */
         .lamp-shade {
             width: 140px;
             height: 70px;
@@ -140,14 +139,13 @@
         }
         
         .pull-string-wrapper:hover {
-            transform: translateY(5px); /* Hover pe chain kheenchti hui lagegi */
+            transform: translateY(5px);
         }
 
         .pull-string {
             width: 3px;
             height: 70px;
             background-color: #666;
-            transition: height 0.2s ease;
         }
         .pull-string::after {
             content: '';
@@ -181,7 +179,7 @@
         /* Light Beam */
         .light-beam {
             position: absolute;
-            top: 70px; /* Shade ke neechay se start */
+            top: 70px;
             width: 0;
             height: 0;
             border-left: 300px solid transparent;
@@ -203,11 +201,9 @@
         body.light-on .light-beam {
             border-top-color: rgba(255, 235, 150, 0.15);
         }
-        /* Text ko hide kar dein jab light on ho jaye */
         body.light-on .click-text {
             display: none;
         }
-
 
         /* ================= LOGIN FORM (RIGHT) ================= */
         .form-side {
@@ -334,7 +330,7 @@
             color: #FB923C;
         }
         
-        /* Responsive (Mobile) */
+        /* Responsive */
         @media (max-width: 991px) {
             .main-wrapper {
                 flex-direction: column;
@@ -349,7 +345,7 @@
             }
             .lamp-container {
                 margin-top: 0;
-                transform: scale(0.8); /* Lamp thora chota mobile pe */
+                transform: scale(0.8);
             }
             .form-side {
                 flex: none;
@@ -372,21 +368,17 @@
         <div class="lamp-side">
             <div class="lamp-container">
                 
-                <!-- Shade & Chain -->
                 <div class="lamp-shade">
                     <div class="lamp-bulb"></div>
                     
-                    <!-- Chain & Click Text Wrapper -->
                     <div class="pull-string-wrapper" id="pullString">
                         <div class="pull-string"></div>
                         <div class="click-text">Click here to turn on</div>
                     </div>
                 </div>
                 
-                <!-- Light Beam -->
                 <div class="light-beam"></div>
 
-                <!-- Stand (Pole & Base) -->
                 <div class="lamp-pole"></div>
                 <div class="lamp-base"></div>
 
@@ -425,32 +417,22 @@
         const pullString = document.getElementById('pullString');
         const body = document.body;
 
-        // 1. Manual Click (User chain kheenche)
+        // 1. Manual Click (Chain kheenchna)
         pullString.addEventListener('click', () => {
             body.classList.toggle('light-on');
         });
 
-        // 2. Auto Light On (Agar user 2.5 seconds tak kuch na kare)
-        let autoLightTimer = setTimeout(() => {
-            body.classList.add('light-on');
-        }, 2500); // 2.5 seconds
-
-        // 3. Scroll ya Touch karne par Auto Light On (Mobile ke liye)
+        // 2. Scroll karne par Auto Light On
         window.addEventListener('scroll', () => {
             body.classList.add('light-on');
-        }, { once: true }); // Sirf ek baar chalega
+        }, { once: true }); // Sirf ek baar trigger hoga
 
+        // 3. Mobile par screen touch karne par Auto Light On
         window.addEventListener('touchstart', () => {
-            // Agar user screen touch kare to bhi light on ho jaye
             if(!body.classList.contains('light-on')) {
                 body.classList.add('light-on');
             }
-        }, { once: true });
-
-        // Agar user ne khud chain kheenchi, to auto-timer cancel kar dein
-        pullString.addEventListener('click', () => {
-            clearTimeout(autoLightTimer);
-        });
+        }, { once: true }); // Sirf ek baar trigger hoga
 
         // Fake Login
         function handleLogin(event) {
