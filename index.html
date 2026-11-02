@@ -1,284 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EduPlus - Smart Substitute System</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-
-<style>
-    :root {
-        --primary: #8B5CF6;
-        --bg-dark: #0F172A;
-        --text-main: #F8FAFC;
-        --text-muted: #CBD5E1;
-    }
-
-    body {
-        font-family: 'Outfit', sans-serif;
-        background-color: var(--bg-dark);
-        color: var(--text-main);
-        overflow-x: hidden;
-        word-wrap: break-word; /* Text cut hone se bachane ke liye */
-    }
-
-    /* Navbar */
-    .navbar {
-        background: rgba(15, 23, 42, 0.95) !important;
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-        padding: 15px 0;
-    }
-    .navbar-brand { font-weight: 800; color: #fff !important; font-size: 1.6rem; }
-    .navbar-brand i { color: var(--primary); }
-    .nav-link { color: var(--text-muted) !important; font-weight: 600; transition: 0.3s; }
-    .nav-link:hover { color: var(--primary) !important; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPlus | Smart Substitute System</title>
     
-    .btn-nav-login {
-        border: 2px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 25px;
-        border-radius: 30px; font-weight: 600; transition: 0.3s;
-    }
-    .btn-nav-login:hover { background: #fff; color: #000; }
-
-    /* Hero Section */
-    .hero {
-        position: relative; 
-        min-height: 90vh; /* Min-height use kiya taake choti screen pe bhi text fit ho */
-        display: flex; 
-        align-items: center;
-        background: url('https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/WhatsApp%20Image%202026-11-02%20at%209.25.30%20PM.jpeg') center/cover no-repeat;
-        background-attachment: fixed;
-        padding: 100px 0 60px;
-    }
-    .hero-overlay {
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(15, 23, 42, 0.85);
-    }
-    .hero-content { position: relative; z-index: 1; text-align: center; width: 100%; padding: 0 15px;}
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    /* Text sizes adjusted with clamp() so they never cut off */
-    .hero h1 { 
-        font-size: clamp(2rem, 5vw, 3.5rem); 
-        font-weight: 800; color: #fff; margin-bottom: 20px; line-height: 1.3;
-    }
-    .hero p { 
-        font-size: clamp(1rem, 2vw, 1.2rem); 
-        color: var(--text-muted); margin-bottom: 40px; 
-        max-width: 700px; margin-left: auto; margin-right: auto;
-    }
-
-    .btn-main {
-        background: var(--primary); color: #fff; padding: 15px 35px;
-        border-radius: 30px; font-weight: 700; font-size: 1.1rem;
-        text-decoration: none; transition: 0.3s; display: inline-block; border: none;
-    }
-    .btn-main:hover { background: #7C3AED; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(139, 92, 246, 0.4); color: #fff;}
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    .btn-outline { border: 2px solid #fff; color: #fff; padding: 15px 35px; border-radius: 30px; font-weight: 700; font-size: 1.1rem; text-decoration: none; display: inline-block; transition: 0.3s;}
-    .btn-outline:hover { background: #fff; color: #000; }
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    /* Sections */
-    .section-padding { padding: 80px 0; }
-    .section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; text-align: center; margin-bottom: 50px; color: #fff; }
-    .section-title span { color: var(--primary); }
-
-    /* Cards */
-    .clean-card {
-        background: rgba(255,255,255,0.03);
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 15px; padding: 30px; height: 100%;
-        transition: 0.3s;
-    }
-    .clean-card:hover { background: rgba(255,255,255,0.08); border-color: var(--primary); transform: translateY(-5px); }
-    .clean-card h4 { font-weight: 700; color: #fff; margin-bottom: 15px; font-size: 1.2rem; }
-    .clean-card p { color: var(--text-muted); font-size: 0.95rem; margin: 0; }
-    .icon-box { font-size: 2rem; color: var(--primary); margin-bottom: 15px; }
-
-    /* Steps */
-    .step-card {
-        background: rgba(255,255,255,0.02); padding: 25px; border-radius: 15px;
-        border-left: 4px solid var(--primary); margin-bottom: 20px;
-    }
-    .step-card h3 { font-size: 1.2rem; color: #fff; font-weight: 700;}
-    .step-card p { color: var(--text-muted); margin: 0; font-size: 0.95rem;}
-
-    /* Pricing (Data Restored) */
-    .price-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; text-align: center; height: 100%; }
-    .price-card.popular { border-color: var(--primary); background: rgba(139, 92, 246, 0.1); position: relative;}
-    .popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #fff; font-size: 0.75rem; font-weight: 800; padding: 5px 15px; border-radius: 20px; letter-spacing: 1px;}
-    .price-card h3 { color: #fff; font-weight: 700; }
-    .price-val { font-size: 2.2rem; font-weight: 800; color: #fff; margin: 15px 0;}
-    .price-val span { font-size: 1rem; color: var(--text-muted);}
-    .price-features { list-style: none; padding: 0; text-align: left; margin: 20px 0; }
-    .price-features li { color: var(--text-muted); margin-bottom: 10px; font-size: 0.95rem; }
-    .price-features i { color: var(--primary); margin-right: 8px; }
-    .btn-price { display: block; width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.1); color: #fff; text-decoration: none; font-weight: 600; transition: 0.3s;}
-    .btn-price:hover { background: var(--primary); color: #fff; }
-    .popular .btn-price { background: var(--primary); }
-    .popular .btn-price:hover { background: #7C3AED; }
-
-    /* FAQ */
-    .accordion-item { background: transparent !important; border: none; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px; }
-    .accordion-button { background: transparent !important; color: #fff !important; font-weight: 600; font-size: 1.1rem; padding: 15px 0; box-shadow: none !important; }
-    .accordion-button:not(.collapsed) { color: var(--primary) !important; }
-    .accordion-body { color: var(--text-muted); padding: 0 0 15px 0; font-size: 0.95rem;}
-
-    /* Footer (Icons Restored) */
-    footer { padding: 40px 0 20px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: var(--text-muted); }
-    .footer-icons { margin-top: 15px; display: flex; justify-content: center; gap: 15px; }
-    .footer-icons a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.08); color: #fff; font-size: 1.1rem; transition: 0.3s; text-decoration: none; }
-    .footer-icons a:hover { background: var(--primary); transform: translateY(-3px); }
-
-    /* === MOBILE RESPONSIVE FIXES === */
-    @media (max-width: 768px) {
-        .hero { padding: 120px 15px 60px; min-height: auto; }
-        .hero h1 { font-size: 2.2rem; }
-        .hero p { font-size: 1rem; }
-        
-        .btn-main, .btn-outline { 
-            width: 100%; 
-            margin-bottom: 10px; 
-            padding: 12px; 
-            font-size: 1rem;
+    <style>
+        /* ================= VARIABLES ================= */
+        :root {
+            --bg-main: #050705; /* Pure Black */
+            --bg-sec: #07120B; /* Dark Green */
+            --neon: #39FF14; /* Neon Green */
+            --lime: #A4FF4F; /* Lime Green */
+            --text-main: #FFFFFF;
+            --text-muted: #9ca3af;
+            --card-bg: rgba(7, 18, 11, 0.7);
+            --border-color: rgba(57, 255, 20, 0.15);
         }
-        
-        .section-padding { padding: 50px 0; }
-        .section-title { font-size: 1.8rem; margin-bottom: 30px;}
-        
-        /* Cards side by side but with safe padding so text doesn't cut */
-        .col-6 { padding-left: 8px; padding-right: 8px; }
-        .clean-card { padding: 15px 10px; }
-        .clean-card h4 { font-size: 1rem; margin-bottom: 8px; }
-        .clean-card p { font-size: 0.8rem; line-height: 1.4; }
-        .icon-box { font-size: 1.5rem; margin-bottom: 10px; }
-        
-        .price-card { padding: 25px 20px; }
-        .price-val { font-size: 2rem; }
-        .price-features li { font-size: 0.85rem; }
 
-        .accordion-button { font-size: 1rem; padding: 15px 0;}
-    }
-</style>
+        /* ================= GLOBAL & CURSOR ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none; /* Custom Cursor */
+        }
+
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            /* Subtle Background Grid */
+            background-image: 
+                linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        h1, h2, h3, h4, .font-heading { font-family: 'Space Grotesk', sans-serif; }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--neon); box-shadow: 0 0 10px var(--neon); }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(57, 255, 20, 0.5); transition: width 0.2s, height 0.2s, background-color 0.2s; }
+        
+        @media (max-width: 991px) {
+            * { cursor: auto; }
+            .cursor-dot, .cursor-outline { display: none; }
+        }
+
+        ::selection { background: var(--neon); color: #000; }
+
+        /* ================= NAVBAR ================= */
+        .navbar {
+            background: rgba(5, 7, 5, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 20px 0; transition: 0.4s;
+        }
+        .navbar-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700; font-size: 1.8rem;
+            color: #fff !important; letter-spacing: -1px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .navbar-brand i { color: var(--neon); text-shadow: 0 0 10px var(--neon); }
+        
+        .nav-link { color: var(--text-muted) !important; font-weight: 500; font-size: 0.95rem; margin: 0 12px; transition: 0.3s; }
+        .nav-link:hover { color: var(--neon) !important; }
+
+        .avail-indicator {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.85rem; color: var(--lime);
+            border: 1px solid rgba(164, 255, 79, 0.2);
+            padding: 5px 15px; border-radius: 20px;
+            background: rgba(164, 255, 79, 0.05);
+        }
+        .dot { width: 8px; height: 8px; background: var(--neon); border-radius: 50%; box-shadow: 0 0 10px var(--neon); animation: pulse 1.5s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(57, 255, 20, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(57, 255, 20, 0); }
+        }
+
+        /* ================= HERO SECTION ================= */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            position: relative; padding-top: 80px; overflow: hidden;
+        }
+
+        /* Animated Light Beams */
+        .beam { position: absolute; width: 2px; background: linear-gradient(to bottom, transparent, var(--neon), transparent); opacity: 0.3; }
+        .beam-1 { height: 100%; top: 0; left: 20%; animation: moveBeam 8s infinite linear; }
+        .beam-2 { height: 100%; top: 0; right: 30%; animation: moveBeam 12s infinite linear reverse; }
+        @keyframes moveBeam { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+
+        /* Floating Particles */
+        .particle { position: absolute; background: var(--neon); border-radius: 50%; filter: blur(1px); animation: float 10s infinite ease-in-out; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
+            50% { transform: translateY(-100px) translateX(50px); opacity: 0.8; }
+        }
+
+        .hero-content { position: relative; z-index: 2; }
+        
+        .hero-subtitle {
+            color: var(--neon); font-weight: 600; letter-spacing: 2px;
+            text-transform: uppercase; font-size: 0.9rem; margin-bottom: 20px; display: inline-block;
+        }
+
+        .hero h1 { font-size: 4.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 30px; }
+        .hero h1 span {
+            color: transparent; -webkit-text-stroke: 1px var(--neon);
+            text-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+        }
+
+        .hero p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin-bottom: 40px; line-height: 1.6; }
+
+        .btn-neon {
+            background: transparent; color: var(--neon); border: 1px solid var(--neon);
+            padding: 15px 35px; font-weight: 600; font-size: 1rem; letter-spacing: 1px;
+            text-transform: uppercase; transition: 0.3s; position: relative;
+            text-decoration: none; display: inline-block; border-radius: 4px;
+        }
+        .btn-neon:hover { background: var(--neon); color: #000; box-shadow: 0 0 20px rgba(57, 255, 20, 0.6); }
+
+        .btn-outline-neon {
+            background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.2);
+            padding: 15px 35px; font-weight: 600; font-size: 1rem; letter-spacing: 1px;
+            text-transform: uppercase; transition: 0.3s; text-decoration: none;
+            display: inline-block; border-radius: 4px;
+        }
+        .btn-outline-neon:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
+
+        /* ================= SECTION STYLING ================= */
+        .section-padding { padding: 120px 0; }
+        .section-title-wrapper { margin-bottom: 70px; }
+        .section-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 15px; }
+        .section-title span { color: var(--neon); }
+        .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; }
+
+        /* ================= HOW IT WORKS (3 COLUMNS) ================= */
+        .about-col { padding: 30px; border-left: 2px solid var(--border-color); transition: 0.3s; position: relative;}
+        .about-col:hover { border-left-color: var(--neon); background: rgba(57, 255, 20, 0.02); }
+        .about-col h4 { font-size: 1.3rem; margin-bottom: 15px; color: #fff; }
+        .about-col p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+
+        /* ================= FEATURES ================= */
+        .service-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            padding: 40px 30px; border-radius: 10px; height: 100%;
+            transition: 0.4s; position: relative; overflow: hidden;
+        }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--neon); transform: scaleX(0); transform-origin: left; transition: 0.4s;
+        }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-color: rgba(57, 255, 20, 0.3);}
+        .service-card:hover::before { transform: scaleX(1); }
+        
+        .service-icon { font-size: 2rem; color: var(--neon); margin-bottom: 20px; }
+        .service-card h4 { font-size: 1.2rem; margin-bottom: 15px; }
+        .service-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin: 0;}
+
+        /* ================= PRICING ================= */
+        .price-card {
+            background: #050705; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px; padding: 40px 30px; text-align: center;
+            transition: 0.3s; position: relative; height: 100%;
+        }
+        .price-card:hover { border-color: var(--lime); box-shadow: 0 0 20px rgba(164, 255, 79, 0.1); }
+        .price-card.popular { border-color: var(--neon); background: rgba(57, 255, 20, 0.05); box-shadow: 0 0 30px rgba(57, 255, 20, 0.15); }
+        .popular-badge {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: var(--neon); color: #000; font-size: 0.75rem; font-weight: 700;
+            padding: 4px 15px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .price-card h3 { color: #fff; font-weight: 700; margin-bottom: 20px;}
+        .price-val { font-size: 2.5rem; font-weight: 800; color: #fff; margin: 15px 0;}
+        .price-val span { font-size: 1rem; color: var(--text-muted);}
+        .price-features { list-style: none; padding: 0; text-align: left; margin: 20px 0; }
+        .price-features li { color: var(--text-muted); margin-bottom: 15px; font-size: 0.9rem; display: flex; align-items: center;}
+        .price-features i { color: var(--neon); margin-right: 10px; }
+        .btn-price { display: block; width: 100%; padding: 12px; border-radius: 5px; background: rgba(255,255,255,0.05); color: #fff; text-decoration: none; font-weight: 600; transition: 0.3s;}
+        .btn-price:hover { background: var(--neon); color: #000; }
+        .popular .btn-price { background: var(--neon); color: #000; }
+        .popular .btn-price:hover { background: #fff; }
+
+        /* ================= FAQ ================= */
+        .accordion-item { background: transparent !important; border: none; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px; }
+        .accordion-button { background: transparent !important; color: #fff !important; font-weight: 600; font-size: 1.1rem; padding: 20px 0; box-shadow: none !important; }
+        .accordion-button:not(.collapsed) { color: var(--neon) !important; }
+        .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2339FF14'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+        .accordion-body { color: var(--text-muted); padding: 0 0 20px 0; font-size: 0.95rem; }
+
+        /* ================= FOOTER ================= */
+        footer { border-top: 1px solid rgba(255,255,255,0.05); padding: 60px 0 30px; background: #030403; }
+        .footer-brand { font-size: 1.5rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; margin-bottom: 20px;}
+        .footer-brand i { color: var(--neon); }
+        .footer-desc { color: var(--text-muted); font-size: 0.9rem; max-width: 300px; }
+        .copyright { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.85rem;}
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; transition: 0.3s; font-size: 0.9rem;}
+        .footer-links a:hover { color: var(--neon); padding-left: 5px; }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 991px) {
+            .hero h1 { font-size: 3rem; }
+            .hero { min-height: 80vh; }
+            .section-padding { padding: 80px 0; }
+            .navbar-collapse { background: #050705; padding: 20px; border: 1px solid var(--border-color); border-radius: 10px; margin-top: 15px; }
+            .avail-indicator { margin-top: 15px; justify-content: center; display: inline-flex; }
+            .about-col { border-left: none; border-top: 2px solid var(--border-color); padding-top: 20px; margin-bottom: 20px;}
+            .about-col:hover { border-top-color: var(--neon); }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="fas fa-graduation-cap me-2"></i>EduPlus</a>
-            <button class="navbar-toggler border-0 shadow-none text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <i class="fas fa-bars" style="font-size: 1.5rem;"></i>
+            <a class="navbar-brand" href="#"><i class="fas fa-graduation-cap"></i> EduPlus</a>
+            <button class="navbar-toggler border-0 text-white shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars" style="color: var(--neon); font-size: 1.5rem;"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
+                <ul class="navbar-nav mx-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#how-it-works">How it Works</a></li>
                     <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
                     <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
                     <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-                    <li class="nav-item ms-3 mb-2 mb-lg-0">
-                        <a href="login.html" class="btn-nav-login">Login</a>
-                    </li>
                 </ul>
+                <a href="login.html" class="btn-neon mt-3 mt-lg-0" style="padding: 8px 25px; font-size: 0.9rem;">Login</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-overlay"></div>
+    <section id="home" class="hero">
+        <!-- Animated Beams -->
+        <div class="beam beam-1"></div>
+        <div class="beam beam-2"></div>
+
         <div class="container hero-content">
-            <h1>Smart Teacher<br>Substitute System</h1>
-            <p>When a teacher is absent, EduPlus automatically finds another teacher to take their place, so no class is left without a teacher.</p>
-            <div>
-                <a href="register.html" class="btn-main me-2 mb-2">Start Free Trial</a>
-                <a href="#how-it-works" class="btn-outline ms-2 mb-2">How it Works?</a>
+            <div class="row">
+                <div class="col-lg-8">
+                    <span class="hero-subtitle gsap-hero-anim">Next-Gen Educational Management</span>
+                    <h1 class="gsap-hero-anim">Smart Teacher <br><span>Substitute System</span></h1>
+                    <p class="gsap-hero-anim">When a teacher is absent, EduPlus automatically finds another teacher to take their place, so no class is left without a teacher.</p>
+                    
+                    <div class="d-flex flex-wrap gap-3 mt-4 gsap-hero-anim">
+                        <a href="register.html" class="btn-neon">Start Free Trial</a>
+                        <a href="#how-it-works" class="btn-outline-neon">How it Works?</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works -->
+    <!-- How It Works (About) -->
     <section id="how-it-works" class="section-padding">
         <div class="container">
-            <h2 class="section-title">How It <span>Works?</span></h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="step-card">
-                        <h3>1. Register School</h3>
-                        <p>Create your school account and add your teachers, classes and timetable.</p>
+            <div class="section-title-wrapper gsap-fade-up">
+                <h2 class="section-title">How It <span>Works?</span></h2>
+                <p class="section-subtitle">Automating your school's daily operations with intelligent algorithms.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 gsap-fade-up">
+                    <div class="about-col">
+                        <h4>1. Register School</h4>
+                        <p>Create your school account and add your teachers, classes and timetable effortlessly.</p>
                     </div>
-                    <div class="step-card">
-                        <h3>2. Mark Absent</h3>
-                        <p>If a teacher is absent, just select their name on the dashboard.</p>
+                </div>
+                <div class="col-lg-4 gsap-fade-up" style="transition-delay: 0.1s;">
+                    <div class="about-col">
+                        <h4>2. Mark Absent</h4>
+                        <p>If a teacher is absent, just select their name on the dashboard with one click.</p>
                     </div>
-                    <div class="step-card">
-                        <h3>3. Smart Suggest</h3>
-                        <p>EduPlus automatically finds free teachers for that specific period.</p>
+                </div>
+                <div class="col-lg-4 gsap-fade-up" style="transition-delay: 0.2s;">
+                    <div class="about-col">
+                        <h4>3. Smart Suggest</h4>
+                        <p>EduPlus instantly finds the best available free teacher for that specific period.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features -->
-    <section id="features" class="section-padding" style="background: rgba(0,0,0,0.2);">
+    <!-- Features (Services) -->
+    <section id="features" class="section-padding">
         <div class="container">
-            <h2 class="section-title">Powerful <span>Features</span></h2>
-            <div class="row g-3 justify-content-center">
-                <div class="col-6 col-md-4">
-                    <div class="clean-card">
-                        <i class="fas fa-file-upload icon-box"></i>
-                        <h4>Easy Upload</h4>
-                        <p>Upload your school's PDF/Excel timetable automatically.</p>
+            <div class="section-title-wrapper gsap-fade-up">
+                <h2 class="section-title">Powerful <span>Features</span></h2>
+                <p class="section-subtitle">Comprehensive tools designed to make school administration a breeze.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4 gsap-fade-up">
+                    <div class="service-card">
+                        <i class="fas fa-file-upload service-icon"></i>
+                        <h4>Easy Data Upload</h4>
+                        <p>Upload your school's PDF/Excel timetable and data fills automatically. No manual entry required.</p>
                     </div>
                 </div>
-                <div class="col-6 col-md-4">
-                    <div class="clean-card">
-                        <i class="fas fa-robot icon-box"></i>
+                <div class="col-md-6 col-lg-4 gsap-fade-up" style="transition-delay: 0.1s;">
+                    <div class="service-card">
+                        <i class="fas fa-robot service-icon"></i>
                         <h4>Smart Algorithm</h4>
-                        <p>Finds the teacher with the lowest workload for substitution.</p>
+                        <p>Finds the teacher with the lowest workload to balance substitutions perfectly.</p>
                     </div>
                 </div>
-                <div class="col-6 col-md-4">
-                    <div class="clean-card">
-                        <i class="fab fa-whatsapp icon-box"></i>
+                <div class="col-md-6 col-lg-4 gsap-fade-up" style="transition-delay: 0.2s;">
+                    <div class="service-card">
+                        <i class="fab fa-whatsapp service-icon"></i>
                         <h4>WhatsApp Alerts</h4>
-                        <p>Get instant WhatsApp notifications for absent teachers.</p>
+                        <p>Get instant WhatsApp notifications for absent teachers and substitution assignments.</p>
                     </div>
                 </div>
-                <div class="col-6 col-md-4">
-                    <div class="clean-card">
-                        <i class="fas fa-chart-line icon-box"></i>
-                        <h4>Analytics</h4>
-                        <p>Beautiful graphs showing absentees and reports.</p>
+                <div class="col-md-6 col-lg-4 gsap-fade-up">
+                    <div class="service-card">
+                        <i class="fas fa-chart-line service-icon"></i>
+                        <h4>Analytics & Reports</h4>
+                        <p>Get beautiful graphs showing absentees. Download PDF/Excel reports for management.</p>
                     </div>
                 </div>
-                <div class="col-6 col-md-4">
-                    <div class="clean-card">
-                        <i class="fas fa-network-wired icon-box"></i>
-                        <h4>Multi-Branch</h4>
-                        <p>One platform for multiple branches and large networks.</p>
+                <div class="col-md-6 col-lg-4 gsap-fade-up" style="transition-delay: 0.1s;">
+                    <div class="service-card">
+                        <i class="fas fa-network-wired service-icon"></i>
+                        <h4>Multi-Branch Support</h4>
+                        <p>One platform for multiple branches. Perfect for large school networks and colleges.</p>
                     </div>
                 </div>
-                <div class="col-6 col-md-4">
-                    <div class="clean-card">
-                        <i class="fas fa-brain icon-box"></i>
+                <div class="col-md-6 col-lg-4 gsap-fade-up" style="transition-delay: 0.2s;">
+                    <div class="service-card">
+                        <i class="fas fa-brain service-icon"></i>
                         <h4>AI Assistant</h4>
-                        <p>Premium AI matches free teachers by subject expertise.</p>
+                        <p>Premium AI matches free teachers not just by free period, but by subject expertise.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing (All Data Restored) -->
+    <!-- Pricing Section -->
     <section id="pricing" class="section-padding">
         <div class="container">
-            <h2 class="section-title">Simple <span>Pricing</span></h2>
+            <div class="section-title-wrapper gsap-fade-up">
+                <h2 class="section-title">Simple <span>Pricing</span></h2>
+                <p class="section-subtitle">Start free for 2 months. Upgrade when you are ready.</p>
+            </div>
             <div class="row g-4 justify-content-center">
-                <!-- Free Plan -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 gsap-fade-up">
                     <div class="price-card">
                         <h3>Free Trial</h3>
                         <div class="price-val">Rs. 0 <span>/ 2 Months</span></div>
@@ -286,41 +384,30 @@
                             <li><i class="fas fa-check-circle"></i> Up to 20 Teachers</li>
                             <li><i class="fas fa-check-circle"></i> Upload via PDF/Excel</li>
                             <li><i class="fas fa-check-circle"></i> Smart Substitution</li>
-                            <li><i class="fas fa-check-circle"></i> Basic Reports & Graphs</li>
-                            <li><i class="fas fa-check-circle"></i> Export Data (PDF)</li>
                         </ul>
                         <a href="register.html" class="btn-price">Start Free</a>
                     </div>
                 </div>
-                <!-- Basic Plan -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 gsap-fade-up" style="transition-delay: 0.1s;">
                     <div class="price-card popular">
-                        <div class="popular-badge">FOR SCHOOLS</div>
+                        <div class="popular-badge">MOST POPULAR</div>
                         <h3>Basic Plan</h3>
                         <div class="price-val">Rs. 5,000 <span>/ Month</span></div>
                         <ul class="price-features">
                             <li><i class="fas fa-check-circle"></i> Up to 50 Teachers</li>
-                            <li><i class="fas fa-check-circle"></i> Single Shift (Morning)</li>
                             <li><i class="fas fa-check-circle"></i> WhatsApp Alerts</li>
-                            <li><i class="fas fa-check-circle"></i> Teacher Self-Service Portal</li>
-                            <li><i class="fas fa-check-circle"></i> Monthly Reports & Graphs</li>
-                            <li><i class="fas fa-check-circle"></i> Export Data (PDF/Excel)</li>
+                            <li><i class="fas fa-check-circle"></i> Monthly Reports</li>
                         </ul>
                         <a href="register.html" class="btn-price">Upgrade</a>
                     </div>
                 </div>
-                <!-- Premium Plan -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 gsap-fade-up" style="transition-delay: 0.2s;">
                     <div class="price-card">
                         <h3>Premium</h3>
                         <div class="price-val">Rs. 10,000 <span>/ Month</span></div>
                         <ul class="price-features">
                             <li><i class="fas fa-check-circle"></i> Unlimited Teachers</li>
-                            <li><i class="fas fa-check-circle"></i> Dual Shifts (Morning & Evening)</li>
-                            <li><i class="fas fa-check-circle"></i> Multi-Branch Support</li>
-                            <li><i class="fas fa-check-circle"></i> AI Substitute Assistant</li>
-                            <li><i class="fas fa-check-circle"></i> Advanced Analytics & Graphs</li>
-                            <li><i class="fas fa-check-circle"></i> Export Data (PDF/Excel)</li>
+                            <li><i class="fas fa-check-circle"></i> AI Assistant</li>
                             <li><i class="fas fa-check-circle"></i> 24/7 Priority Support</li>
                         </ul>
                         <a href="register.html" class="btn-price">Upgrade</a>
@@ -330,11 +417,13 @@
         </div>
     </section>
 
-    <!-- FAQ -->
+    <!-- FAQ Section -->
     <section id="faq" class="section-padding">
         <div class="container" style="max-width: 800px;">
-            <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
-            <div class="accordion" id="faqAccordion">
+            <div class="section-title-wrapper gsap-fade-up text-center">
+                <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+            </div>
+            <div class="accordion gsap-fade-up" id="faqAccordion">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
@@ -342,7 +431,7 @@
                         </button>
                     </h2>
                     <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">It's very simple. When a teacher is marked absent, our system automatically checks the timetable and finds a free teacher who has no class in that specific period and assigns them as a substitute.</div>
+                        <div class="accordion-body">When a teacher is marked absent, our system automatically checks the timetable and finds a free teacher who has no class in that specific period and assigns them as a substitute.</div>
                     </div>
                 </div>
                 <div class="accordion-item">
@@ -358,20 +447,10 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                            What makes Basic and Premium Plans different?
+                            Is it approved for Government schools?
                         </button>
                     </h2>
                     <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">The Basic plan is for schools with a single shift and includes WhatsApp alerts. The Premium plan is for colleges with dual shifts and includes an AI Assistant that matches teachers by subject expertise.</div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                            Is this system approved for Government schools?
-                        </button>
-                    </h2>
-                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                         <div class="accordion-body">Yes, EduPlus is built to generate proper monthly PDF reports and statistics which are exactly what government officials and management need for auditing.</div>
                     </div>
                 </div>
@@ -379,21 +458,116 @@
         </div>
     </section>
 
-    <!-- Footer (Icons Restored) -->
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>© 2026 <strong>EduPlus</strong>. Developed by Mariam Khan. All Rights Reserved.</p>
-            <div class="footer-icons">
-                <a href="https://wa.me/923352528514" target="_blank" title="Contact on WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                <a href="mailto:info@eduplus.com" title="Send Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <a class="footer-brand" href="#"><i class="fas fa-graduation-cap"></i> EduPlus</a>
+                    <p class="footer-desc">Smart Teacher Substitute System. Automate your timetable, track absentees, and manage substitute teachers efficiently.</p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5 class="footer-title" style="color:#fff; font-weight:600; margin-bottom:20px;">Navigation</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#how-it-works">How it Works</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <h5 class="footer-title" style="color:#fff; font-weight:600; margin-bottom:20px;">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Register School</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="footer-title" style="color:#fff; font-weight:600; margin-bottom:20px;">Connect</h5>
+                    <div style="display:flex; gap:10px;">
+                        <a href="#" style="color:#fff; font-size:1.2rem;"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" style="color:#fff; font-size:1.2rem;"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 EduPlus. Developed by Mariam Khan. All rights reserved.
             </div>
         </div>
     </footer>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // CUSTOM CURSOR LOGIC
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            gsap.to(cursorOutline, {
+                left: posX, top: posY, duration: 0.15, ease: "power2.out"
+            });
+        });
+
+        const links = document.querySelectorAll('a, button, input, textarea');
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursorOutline.style.width = '60px';
+                cursorOutline.style.height = '60px';
+                cursorOutline.style.backgroundColor = 'rgba(57, 255, 20, 0.1)';
+            });
+            link.addEventListener('mouseleave', () => {
+                cursorOutline.style.width = '40px';
+                cursorOutline.style.height = '40px';
+                cursorOutline.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // HERO ANIMATIONS
+        const tl = gsap.timeline();
+        tl.from(".gsap-hero-anim", {
+            y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out", delay: 0.2
+        });
+
+        // SCROLL REVEAL
+        gsap.utils.toArray('.gsap-fade-up').forEach(element => {
+            gsap.from(element, {
+                scrollTrigger: {
+                    trigger: element, start: "top 85%", toggleActions: "play none none none"
+                },
+                y: 40, opacity: 0, duration: 0.8, ease: "power2.out"
+            });
+        });
+
+        // DYNAMIC PARTICLES
+        const heroSection = document.querySelector('.hero');
+        for(let i=0; i<20; i++) {
+            let particle = document.createElement('div');
+            particle.classList.add('particle');
+            let size = Math.random() * 4 + 1;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+            heroSection.appendChild(particle);
+        }
+    </script>
 </body>
 </html>
