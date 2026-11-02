@@ -4,10 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduPlus - Register</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
+        :root {
+            --bg-main: #050705;
+            --neon: #39FF14;
+            --lime: #A4FF4F;
+            --text-main: #FFFFFF;
+            --text-muted: #9ca3af;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -16,7 +26,7 @@
         }
 
         body {
-            background-color: #050505;
+            background-color: var(--bg-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,29 +34,53 @@
             overflow-x: hidden;
             transition: background-color 1s ease;
             position: relative;
+            /* Cyber Grid Background */
+            background-image: 
+                linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
 
         body.light-on {
-            background-color: #121212;
+            background-color: #07120B; /* Dark Green tint when light is on */
         }
 
+        /* ================= TOP CORNER LOGO ================= */
         .top-logo {
             position: absolute;
             top: 25px;
             left: 40px;
             color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.8rem;
-            font-weight: 800;
+            font-weight: 700;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 10px;
             z-index: 1000;
-            letter-spacing: 1px;
+            letter-spacing: -1px;
             transition: color 0.3s ease;
         }
-        body.light-on .top-logo { color: #8B5CF6; }
+        .top-logo i { color: var(--neon); text-shadow: 0 0 10px var(--neon); }
 
+        /* Particles container */
+        .particles-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; z-index: 0; pointer-events: none;
+        }
+        .particle {
+            position: absolute; background: var(--neon);
+            border-radius: 50%; filter: blur(1px);
+            animation: float 10s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
+            50% { transform: translateY(-50px) translateX(25px); opacity: 0.6; }
+        }
+
+        /* ================= MAIN WRAPPER ================= */
         .main-wrapper {
             display: flex;
             width: 100%;
@@ -56,7 +90,7 @@
             z-index: 10;
         }
 
-        /* LAMP SECTION */
+        /* ================= LAMP SECTION ================= */
         .lamp-side {
             flex: 1;
             position: relative;
@@ -75,54 +109,57 @@
         }
 
         .lamp-base {
-            width: 80px;
-            height: 15px;
-            background-color: #333;
+            width: 90px;
+            height: 12px;
+            background: linear-gradient(to bottom, #222, #050705);
             border-radius: 50%;
-            margin-top: 180px;
+            margin-top: 210px; 
             position: relative;
             z-index: 2;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.8), 0 0 10px rgba(57, 255, 20, 0.1);
         }
 
         .lamp-pole {
             position: absolute;
-            bottom: 10px;
+            bottom: 5px;
             left: 50%;
             transform: translateX(-50%);
             width: 6px;
-            height: 200px;
-            background-color: #2a2a2a;
+            height: 220px;
+            background: linear-gradient(to right, #111, #444, #111);
             z-index: 1;
+            border-radius: 4px;
         }
 
         .lamp-shade {
-            width: 140px;
-            height: 70px;
-            background-color: #444;
-            border-top-left-radius: 70px;
-            border-top-right-radius: 70px;
+            width: 160px;
+            height: 80px;
+            background: linear-gradient(to bottom, #1a1a1a, #050705);
+            border-top-left-radius: 80px;
+            border-top-right-radius: 80px;
             position: relative;
-            z-index: 2;
+            z-index: 3;
             transition: box-shadow 0.5s ease;
-            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5);
+            box-shadow: inset 0 -15px 25px rgba(0,0,0,0.8), 0 5px 15px rgba(0,0,0,0.5);
+            border-bottom: 2px solid #111;
         }
 
         .lamp-bulb {
-            width: 35px;
-            height: 35px;
-            background-color: #555;
+            width: 40px;
+            height: 40px;
+            background-color: #222;
             border-radius: 50%;
             position: absolute;
-            bottom: -17px;
+            bottom: -20px;
             left: 50%;
             transform: translateX(-50%);
             transition: background-color 0.5s ease, box-shadow 0.5s ease;
+            z-index: 2;
         }
 
         .pull-string-wrapper {
             position: absolute;
-            top: 40px;
+            top: 50px;
             left: 50%;
             display: flex;
             flex-direction: column;
@@ -137,31 +174,35 @@
         }
 
         .pull-string {
-            width: 3px;
-            height: 70px;
+            width: 2px;
+            height: 80px;
             background-color: #666;
         }
         .pull-string::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -8px;
             left: -5px;
-            width: 14px;
-            height: 14px;
-            background-color: #d4a373;
+            width: 12px;
+            height: 12px;
+            background-color: var(--neon);
             border-radius: 50%;
-            box-shadow: 0 0 10px rgba(212, 163, 115, 0.8);
+            box-shadow: 0 0 15px var(--neon);
         }
 
         .click-text {
             position: absolute;
-            top: 80px;
-            color: #fff;
-            font-size: 0.8rem;
+            top: 90px;
+            color: var(--neon);
+            font-size: 0.75rem;
             font-weight: 600;
             white-space: nowrap;
             animation: pulseText 1.5s infinite;
-            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+            background: rgba(0,0,0,0.8);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(57,255,20,0.3);
         }
 
         @keyframes pulseText {
@@ -172,32 +213,33 @@
 
         .light-beam {
             position: absolute;
-            top: 70px;
+            top: 80px;
             width: 0;
             height: 0;
-            border-left: 300px solid transparent;
-            border-right: 300px solid transparent;
-            border-top: 600px solid rgba(255, 235, 150, 0.02);
+            border-left: 350px solid transparent;
+            border-right: 350px solid transparent;
+            border-top: 600px solid rgba(57, 255, 20, 0.0); 
             transition: border-top-color 1s ease;
-            z-index: 0;
+            z-index: 1;
             pointer-events: none;
+            filter: blur(15px);
         }
 
         body.light-on .lamp-shade {
-            box-shadow: 0 -10px 30px rgba(255, 234, 148, 0.2), inset 0 -10px 20px rgba(0,0,0,0.5);
+            box-shadow: inset 0 -15px 25px rgba(0,0,0,0.8), 0 -10px 40px rgba(57, 255, 20, 0.2);
         }
         body.light-on .lamp-bulb {
-            background-color: #ffea94;
-            box-shadow: 0 0 60px 25px rgba(255, 234, 148, 0.8);
+            background-color: #fff;
+            box-shadow: 0 0 40px 15px var(--neon), 0 0 80px 30px rgba(57, 255, 20, 0.4);
         }
         body.light-on .light-beam {
-            border-top-color: rgba(255, 235, 150, 0.15);
+            border-top-color: rgba(57, 255, 20, 0.1);
         }
         body.light-on .click-text {
             display: none;
         }
 
-        /* REGISTER FORM */
+        /* ================= REGISTER FORM ================= */
         .form-side {
             flex: 1;
             display: flex;
@@ -207,9 +249,9 @@
         }
 
         .register-container {
-            background: rgba(25, 25, 25, 0.6);
+            background: rgba(5, 7, 5, 0.7);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(57, 255, 20, 0.2);
             padding: 30px 40px;
             border-radius: 20px;
             width: 480px;
@@ -226,21 +268,23 @@
             opacity: 1;
             transform: translateY(0) scale(1);
             pointer-events: auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(57, 255, 20, 0.3);
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.05);
         }
 
         .register-container h2 {
             color: #fff;
             text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.8rem;
             margin-bottom: 5px;
             font-weight: 700;
         }
 
         .register-container p {
-            color: #888;
+            color: var(--text-muted);
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-size: 0.9rem;
         }
 
@@ -262,9 +306,9 @@
         .input-group select {
             width: 100%;
             padding: 12px 12px 12px 45px;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+            border-radius: 8px;
             color: #fff;
             font-size: 0.95rem;
             outline: none;
@@ -284,51 +328,54 @@
             pointer-events: none;
         }
 
-        .input-group input::placeholder { color: #666; }
-        .input-group select option { background: #1a1a1a; color: #fff; }
+        .input-group input::placeholder { color: #555; }
+        .input-group select option { background: #111; color: #fff; }
 
         .input-group input:focus, 
         .input-group select:focus {
-            border-color: #8B5CF6;
-            background: rgba(0, 0, 0, 0.5);
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+            border-color: var(--neon);
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
         }
         
         .input-group input:focus + i,
         .input-group input:not(:placeholder-shown) + i {
-            color: #8B5CF6;
+            color: var(--neon);
         }
 
         .btn-register {
             width: 100%;
             padding: 14px;
-            background: #6D28D9;
-            color: #fff;
-            border: none;
-            border-radius: 12px;
+            background: transparent;
+            color: var(--neon);
+            border: 1px solid var(--neon);
+            border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
             margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(109, 40, 217, 0.3);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-register:hover {
-            background: #5B21B6;
+            background: var(--neon);
+            color: #000;
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.5);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(109, 40, 217, 0.5);
         }
 
         .login-link {
             text-align: center;
             margin-top: 20px;
-            color: #888;
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
 
         .login-link a {
-            color: #F97316;
+            color: var(--lime);
             text-decoration: none;
             font-weight: 600;
             transition: 0.3s;
@@ -336,7 +383,7 @@
 
         .login-link a:hover {
             text-decoration: underline;
-            color: #FB923C;
+            text-shadow: 0 0 10px rgba(164, 255, 79, 0.5);
         }
 
         .row-inputs {
@@ -360,16 +407,16 @@
                 height: auto;
                 min-height: 200px;
                 align-items: flex-start;
-                margin-bottom: 10px;
+                margin-bottom: 20px;
             }
             .lamp-container {
-                transform: scale(0.7);
-                margin-top: -40px;
+                transform: scale(0.75);
+                margin-top: -20px;
             }
             .light-beam {
-                border-left-width: 150px;
-                border-right-width: 150px;
-                border-top-width: 300px;
+                border-left-width: 180px;
+                border-right-width: 180px;
+                border-top-width: 350px;
             }
             .form-side {
                 flex: none;
@@ -394,6 +441,9 @@
     </style>
 </head>
 <body id="bodyElement">
+
+    <!-- Particles Background -->
+    <div class="particles-container" id="particles"></div>
 
     <!-- Corner Logo -->
     <a href="index.html" class="top-logo"><i class="fas fa-graduation-cap"></i> EduPlus</a>
@@ -472,33 +522,54 @@
 
     <!-- JavaScript Logic -->
     <script>
+        // --- Generate Particles ---
+        const particlesContainer = document.getElementById('particles');
+        for(let i=0; i<15; i++) {
+            let particle = document.createElement('div');
+            particle.classList.add('particle');
+            let size = Math.random() * 4 + 1;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+            particlesContainer.appendChild(particle);
+        }
+
         const pullString = document.getElementById('pullString');
         const body = document.body;
 
+        // 1. Manual Click
         pullString.addEventListener('click', () => {
             body.classList.toggle('light-on');
         });
 
+        // 2. Scroll Auto Light
         window.addEventListener('scroll', () => {
             body.classList.add('light-on');
         }, { once: true });
 
+        // 3. Mobile Touch Auto Light
         window.addEventListener('touchstart', () => {
             if(!body.classList.contains('light-on')) {
                 body.classList.add('light-on');
             }
         }, { once: true });
 
+        // Fake Register
         function handleRegister(event) {
             event.preventDefault();
             const btn = document.getElementById('registerBtn');
             
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
             btn.disabled = true;
+            btn.style.color = '#fff';
 
             setTimeout(() => {
                 btn.innerHTML = '<i class="fas fa-check"></i> Success!';
-                btn.style.background = '#16a34a';
+                btn.style.background = 'var(--neon)';
+                btn.style.color = '#000';
                 
                 const schoolName = document.getElementById('schoolName').value;
                 localStorage.setItem('eduplus_user', JSON.stringify({
