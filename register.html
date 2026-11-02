@@ -16,21 +16,20 @@
         }
 
         body {
-            background-color: #050505; /* Full Black */
-            height: 100vh;
+            background-color: #050505;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
             transition: background-color 1s ease;
             position: relative;
         }
 
         body.light-on {
-            background-color: #121212; /* Thora roshan */
+            background-color: #121212;
         }
 
-        /* ================= TOP CORNER LOGO ================= */
         .top-logo {
             position: absolute;
             top: 25px;
@@ -48,17 +47,16 @@
         }
         body.light-on .top-logo { color: #8B5CF6; }
 
-        /* ================= MAIN WRAPPER ================= */
         .main-wrapper {
             display: flex;
             width: 100%;
             max-width: 1200px;
-            height: 100vh;
+            min-height: 100vh;
             position: relative;
             z-index: 10;
         }
 
-        /* ================= LAMP SECTION (LEFT) ================= */
+        /* LAMP SECTION */
         .lamp-side {
             flex: 1;
             position: relative;
@@ -73,10 +71,9 @@
             flex-direction: column;
             align-items: center;
             z-index: 10;
-            margin-top: -100px; 
+            margin-top: -50px; 
         }
 
-        /* Lamp Stand (Base & Pole) */
         .lamp-base {
             width: 80px;
             height: 15px;
@@ -99,7 +96,6 @@
             z-index: 1;
         }
 
-        /* Lamp Shade */
         .lamp-shade {
             width: 140px;
             height: 70px;
@@ -112,7 +108,6 @@
             box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5);
         }
 
-        /* Bulb */
         .lamp-bulb {
             width: 35px;
             height: 35px;
@@ -125,7 +120,6 @@
             transition: background-color 0.5s ease, box-shadow 0.5s ease;
         }
 
-        /* Chain & Text */
         .pull-string-wrapper {
             position: absolute;
             top: 40px;
@@ -176,7 +170,6 @@
             100% { opacity: 0.5; transform: scale(0.95); }
         }
 
-        /* Light Beam */
         .light-beam {
             position: absolute;
             top: 70px;
@@ -190,7 +183,6 @@
             pointer-events: none;
         }
 
-        /* Jab Light On ho */
         body.light-on .lamp-shade {
             box-shadow: 0 -10px 30px rgba(255, 234, 148, 0.2), inset 0 -10px 20px rgba(0,0,0,0.5);
         }
@@ -205,14 +197,13 @@
             display: none;
         }
 
-        /* ================= REGISTER FORM (RIGHT) ================= */
+        /* REGISTER FORM */
         .form-side {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow-y: auto; /* Agar form lamba ho to scroll ho sake */
         }
 
         .register-container {
@@ -278,12 +269,11 @@
             font-size: 0.95rem;
             outline: none;
             transition: 0.3s;
-            appearance: none; /* Select ka default arrow hatane ke liye */
+            appearance: none;
         }
 
-        /* Custom arrow for select */
         .select-wrapper::after {
-            content: '\f107'; /* FontAwesome down arrow */
+            content: '\f107';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             position: absolute;
@@ -349,7 +339,6 @@
             color: #FB923C;
         }
 
-        /* Grid for side-by-side inputs */
         .row-inputs {
             display: flex;
             gap: 10px;
@@ -358,36 +347,49 @@
             flex: 1;
         }
         
-        /* Responsive */
+        /* ================= MOBILE RESPONSIVE FIX ================= */
         @media (max-width: 991px) {
             .main-wrapper {
                 flex-direction: column;
                 justify-content: flex-start;
-                padding-top: 20px;
+                padding-top: 80px;
+                padding-bottom: 40px;
             }
             .lamp-side {
                 flex: none;
-                height: 40vh;
-                align-items: flex-end;
-                padding-bottom: 10px;
+                height: auto;
+                min-height: 200px;
+                align-items: flex-start;
+                margin-bottom: 10px;
             }
             .lamp-container {
-                margin-top: 0;
-                transform: scale(0.7); /* Mobile pe lamp chota */
+                transform: scale(0.7);
+                margin-top: -40px;
+            }
+            .light-beam {
+                border-left-width: 150px;
+                border-right-width: 150px;
+                border-top-width: 300px;
             }
             .form-side {
                 flex: none;
                 padding: 0 15px;
-                margin-top: -20px;
-                overflow-y: auto;
-                height: 60vh;
+                width: 100%;
             }
             .register-container { 
                 width: 100%; 
-                padding: 20px;
+                padding: 25px 20px;
             }
-            .row-inputs { flex-direction: column; gap: 0; }
-            .top-logo { top: 15px; left: 20px; font-size: 1.5rem; }
+            .row-inputs { 
+                flex-direction: column; 
+                gap: 0; 
+            }
+            .top-logo { 
+                top: 20px; 
+                left: 20px; 
+                font-size: 1.5rem; 
+                z-index: 9999;
+            }
         }
     </style>
 </head>
@@ -405,7 +407,7 @@
                     <div class="lamp-bulb"></div>
                     <div class="pull-string-wrapper" id="pullString">
                         <div class="pull-string"></div>
-                        <div class="click-text">Click here to turn on</div>
+                        <div class="click-text">Click to turn on</div>
                     </div>
                 </div>
                 <div class="light-beam"></div>
@@ -421,7 +423,6 @@
                 <p>Join EduPlus to manage your institution</p>
                 
                 <form id="registerForm" onsubmit="handleRegister(event)">
-                    <!-- Row 1: Institution Type & Name -->
                     <div class="row-inputs">
                         <div class="input-group select-wrapper">
                             <select id="instType" required>
@@ -437,7 +438,6 @@
                         </div>
                     </div>
 
-                    <!-- Row 2: Admin Name & Phone -->
                     <div class="row-inputs">
                         <div class="input-group">
                             <input type="text" id="adminName" placeholder="Admin Name" required>
@@ -449,13 +449,11 @@
                         </div>
                     </div>
 
-                    <!-- Row 3: Email -->
                     <div class="input-group">
                         <input type="email" id="email" placeholder="Email Address" required>
                         <i class="fas fa-envelope"></i>
                     </div>
 
-                    <!-- Row 4: Password -->
                     <div class="input-group">
                         <input type="password" id="password" placeholder="Create Password" required minlength="6">
                         <i class="fas fa-lock"></i>
@@ -477,24 +475,20 @@
         const pullString = document.getElementById('pullString');
         const body = document.body;
 
-        // 1. Manual Click (Chain kheenchna)
         pullString.addEventListener('click', () => {
             body.classList.toggle('light-on');
         });
 
-        // 2. Scroll karne par Auto Light On
         window.addEventListener('scroll', () => {
             body.classList.add('light-on');
         }, { once: true });
 
-        // 3. Mobile par screen touch karne par Auto Light On
         window.addEventListener('touchstart', () => {
             if(!body.classList.contains('light-on')) {
                 body.classList.add('light-on');
             }
         }, { once: true });
 
-        // Fake Register Function
         function handleRegister(event) {
             event.preventDefault();
             const btn = document.getElementById('registerBtn');
@@ -506,7 +500,6 @@
                 btn.innerHTML = '<i class="fas fa-check"></i> Success!';
                 btn.style.background = '#16a34a';
                 
-                // Save user info
                 const schoolName = document.getElementById('schoolName').value;
                 localStorage.setItem('eduplus_user', JSON.stringify({
                     name: "Admin",
@@ -514,7 +507,7 @@
                 }));
 
                 setTimeout(() => {
-                    window.location.href = "login.html"; // Redirect to login
+                    window.location.href = "login.html";
                 }, 1500);
             }, 1500);
         }
