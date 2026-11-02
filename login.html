@@ -46,9 +46,7 @@
             letter-spacing: 1px;
             transition: color 0.3s ease;
         }
-        body.light-on .top-logo {
-            color: #8B5CF6;
-        }
+        body.light-on .top-logo { color: #8B5CF6; }
 
         /* ================= MAIN WRAPPER ================= */
         .main-wrapper {
@@ -66,37 +64,56 @@
             position: relative;
             display: flex;
             justify-content: center;
-            /* Lamp thora left shift hoga */
+            align-items: center; /* Lamp ko center vertically kiya */
         }
 
         .lamp-container {
-            position: absolute;
-            top: 0;
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 10;
+            /* Position adjust ki hai taake beam neechay se nikle */
+            margin-top: -100px; 
         }
 
-        .lamp-wire {
-            width: 6px;
-            height: 120px;
+        /* Lamp Stand (Base & Pole) */
+        .lamp-base {
+            width: 80px;
+            height: 15px;
             background-color: #333;
+            border-radius: 50%;
+            margin-top: 180px; /* Pole ki height ke mutabiq */
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.8);
         }
 
-        /* Lamp wazeh karne ke liye grey color */
+        .lamp-pole {
+            position: absolute;
+            bottom: 10px; /* Base ke upar */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 200px;
+            background-color: #2a2a2a;
+            z-index: 1;
+        }
+
+        /* Lamp Shade (Top part) */
         .lamp-shade {
             width: 140px;
             height: 70px;
-            background-color: #444; /* Grey color */
+            background-color: #444;
             border-top-left-radius: 70px;
             border-top-right-radius: 70px;
             position: relative;
             z-index: 2;
-            transition: box-shadow 0.5s ease, background-color 0.5s ease;
+            transition: box-shadow 0.5s ease;
             box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5);
         }
 
+        /* Bulb */
         .lamp-bulb {
             width: 35px;
             height: 35px;
@@ -109,21 +126,33 @@
             transition: background-color 0.5s ease, box-shadow 0.5s ease;
         }
 
-        /* Chain */
-        .pull-string {
+        /* Chain & Text */
+        .pull-string-wrapper {
             position: absolute;
             top: 40px;
             left: 50%;
-            width: 3px;
-            height: 90px;
-            background-color: #666;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             cursor: pointer;
+            z-index: 5;
+            transition: transform 0.2s ease;
+        }
+        
+        .pull-string-wrapper:hover {
+            transform: translateY(5px); /* Hover pe chain kheenchti hui lagegi */
+        }
+
+        .pull-string {
+            width: 3px;
+            height: 70px;
+            background-color: #666;
             transition: height 0.2s ease;
         }
         .pull-string::after {
             content: '';
             position: absolute;
-            bottom: -12px;
+            bottom: -10px;
             left: -5px;
             width: 14px;
             height: 14px;
@@ -131,21 +160,35 @@
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(212, 163, 115, 0.8);
         }
-        .pull-string:hover {
-            height: 100px;
+
+        .click-text {
+            position: absolute;
+            top: 80px;
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulseText 1.5s infinite;
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
         }
 
-        /* Roshni */
+        @keyframes pulseText {
+            0% { opacity: 0.5; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.5; transform: scale(0.95); }
+        }
+
+        /* Light Beam */
         .light-beam {
             position: absolute;
-            top: 190px;
+            top: 70px; /* Shade ke neechay se start */
             width: 0;
             height: 0;
             border-left: 300px solid transparent;
             border-right: 300px solid transparent;
             border-top: 600px solid rgba(255, 235, 150, 0.02);
             transition: border-top-color 1s ease;
-            z-index: 1;
+            z-index: 0;
             pointer-events: none;
         }
 
@@ -159,6 +202,10 @@
         }
         body.light-on .light-beam {
             border-top-color: rgba(255, 235, 150, 0.15);
+        }
+        /* Text ko hide kar dein jab light on ho jaye */
+        body.light-on .click-text {
+            display: none;
         }
 
 
@@ -180,14 +227,12 @@
             box-shadow: 0 25px 50px rgba(0,0,0,0.8);
             z-index: 100;
             
-            /* Form chhupa hua */
             opacity: 0;
             transform: translateY(40px) scale(0.95);
             transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             pointer-events: none; 
         }
 
-        /* Jab light on ho form aayega */
         body.light-on .login-container {
             opacity: 1;
             transform: translateY(0) scale(1);
@@ -236,9 +281,7 @@
             transition: 0.3s;
         }
 
-        .input-group input::placeholder {
-            color: #666;
-        }
+        .input-group input::placeholder { color: #666; }
 
         .input-group input:focus {
             border-color: #8B5CF6;
@@ -291,48 +334,62 @@
             color: #FB923C;
         }
         
-        /* Responsive (Mobile ke liye) */
+        /* Responsive (Mobile) */
         @media (max-width: 991px) {
             .main-wrapper {
                 flex-direction: column;
                 justify-content: flex-start;
-                padding-top: 50px;
+                padding-top: 20px;
             }
             .lamp-side {
                 flex: none;
-                height: 40vh;
+                height: 45vh;
+                align-items: flex-end;
+                padding-bottom: 20px;
             }
             .lamp-container {
-                transform: scale(0.8);
-                top: -20px;
+                margin-top: 0;
+                transform: scale(0.8); /* Lamp thora chota mobile pe */
             }
             .form-side {
                 flex: none;
                 padding: 0 20px;
+                margin-top: -30px;
             }
-            .login-container {
-                width: 100%;
-            }
+            .login-container { width: 100%; }
             .top-logo { top: 15px; left: 20px; font-size: 1.5rem; }
         }
     </style>
 </head>
-<body>
+<body id="bodyElement">
 
     <!-- Corner Logo -->
     <a href="index.html" class="top-logo"><i class="fas fa-graduation-cap"></i> EduPlus</a>
 
     <div class="main-wrapper">
         
-        <!-- LEFT: LAMP -->
+        <!-- LEFT: LAMP WITH STAND -->
         <div class="lamp-side">
             <div class="lamp-container">
-                <div class="lamp-wire"></div>
+                
+                <!-- Shade & Chain -->
                 <div class="lamp-shade">
                     <div class="lamp-bulb"></div>
-                    <div class="pull-string" id="pullString" title="Click to turn on the light"></div>
+                    
+                    <!-- Chain & Click Text Wrapper -->
+                    <div class="pull-string-wrapper" id="pullString">
+                        <div class="pull-string"></div>
+                        <div class="click-text">Click here to turn on</div>
+                    </div>
                 </div>
+                
+                <!-- Light Beam -->
                 <div class="light-beam"></div>
+
+                <!-- Stand (Pole & Base) -->
+                <div class="lamp-pole"></div>
+                <div class="lamp-base"></div>
+
             </div>
         </div>
 
@@ -363,14 +420,36 @@
 
     </div>
 
-    <!-- JavaScript Animation Logic -->
+    <!-- JavaScript Logic -->
     <script>
         const pullString = document.getElementById('pullString');
         const body = document.body;
 
-        // Chain kheenchne par light on/off
+        // 1. Manual Click (User chain kheenche)
         pullString.addEventListener('click', () => {
             body.classList.toggle('light-on');
+        });
+
+        // 2. Auto Light On (Agar user 2.5 seconds tak kuch na kare)
+        let autoLightTimer = setTimeout(() => {
+            body.classList.add('light-on');
+        }, 2500); // 2.5 seconds
+
+        // 3. Scroll ya Touch karne par Auto Light On (Mobile ke liye)
+        window.addEventListener('scroll', () => {
+            body.classList.add('light-on');
+        }, { once: true }); // Sirf ek baar chalega
+
+        window.addEventListener('touchstart', () => {
+            // Agar user screen touch kare to bhi light on ho jaye
+            if(!body.classList.contains('light-on')) {
+                body.classList.add('light-on');
+            }
+        }, { once: true });
+
+        // Agar user ne khud chain kheenchi, to auto-timer cancel kar dein
+        pullString.addEventListener('click', () => {
+            clearTimeout(autoLightTimer);
         });
 
         // Fake Login
