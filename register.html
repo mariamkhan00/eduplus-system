@@ -1,537 +1,521 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Register Your Institution - EduPlus</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<style>
-    /* === THEME VARIABLES === */
-    :root {
-        --primary: #6D28D9;      
-        --primary-hover: #5B21B6;
-        --secondary: #F97316;    
-        --bg-color: #F8FAFC;
-        --text-color: #1E293B;
-        --card-bg: #FFFFFF;
-        --border-color: #E2E8F0;
-    }
-
-    body.dark-mode {
-        --bg-color: #0F172A;      
-        --text-color: #F1F5F9; 
-        --card-bg: #1E293B;
-        --border-color: #334155;
-        --primary: #8B5CF6;       
-        --primary-hover: #7C3AED;
-    }
-
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        min-height: 100vh;
-        margin: 0;
-        overflow-x: hidden;
-    }
-
-    .register-wrapper {
-        display: flex;
-        min-height: 100vh;
-    }
-
-    /* Left Side Image */
-    .register-left {
-        flex: 1;
-        background: url('https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/EduPlus%20Pakistani%20School%20Welcome.png') center/cover no-repeat;
-        position: relative;
-        display: none; 
-    }
-
-    .register-left::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: linear-gradient(135deg, rgba(109, 40, 217, 0.4) 0%, rgba(15, 23, 42, 0.7) 100%);
-    }
-
-    .register-left-content {
-        position: relative;
-        z-index: 1;
-        color: white;
-        padding: 50px;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .register-left-content h1 {
-        font-size: 3rem;
-        font-weight: 800;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
-    }
-
-    .register-left-content p {
-        font-size: 1.2rem;
-        opacity: 0.95;
-        line-height: 1.6;
-        text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-    }
-
-    /* Right Side Form */
-    .register-right {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 40px 20px;
-        background-color: #0b0b0b; /* ANDHERA BACKGROUND YAHAN LAGAYA HAI */
-        position: relative;
-        overflow-y: auto;
-        transition: background-color 1s ease;
-    }
-
-    /* Jab light on hogi tab thora roshan hoga */
-    .register-right.light-on {
-        background-color: #151515;
-    }
-
-    /* ================= LAMP DESIGN ================= */
-    .lamp-container {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        z-index: 10;
-    }
-
-    .lamp-wire {
-        width: 4px;
-        height: 80px;
-        background-color: #333;
-    }
-
-    .lamp-shade {
-        width: 100px;
-        height: 50px;
-        background-color: #222;
-        border-top-left-radius: 50px;
-        border-top-right-radius: 50px;
-        position: relative;
-        z-index: 2;
-    }
-
-    .lamp-bulb {
-        width: 25px;
-        height: 25px;
-        background-color: #444;
-        border-radius: 50%;
-        position: absolute;
-        bottom: -12px;
-        left: 50%;
-        transform: translateX(-50%);
-        transition: background-color 0.5s ease, box-shadow 0.5s ease;
-    }
-
-    .pull-string {
-        position: absolute;
-        top: 20px;
-        left: 50%;
-        width: 2px;
-        height: 60px;
-        background-color: #555;
-        cursor: pointer;
-        transition: height 0.2s ease;
-    }
-    .pull-string::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: -4px;
-        width: 10px;
-        height: 10px;
-        background-color: #c98a2d;
-        border-radius: 50%;
-    }
-    .pull-string:hover {
-        height: 70px;
-    }
-
-    .light-beam {
-        position: absolute;
-        top: 130px;
-        width: 0;
-        height: 0;
-        border-left: 250px solid transparent;
-        border-right: 250px solid transparent;
-        border-top: 500px solid rgba(255, 235, 150, 0.05);
-        transition: border-top-color 0.5s ease;
-        z-index: 1;
-        pointer-events: none;
-    }
-
-    /* Jab light on hogi */
-    .register-right.light-on .lamp-bulb {
-        background-color: #ffea94;
-        box-shadow: 0 0 40px 15px rgba(255, 234, 148, 0.8);
-    }
-    .register-right.light-on .light-beam {
-        border-top-color: rgba(255, 235, 150, 0.3);
-    }
-
-    /* Form Box */
-    .theme-toggle-btn { 
-        position: absolute; top: 20px; right: 20px;
-        background: transparent; border: none; color: var(--text-color); 
-        font-size: 1.5rem; cursor: pointer; transition: 0.3s; z-index: 20;
-    }
-    .theme-toggle-btn:hover { color: var(--primary); }
-
-    .register-box {
-        width: 100%;
-        max-width: 500px;
-        background: var(--card-bg);
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.5); /* Shadow badha di hai */
-        border: 1px solid var(--border-color);
-        z-index: 100;
-        
-        /* Form pehle thora sa neechay aur thora transparent hoga */
-        transform: translateY(20px);
-        opacity: 0.9;
-        transition: all 0.8s ease;
-    }
-
-    /* Jab light on hogi to form upar aayega aur clear hoga */
-    .register-right.light-on .register-box {
-        transform: translateY(0);
-        opacity: 1;
-        box-shadow: 0 15px 50px rgba(255, 234, 148, 0.1);
-    }
-
-    .brand-logo {
-        font-size: 1.8rem;
-        font-weight: 800;
-        color: var(--primary);
-        text-align: center;
-        margin-bottom: 10px;
-        display: block;
-        text-decoration: none;
-    }
-
-    .register-box h3 {
-        text-align: center;
-        font-weight: 700;
-        margin-bottom: 30px;
-        color: var(--text-color);
-    }
-
-    .form-label {
-        font-weight: 600;
-        font-size: 0.9rem;
-        color: var(--text-color);
-    }
-
-    .form-control, .form-select {
-        padding: 12px 15px;
-        border-radius: 10px;
-        border: 2px solid var(--border-color);
-        font-size: 1rem;
-        transition: 0.3s;
-        background-color: transparent;
-        color: var(--text-color);
-    }
-
-    .form-control:focus, .form-select:focus {
-        border-color: var(--primary);
-        box-shadow: none;
-        background-color: transparent;
-        color: var(--text-color);
-    }
-
-    .form-select option {
-        background-color: var(--card-bg);
-        color: var(--text-color);
-    }
-
-    .input-group-text {
-        background: transparent;
-        border: 2px solid var(--border-color);
-        border-right: none;
-        border-radius: 10px 0 0 10px;
-        color: var(--primary);
-    }
-
-    .form-control.with-icon {
-        border-left: none;
-        border-radius: 0 10px 10px 0;
-    }
-
-    .form-control.with-icon:focus {
-        border-left: none;
-    }
-
-    .btn-register {
-        background-color: var(--primary);
-        color: white;
-        padding: 12px;
-        border-radius: 10px;
-        font-weight: 700;
-        font-size: 1.1rem;
-        width: 100%;
-        border: none;
-        transition: 0.3s;
-        margin-top: 10px;
-    }
-
-    .btn-register:hover {
-        background-color: var(--primary-hover);
-        transform: translateY(-2px);
-    }
-
-    .login-link {
-        text-align: center;
-        margin-top: 20px;
-        font-size: 1rem;
-        color: var(--text-color);
-    }
-
-    .login-link a {
-        color: var(--secondary);
-        font-weight: 800;
-        text-decoration: none;
-        margin-left: 5px;
-    }
-
-    .login-link a:hover {
-        text-decoration: underline;
-    }
-
-    .password-toggle {
-        position: absolute;
-        right: 15px;
-        top: 42px;
-        cursor: pointer;
-        color: #888;
-        z-index: 10;
-    }
-
-    @media (min-width: 992px) {
-        .register-left {
-            display: block; 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPlus - Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
         }
-    }
-</style>
-</head>
-<body>
 
-    <div class="register-wrapper">
-        <!-- Left Side (Image & Text) -->
-        <div class="register-left">
-            <div class="register-left-content">
-                <a href="index.html" class="brand-logo text-white mb-4"><i class="fas fa-graduation-cap me-2"></i>EduPlus</a>
-                <h1>Join EduPlus Today!</h1>
-                <p>Create your institution's account and get a 2-month free trial. Automate your timetable, track absentees, and manage substitute teachers efficiently.</p>
-            </div>
-        </div>
+        body {
+            background-color: #050505; /* Full Black */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: background-color 1s ease;
+            position: relative;
+        }
 
-        <!-- Right Side (Register Form) -->
-        <div class="register-right" id="registerRight">
+        body.light-on {
+            background-color: #121212; /* Thora roshan */
+        }
+
+        /* ================= TOP CORNER LOGO ================= */
+        .top-logo {
+            position: absolute;
+            top: 25px;
+            left: 40px;
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+        body.light-on .top-logo { color: #8B5CF6; }
+
+        /* ================= MAIN WRAPPER ================= */
+        .main-wrapper {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            height: 100vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ================= LAMP SECTION (LEFT) ================= */
+        .lamp-side {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lamp-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            margin-top: -100px; 
+        }
+
+        /* Lamp Stand (Base & Pole) */
+        .lamp-base {
+            width: 80px;
+            height: 15px;
+            background-color: #333;
+            border-radius: 50%;
+            margin-top: 180px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+        }
+
+        .lamp-pole {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 200px;
+            background-color: #2a2a2a;
+            z-index: 1;
+        }
+
+        /* Lamp Shade */
+        .lamp-shade {
+            width: 140px;
+            height: 70px;
+            background-color: #444;
+            border-top-left-radius: 70px;
+            border-top-right-radius: 70px;
+            position: relative;
+            z-index: 2;
+            transition: box-shadow 0.5s ease;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Bulb */
+        .lamp-bulb {
+            width: 35px;
+            height: 35px;
+            background-color: #555;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -17px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: background-color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        /* Chain & Text */
+        .pull-string-wrapper {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            z-index: 5;
+            transition: transform 0.2s ease;
+        }
+        
+        .pull-string-wrapper:hover {
+            transform: translateY(5px);
+        }
+
+        .pull-string {
+            width: 3px;
+            height: 70px;
+            background-color: #666;
+        }
+        .pull-string::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: -5px;
+            width: 14px;
+            height: 14px;
+            background-color: #d4a373;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(212, 163, 115, 0.8);
+        }
+
+        .click-text {
+            position: absolute;
+            top: 80px;
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulseText 1.5s infinite;
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+        }
+
+        @keyframes pulseText {
+            0% { opacity: 0.5; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.5; transform: scale(0.95); }
+        }
+
+        /* Light Beam */
+        .light-beam {
+            position: absolute;
+            top: 70px;
+            width: 0;
+            height: 0;
+            border-left: 300px solid transparent;
+            border-right: 300px solid transparent;
+            border-top: 600px solid rgba(255, 235, 150, 0.02);
+            transition: border-top-color 1s ease;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Jab Light On ho */
+        body.light-on .lamp-shade {
+            box-shadow: 0 -10px 30px rgba(255, 234, 148, 0.2), inset 0 -10px 20px rgba(0,0,0,0.5);
+        }
+        body.light-on .lamp-bulb {
+            background-color: #ffea94;
+            box-shadow: 0 0 60px 25px rgba(255, 234, 148, 0.8);
+        }
+        body.light-on .light-beam {
+            border-top-color: rgba(255, 235, 150, 0.15);
+        }
+        body.light-on .click-text {
+            display: none;
+        }
+
+        /* ================= REGISTER FORM (RIGHT) ================= */
+        .form-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-y: auto; /* Agar form lamba ho to scroll ho sake */
+        }
+
+        .register-container {
+            background: rgba(25, 25, 25, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 30px 40px;
+            border-radius: 20px;
+            width: 480px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            z-index: 100;
             
-            <!-- Lamp Animation (Right side ke andar) -->
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none; 
+        }
+
+        body.light-on .register-container {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .register-container h2 {
+            color: #fff;
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .register-container p {
+            color: #888;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .input-group input, 
+        .input-group select {
+            width: 100%;
+            padding: 12px 12px 12px 45px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+            appearance: none; /* Select ka default arrow hatane ke liye */
+        }
+
+        /* Custom arrow for select */
+        .select-wrapper::after {
+            content: '\f107'; /* FontAwesome down arrow */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+        }
+
+        .input-group input::placeholder { color: #666; }
+        .input-group select option { background: #1a1a1a; color: #fff; }
+
+        .input-group input:focus, 
+        .input-group select:focus {
+            border-color: #8B5CF6;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+        }
+        
+        .input-group input:focus + i,
+        .input-group input:not(:placeholder-shown) + i {
+            color: #8B5CF6;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 14px;
+            background: #6D28D9;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(109, 40, 217, 0.3);
+        }
+
+        .btn-register:hover {
+            background: #5B21B6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(109, 40, 217, 0.5);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .login-link a {
+            color: #F97316;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+            color: #FB923C;
+        }
+
+        /* Grid for side-by-side inputs */
+        .row-inputs {
+            display: flex;
+            gap: 10px;
+        }
+        .row-inputs .input-group {
+            flex: 1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 991px) {
+            .main-wrapper {
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 20px;
+            }
+            .lamp-side {
+                flex: none;
+                height: 40vh;
+                align-items: flex-end;
+                padding-bottom: 10px;
+            }
+            .lamp-container {
+                margin-top: 0;
+                transform: scale(0.7); /* Mobile pe lamp chota */
+            }
+            .form-side {
+                flex: none;
+                padding: 0 15px;
+                margin-top: -20px;
+                overflow-y: auto;
+                height: 60vh;
+            }
+            .register-container { 
+                width: 100%; 
+                padding: 20px;
+            }
+            .row-inputs { flex-direction: column; gap: 0; }
+            .top-logo { top: 15px; left: 20px; font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body id="bodyElement">
+
+    <!-- Corner Logo -->
+    <a href="index.html" class="top-logo"><i class="fas fa-graduation-cap"></i> EduPlus</a>
+
+    <div class="main-wrapper">
+        
+        <!-- LEFT: LAMP -->
+        <div class="lamp-side">
             <div class="lamp-container">
-                <div class="lamp-wire"></div>
                 <div class="lamp-shade">
                     <div class="lamp-bulb"></div>
-                    <div class="pull-string" id="pullString" title="Click to turn on the light"></div>
+                    <div class="pull-string-wrapper" id="pullString">
+                        <div class="pull-string"></div>
+                        <div class="click-text">Click here to turn on</div>
+                    </div>
                 </div>
                 <div class="light-beam"></div>
+                <div class="lamp-pole"></div>
+                <div class="lamp-base"></div>
             </div>
+        </div>
 
-            <!-- Theme Toggle -->
-            <button class="theme-toggle-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
-
-            <div class="register-box">
-                <a href="index.html" class="brand-logo d-lg-none"><i class="fas fa-graduation-cap me-2"></i>EduPlus</a>
+        <!-- RIGHT: REGISTER FORM -->
+        <div class="form-side">
+            <div class="register-container">
+                <h2>Create Account</h2>
+                <p>Join EduPlus to manage your institution</p>
                 
-                <h3>Create Your Account</h3>
-
                 <form id="registerForm" onsubmit="handleRegister(event)">
-                    <!-- Institution Type -->
-                    <div class="mb-3">
-                        <label class="form-label">Institution Type</label>
-                        <select class="form-select" id="instType" required>
-                            <option value="" disabled selected>Select your institution type</option>
-                            <option value="School">School (Single Shift)</option>
-                            <option value="College">College / University (Dual Shift)</option>
-                        </select>
-                    </div>
-
-                    <!-- Institution Name -->
-                    <div class="mb-3">
-                        <label class="form-label">Institution Name</label>
+                    <!-- Row 1: Institution Type & Name -->
+                    <div class="row-inputs">
+                        <div class="input-group select-wrapper">
+                            <select id="instType" required>
+                                <option value="" disabled selected>Select Type</option>
+                                <option value="School">School</option>
+                                <option value="College">College</option>
+                            </select>
+                            <i class="fas fa-building"></i>
+                        </div>
                         <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-building"></i></span>
-                            <input type="text" class="form-control with-icon" id="schoolName" placeholder="e.g. Al-Noor Public School" required>
+                            <input type="text" id="schoolName" placeholder="Institution Name" required>
+                            <i class="fas fa-school"></i>
                         </div>
                     </div>
 
-                    <!-- Admin Name -->
-                    <div class="mb-3">
-                        <label class="form-label">Admin / Principal Name</label>
+                    <!-- Row 2: Admin Name & Phone -->
+                    <div class="row-inputs">
                         <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            <input type="text" class="form-control with-icon" id="adminName" placeholder="e.g. Mariam Khan" required>
+                            <input type="text" id="adminName" placeholder="Admin Name" required>
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="input-group">
+                            <input type="tel" id="phone" placeholder="WhatsApp Number" required>
+                            <i class="fab fa-whatsapp"></i>
                         </div>
                     </div>
 
-                    <!-- Email -->
-                    <div class="mb-3">
-                        <label class="form-label">Email Address</label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                            <input type="email" class="form-control with-icon" id="email" placeholder="admin@school.com" required>
-                        </div>
+                    <!-- Row 3: Email -->
+                    <div class="input-group">
+                        <input type="email" id="email" placeholder="Email Address" required>
+                        <i class="fas fa-envelope"></i>
                     </div>
 
-                    <!-- Phone Number -->
-                    <div class="mb-3">
-                        <label class="form-label">Phone Number (WhatsApp)</label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fab fa-whatsapp"></i></span>
-                            <input type="tel" class="form-control with-icon" id="phone" placeholder="e.g. 03001234567" required>
-                        </div>
+                    <!-- Row 4: Password -->
+                    <div class="input-group">
+                        <input type="password" id="password" placeholder="Create Password" required minlength="6">
+                        <i class="fas fa-lock"></i>
                     </div>
-
-                    <!-- Password -->
-                    <div class="mb-4 position-relative">
-                        <label class="form-label">Password</label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                            <input type="password" class="form-control with-icon" id="password" placeholder="Create a strong password" required minlength="6">
-                        </div>
-                        <i class="fas fa-eye password-toggle" onclick="togglePassword()" id="toggleIcon"></i>
-                    </div>
-
-                    <!-- Terms Checkbox -->
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="terms" required>
-                        <label class="form-check-label" for="terms" style="font-size: 0.9rem;">
-                            I agree to the <a href="#" style="color: var(--primary);">Terms & Conditions</a>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="btn-register" id="registerBtn">
-                        Create Account <i class="fas fa-arrow-right ms-2"></i>
-                    </button>
                     
-                    <div id="errorMsg" class="text-danger text-center mt-3" style="display: none; font-weight: 600;"></div>
-                    <div id="successMsg" class="text-success text-center mt-3" style="display: none; font-weight: 600;"></div>
+                    <button type="submit" class="btn-register" id="registerBtn">Sign Up</button>
                 </form>
 
-                <div class="login-link mt-4 pt-3 border-top" style="border-color: var(--border-color) !important;">
-                    Already have an account? 
-                    <a href="login.html">Login here <i class="fas fa-arrow-right ms-1"></i></a>
+                <div class="login-link">
+                    Already have an account? <a href="login.html">Login here</a>
                 </div>
             </div>
         </div>
+
     </div>
 
+    <!-- JavaScript Logic -->
     <script>
-        // === LAMP ANIMATION LOGIC ===
-        const registerRight = document.getElementById('registerRight');
         const pullString = document.getElementById('pullString');
+        const body = document.body;
 
-        // Jab lamp ki zanjeer par click ho
+        // 1. Manual Click (Chain kheenchna)
         pullString.addEventListener('click', () => {
-            // Right side ke background mein 'light-on' class add/remove hogi
-            registerRight.classList.toggle('light-on');
+            body.classList.toggle('light-on');
         });
 
-        // === THEME TOGGLE ===
-        function toggleTheme() {
-            const body = document.body;
-            const icon = document.getElementById('theme-icon');
-            body.classList.toggle('dark-mode');
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('eduplus_theme', 'dark');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                localStorage.setItem('eduplus_theme', 'light');
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
+        // 2. Scroll karne par Auto Light On
+        window.addEventListener('scroll', () => {
+            body.classList.add('light-on');
+        }, { once: true });
+
+        // 3. Mobile par screen touch karne par Auto Light On
+        window.addEventListener('touchstart', () => {
+            if(!body.classList.contains('light-on')) {
+                body.classList.add('light-on');
             }
-        }
+        }, { once: true });
 
-        document.addEventListener("DOMContentLoaded", () => {
-            // Page load hote hi light ON kar dein taake form user ko nazar aaye
-            registerRight.classList.add('light-on');
-
-            const savedTheme = localStorage.getItem('eduplus_theme');
-            const icon = document.getElementById('theme-icon');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            }
-        });
-
-        // === PASSWORD TOGGLE ===
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggleIcon = document.getElementById('toggleIcon');
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleIcon.classList.remove('fa-eye');
-                toggleIcon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                toggleIcon.classList.remove('fa-eye-slash');
-                toggleIcon.classList.add('fa-eye');
-            }
-        }
-
-        // === REGISTER FUNCTION (Demo) ===
+        // Fake Register Function
         function handleRegister(event) {
-            event.preventDefault(); 
-            
-            const schoolName = document.getElementById('schoolName').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            event.preventDefault();
             const btn = document.getElementById('registerBtn');
-            const errorMsg = document.getElementById('errorMsg');
-            const successMsg = document.getElementById('successMsg');
-
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Creating Account...';
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
             btn.disabled = true;
-            errorMsg.style.display = 'none';
-            successMsg.style.display = 'none';
 
             setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-check me-2"></i> Account Created!';
-                btn.style.background = '#28a745';
+                btn.innerHTML = '<i class="fas fa-check"></i> Success!';
+                btn.style.background = '#16a34a';
                 
-                successMsg.innerHTML = 'Your account has been created successfully. Redirecting to login...';
-                successMsg.style.display = 'block';
-
+                // Save user info
+                const schoolName = document.getElementById('schoolName').value;
                 localStorage.setItem('eduplus_user', JSON.stringify({
                     name: "Admin",
-                    school_name: schoolName,
-                    email: email
+                    school_name: schoolName
                 }));
 
                 setTimeout(() => {
-                    window.location.href = "login.html"; 
-                }, 2000);
-
+                    window.location.href = "login.html"; // Redirect to login
+                }, 1500);
             }, 1500);
         }
     </script>
