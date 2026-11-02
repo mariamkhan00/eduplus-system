@@ -29,10 +29,12 @@
     .sidebar-menu a i { width: 20px; text-align: center; }
 
     .main-content { margin-left: 260px; padding: 20px; transition: all 0.3s ease; min-height: 100vh; }
-    .top-navbar { background-color: var(--card-bg); border-radius: 15px; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color); margin-bottom: 25px; }
-    .school-info h4 { margin: 0; font-weight: 700; font-size: 1.2rem; }
+    .top-navbar { background-color: var(--card-bg); border-radius: 15px; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color); margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
+    
+    .school-info h4 { margin: 0; font-weight: 700; font-size: 1.2rem; white-space: nowrap; }
     .school-info p { margin: 0; font-size: 0.85rem; color: #64748b; }
-    .top-nav-right { display: flex; align-items: center; gap: 20px; }
+    
+    .top-nav-right { display: flex; align-items: center; gap: 15px; }
     .icon-btn { background: transparent; border: none; font-size: 1.2rem; color: var(--text-color); cursor: pointer; position: relative; }
     .icon-btn:hover { color: var(--primary); }
     .notification-dot { position: absolute; top: 0; right: 0; width: 8px; height: 8px; background-color: var(--secondary); border-radius: 50%; }
@@ -41,30 +43,49 @@
     .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
     .mobile-toggle { display: none; background: transparent; border: none; font-size: 1.5rem; color: var(--text-color); cursor: pointer; }
 
-    .stat-card { background-color: var(--card-bg); border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+    .stat-card { background-color: var(--card-bg); border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; transition: 0.3s; height: 100%; }
     .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
-    .stat-info h3 { margin: 0; font-size: 2rem; font-weight: 800; color: var(--text-color); }
-    .stat-info p { margin: 0; font-size: 0.95rem; color: #64748b; font-weight: 600; }
-    .stat-icon { width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+    .stat-info h3 { margin: 0; font-size: 1.8rem; font-weight: 800; color: var(--text-color); }
+    .stat-info p { margin: 0; font-size: 0.9rem; color: #64748b; font-weight: 600; }
+    .stat-icon { width: 55px; height: 55px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
     .icon-purple { background-color: rgba(109, 40, 217, 0.1); color: var(--primary); }
     .icon-red { background-color: rgba(220, 38, 38, 0.1); color: #dc2626; }
     .icon-green { background-color: rgba(22, 163, 74, 0.1); color: #16a34a; }
     .icon-orange { background-color: rgba(249, 115, 22, 0.1); color: var(--secondary); }
 
-    .section-title { font-weight: 700; font-size: 1.3rem; margin: 35px 0 20px; }
-    .action-btn { display: flex; align-items: center; gap: 15px; background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 15px; text-decoration: none; color: var(--text-color); transition: 0.3s; font-weight: 600; }
+    .section-title { font-weight: 700; font-size: 1.3rem; margin: 30px 0 15px; }
+    .action-btn { display: flex; align-items: center; gap: 15px; background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 15px 20px; border-radius: 15px; text-decoration: none; color: var(--text-color); transition: 0.3s; font-weight: 600; font-size: 0.95rem; }
     .action-btn:hover { border-color: var(--primary); transform: translateY(-3px); color: var(--primary); }
-    .action-btn i { font-size: 1.5rem; color: var(--primary); }
+    .action-btn i { font-size: 1.3rem; color: var(--primary); }
 
-    .table { margin: 0; --bs-table-color: var(--text-color); --bs-table-bg: transparent; --bs-table-border-color: var(--border-color); --bs-table-hover-color: var(--text-color); --bs-table-hover-bg: var(--sidebar-hover); color: var(--text-color) !important; }
-    .table thead th { background-color: transparent !important; border-bottom: 2px solid var(--border-color) !important; color: var(--text-color) !important; font-weight: 700; padding: 15px; }
-    .table tbody td { padding: 15px; border-bottom: 1px solid var(--border-color) !important; color: var(--text-color) !important; }
+    .table { margin: 0; --bs-table-color: var(--text-color); --bs-table-bg: transparent; --bs-table-border-color: var(--border-color); --bs-table-hover-color: var(--text-color); --bs-table-hover-bg: var(--sidebar-hover); color: var(--text-color) !important; white-space: nowrap; }
+    .table thead th { background-color: transparent !important; border-bottom: 2px solid var(--border-color) !important; color: var(--text-color) !important; font-weight: 700; padding: 15px; font-size: 0.9rem; }
+    .table tbody td { padding: 15px; border-bottom: 1px solid var(--border-color) !important; color: var(--text-color) !important; font-size: 0.9rem; }
 
+    /* ===== MOBILE RESPONSIVE FIXES ===== */
     @media (max-width: 991px) {
         .sidebar { left: -260px; }
         .sidebar.active { left: 0; }
-        .main-content { margin-left: 0; }
+        .main-content { margin-left: 0; padding: 15px; }
         .mobile-toggle { display: block; }
+        
+        /* Top Navbar adjustments */
+        .top-navbar { padding: 12px 15px; }
+        .school-info h4 { font-size: 1.1rem; white-space: normal; }
+        .school-info p { font-size: 0.8rem; }
+        .top-nav-right { gap: 10px; }
+        
+        /* Action buttons */
+        .action-btn { padding: 12px 15px; font-size: 0.9rem; }
+        
+        /* Table overflow fix */
+        .table-responsive { border-radius: 10px; overflow-x: auto; }
+    }
+    
+    @media (max-width: 576px) {
+        .stat-info h3 { font-size: 1.5rem; }
+        .stat-icon { width: 45px; height: 45px; font-size: 1.3rem; }
+        .school-info h4 { font-size: 1rem; }
     }
 </style>
 </head>
@@ -75,7 +96,6 @@
             <i class="fas fa-graduation-cap"></i> EduPlus
         </a>
         <ul class="sidebar-menu">
-            <!-- YAHAN SAARE LINKS SAHI KAR DIYE HAIN -->
             <li><a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="find-substitute.html"><i class="fas fa-search"></i> Find Substitute</a></li>
             <li><a href="teachers.html"><i class="fas fa-users"></i> All Teachers</a></li>
@@ -108,26 +128,27 @@
             </div>
         </div>
 
-        <div class="row g-4">
-            <div class="col-md-6 col-lg-3">
+        <!-- Stats Cards -->
+        <div class="row g-3">
+            <div class="col-6 col-lg-3">
                 <div class="stat-card">
                     <div class="stat-info"><h3>50</h3><p>Total Teachers</p></div>
                     <div class="stat-icon icon-purple"><i class="fas fa-users"></i></div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
+            <div class="col-6 col-lg-3">
                 <div class="stat-card">
                     <div class="stat-info"><h3>5</h3><p>Absent Today</p></div>
                     <div class="stat-icon icon-red"><i class="fas fa-user-times"></i></div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
+            <div class="col-6 col-lg-3">
                 <div class="stat-card">
                     <div class="stat-info"><h3>45</h3><p>Available Teachers</p></div>
                     <div class="stat-icon icon-green"><i class="fas fa-user-check"></i></div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
+            <div class="col-6 col-lg-3">
                 <div class="stat-card">
                     <div class="stat-info"><h3>12</h3><p>Substitutes Assigned</p></div>
                     <div class="stat-icon icon-orange"><i class="fas fa-random"></i></div>
@@ -136,20 +157,20 @@
         </div>
 
         <h3 class="section-title">Quick Actions</h3>
-        <div class="row g-4">
-            <div class="col-md-4">
+        <div class="row g-3">
+            <div class="col-12 col-md-4">
                 <a href="find-substitute.html" class="action-btn"><i class="fas fa-user-minus"></i> Mark Teacher Absent</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-md-4">
                 <a href="timetable.html" class="action-btn"><i class="fas fa-file-upload"></i> Upload Timetable</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-md-4">
                 <a href="reports.html" class="action-btn"><i class="fas fa-download"></i> Download Reports</a>
             </div>
         </div>
 
-        <h3 class="section-title mt-5">Recent Substitutions</h3>
-        <div class="stat-card" style="display: block; padding: 20px;">
+        <h3 class="section-title mt-4">Recent Substitutions</h3>
+        <div class="stat-card" style="display: block; padding: 15px;">
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
