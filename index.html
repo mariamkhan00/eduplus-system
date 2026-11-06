@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -683,93 +684,241 @@ padding:0 5px 20px;
 }
 
 
-/* FOOTER */
+/* ===== EDUPLUS MINIMAL ANIMATED FOOTER ===== */
 
-footer {
-background:var(--deep);
-color:white;
-padding:55px 0 20px;
+footer#contact {
+    background:#061522;
+    color:#f5f7f8;
+    padding:90px 0 35px;
+    overflow:hidden;
+    position:relative;
+    font-family:"DM Sans",sans-serif;
 }
 
-.footer-brand {
-font-size:24px;
-font-weight:900;
-color:white;
+footer#contact .container {
+    position:relative;
+    z-index:2;
 }
 
-.footer-brand i {
-color:var(--gold);
-margin-right:8px;
+.footer-content {
+    opacity:0;
+    transform:translateY(45px);
+    transition:opacity 1s ease,transform 1s ease;
 }
 
-.footer-desc {
-max-width:310px;
-color:#bdc9d7;
-font-size:12px;
-line-height:1.8;
-margin-top:15px;
+footer#contact.show-footer .footer-content {
+    opacity:1;
+    transform:translateY(0);
 }
 
-.footer-title {
-font-size:13px;
-font-weight:900;
-margin-bottom:17px;
+.footer-label {
+    color:#20c58b;
+    font-size:12px;
+    letter-spacing:5px;
+    font-weight:800;
+    margin-bottom:25px;
 }
 
-.footer-links {
-list-style:none;
-padding:0;
-margin:0;
+.footer-heading {
+    font-family:"DM Sans",sans-serif;
+    font-size:clamp(40px,6vw,76px);
+    line-height:1.05;
+    font-weight:700;
+    letter-spacing:-3px;
+    max-width:750px;
+    margin-bottom:35px;
+    color:#fff;
 }
 
-.footer-links li {
-margin:10px 0;
+.footer-socials {
+    display:flex;
+    gap:35px;
+    margin-top:45px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
 }
 
-.footer-links a {
-color:#bdc9d7;
-font-size:12px;
+.footer-socials a {
+    color:white;
+    font-size:23px;
+    letter-spacing:-1px;
+    transition:color .3s ease;
 }
 
-.footer-links a:hover {
-color:var(--gold);
+.footer-socials a:hover {
+    color:#20c58b;
 }
 
-.footer-contact {
-font-size:12px;
-color:#bdc9d7;
-line-height:2.2;
+.footer-logo-wrap {
+    overflow:hidden;
+    width:100%;
+    margin:25px 0 35px;
 }
 
-.social-link {
-display:inline-flex;
-width:38px;
-height:38px;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-background:rgba(255,255,255,.1);
-color:var(--gold);
-font-size:21px;
-margin-right:9px;
-transition:.2s;
+.footer-logo {
+    display:flex;
+    align-items:center;
+    gap:0;
+    width:max-content;
+    font-family:"Fredoka",sans-serif;
+    font-size:clamp(100px,18vw,230px);
+    font-weight:700;
+    letter-spacing:-.065em;
+    line-height:.95;
+    white-space:nowrap;
+    color:#f7f8fa;
+    text-shadow:0 5px 0 rgba(255,255,255,.04);
 }
 
-.social-link:hover {
-background:#25D366;
-color:white;
+.footer-logo span {
+    display:inline-block;
+    animation:footerSnake 1.8s ease-in-out infinite;
+    animation-delay:calc(var(--i) * .11s);
+    background:linear-gradient(180deg,#fff 15%,#dffcf1 55%,#20c58b 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
 
-.copyright {
-border-top:1px solid rgba(255,255,255,.13);
-margin-top:35px;
-padding-top:18px;
-color:#aebccc;
-font-size:10px;
-display:flex;
-justify-content:space-between;
-gap:15px;
-flex-wrap:wrap;
+@keyframes footerSnake {
+    0%,100% {
+        transform:translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform:translateY(-13px) rotate(-3deg);
+    }
+
+    50% {
+        transform:translateY(0) rotate(0deg);
+    }
+
+    75% {
+        transform:translateY(8px) rotate(2deg);
+    }
+}
+
+.footer-bottom-info {
+    border-top:1px solid rgba(255,255,255,.18);
+    padding-top:25px;
+    margin-top:35px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.footer-copyright,.footer-developer {
+    color:#aebdca;
+    font-size:13px;
+    line-height:1.9;
+}
+
+.footer-developer strong {
+    color:white;
+}
+
+.footer-nav {
+    display:flex;
+    flex-wrap:wrap;
+    gap:25px;
+    margin-top:35px;
+    padding-top:25px;
+    border-top:1px solid rgba(255,255,255,.15);
+}
+
+.footer-nav a {
+    color:white;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:1px;
+    transition:color .3s;
+}
+
+.footer-nav a:hover {
+    color:#20c58b;
+}
+
+.footer-top {
+    position:absolute;
+    right:0;
+    bottom:0;
+    border:1px solid #65717c;
+    border-radius:50px;
+    padding:13px 25px;
+    color:white;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+.footer-top:hover {
+    background:#20c58b;
+    color:#061522;
+}
+
+@media(max-width:767px) {
+
+    footer#contact {
+        padding:65px 0 30px;
+    }
+
+    .footer-heading {
+        font-size:43px;
+        letter-spacing:-2px;
+    }
+
+    .footer-socials {
+        margin-top:35px;
+        gap:30px;
+    }
+
+    .footer-socials a {
+        font-size:20px;
+    }
+
+    .footer-logo {
+        font-size:19vw;
+        letter-spacing:-.07em;
+    }
+
+    .footer-logo span {
+        animation-duration:1.6s;
+    }
+
+    .footer-bottom-info {
+        display:block;
+    }
+
+    .footer-developer {
+        margin-top:8px;
+    }
+
+    .footer-nav {
+        gap:18px 22px;
+        padding-right:0;
+    }
+
+    .footer-top {
+        position:relative;
+        display:inline-flex;
+        margin-top:30px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    .footer-logo span {
+        animation:none;
+    }
+
+    .footer-content {
+        opacity:1;
+        transform:none;
+        transition:none;
+    }
 }
 
 
@@ -777,18 +926,17 @@ flex-wrap:wrap;
 
 @media(max-width:991px) {
 
-.navbar-collapse {
-padding:15px 0;
-}
+    .navbar-collapse {
+        padding:15px 0;
+    }
 
-.nav-link {
-padding:9px 0;
-}
+    .nav-link {
+        padding:9px 0;
+    }
 
-.section {
-padding:60px 0;
-}
-
+    .section {
+        padding:60px 0;
+    }
 }
 
 
@@ -796,130 +944,129 @@ padding:60px 0;
 
 @media(max-width:767px) {
 
-/* HERO MAIN CONTAINER */
+    /* HERO MAIN CONTAINER */
 
-.hero {
-display:flex;
-flex-direction:column;
-align-items:stretch;
-min-height:auto !important;
-height:auto;
-padding:0 !important;
-background:#f5f8fc;
-overflow:hidden;
-}
+    .hero {
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        min-height:auto !important;
+        height:auto;
+        padding:0 !important;
+        background:#f5f8fc;
+        overflow:hidden;
+    }
 
-/* HERO IMAGE FIX */
+    /* HERO IMAGE FIX */
 
-.hero-photo {
-position:relative;
-inset:auto;
-display:block;
-width:100%;
-height:auto;
-max-height:none;
-object-fit:contain;
-object-position:center;
-opacity:1;
-}
+    .hero-photo {
+        position:relative;
+        inset:auto;
+        display:block;
+        width:100%;
+        height:auto;
+        max-height:none;
+        object-fit:contain;
+        object-position:center;
+        opacity:1;
+    }
 
-/* REMOVE DESKTOP OVERLAY */
+    /* REMOVE DESKTOP OVERLAY */
 
-.hero:before {
-display:none;
-}
+    .hero:before {
+        display:none;
+    }
 
-/* HERO CONTENT */
+    /* HERO CONTENT */
 
-.hero-content {
-position:relative;
-width:100%;
-padding:30px 12px 35px !important;
-margin:0 auto;
-}
+    .hero-content {
+        position:relative;
+        width:100%;
+        padding:30px 12px 35px !important;
+        margin:0 auto;
+    }
 
-.hero-content > .col-lg-7 {
-width:100%;
-}
+    .hero-content > .col-lg-7 {
+        width:100%;
+    }
 
-/* HERO HEADING */
+    /* HERO HEADING */
 
-.hero h1 {
-font-size:clamp(2.4rem,9vw,3rem) !important;
-line-height:1.05;
-margin-bottom:15px;
-}
+    .hero h1 {
+        font-size:clamp(2.4rem,9vw,3rem) !important;
+        line-height:1.05;
+        margin-bottom:15px;
+    }
 
-/* HERO DESCRIPTION */
+    /* HERO DESCRIPTION */
 
-.hero p {
-font-size:14px;
-line-height:1.75;
-max-width:100%;
-}
+    .hero p {
+        font-size:14px;
+        line-height:1.75;
+        max-width:100%;
+    }
 
-/* HERO BUTTONS */
+    /* HERO BUTTONS */
 
-.hero-actions {
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-margin-top:20px;
-}
+    .hero-actions {
+        display:flex;
+        flex-wrap:wrap;
+        gap:10px;
+        margin-top:20px;
+    }
 
-.hero-actions a {
-padding:12px 17px;
-font-size:13px;
-}
+    .hero-actions a {
+        padding:12px 17px;
+        font-size:13px;
+    }
 
-/* HERO QUOTE */
+    /* HERO QUOTE */
 
-.hero-note {
-font-size:16px;
-margin-top:22px;
-line-height:1.5;
-}
+    .hero-note {
+        font-size:16px;
+        margin-top:22px;
+        line-height:1.5;
+    }
 
-/* TRUST FEATURES */
+    /* TRUST FEATURES */
 
-.trust-row {
-display:flex;
-flex-wrap:wrap;
-gap:15px;
-margin-top:25px;
-}
+    .trust-row {
+        display:flex;
+        flex-wrap:wrap;
+        gap:15px;
+        margin-top:25px;
+    }
 
-.trust-item {
-font-size:11px;
-}
+    .trust-item {
+        font-size:11px;
+    }
 
-.trust-item i {
-font-size:17px;
-}
+    .trust-item i {
+        font-size:17px;
+    }
 
-/* OTHER SECTIONS */
+    /* OTHER SECTIONS */
 
-.section-head {
-display:block;
-}
+    .section-head {
+        display:block;
+    }
 
-.about-copy {
-padding:20px 5px;
-}
+    .about-copy {
+        padding:20px 5px;
+    }
 
-.banner-content {
-padding:28px 23px;
-}
+    .banner-content {
+        padding:28px 23px;
+    }
 
-.stat {
-justify-content:flex-start;
-padding:10px 15px;
-}
+    .stat {
+        justify-content:flex-start;
+        padding:10px 15px;
+    }
 
-.copyright {
-display:block;
-}
-
+    .copyright {
+        display:block;
+    }
 }
 
 
@@ -927,23 +1074,22 @@ display:block;
 
 @media(max-width:380px) {
 
-.hero h1 {
-font-size:2.35rem !important;
-}
+    .hero h1 {
+        font-size:2.35rem !important;
+    }
 
-.hero-actions {
-gap:8px;
-}
+    .hero-actions {
+        gap:8px;
+    }
 
-.hero-actions a {
-padding:11px 14px;
-font-size:12px;
-}
+    .hero-actions a {
+        padding:11px 14px;
+        font-size:12px;
+    }
 
-.trust-row {
-gap:12px;
-}
-
+    .trust-row {
+        gap:12px;
+    }
 }
 
 </style>
@@ -2347,182 +2493,78 @@ and management need for auditing.
 </section>
 
 
-<!-- FOOTER -->
+<!-- EDUPLUS ANIMATED FOOTER -->
 
 <footer id="contact">
 
-<div class="container">
+<div class="container footer-content">
 
-<div class="row g-4">
+<div class="footer-label">LET'S TALK</div>
 
-
-<!-- BRAND -->
-
-<div class="col-lg-4">
-
-<a class="footer-brand" href="#home">
-
-<i class="fa-solid fa-graduation-cap"></i> EduPlus
-
-</a>
+<h2 class="footer-heading">Smart School Management.</h2>
 
 
-<p class="footer-desc mt-3">
-
-Smart Substitute System. Automate your timetable, track absentees, and manage substitute teachers efficiently.
-
-</p>
-
-</div>
-
-
-<!-- NAVIGATION -->
-
-<div class="col-6 col-lg-2">
-
-<h3 class="footer-title">Navigation</h3>
-
-<ul class="footer-links">
-
-<li><a href="#home">Home</a></li>
-
-<li><a href="#about">About EduPlus</a></li>
-
-<li><a href="#how-it-works">How It Works</a></li>
-
-<li><a href="#features">Features</a></li>
-
-<li><a href="#pricing">Pricing</a></li>
-
-</ul>
-
-</div>
-
-
-<!-- PROJECT -->
-
-<div class="col-6 col-lg-3">
-
-<h3 class="footer-title">Project</h3>
-
-<ul class="footer-links">
-
-<li><a href="#vision">Our Vision</a></li>
-
-<li><a href="login.html">Login</a></li>
-
-<li><a href="register.html">Register School</a></li>
-
-</ul>
-
-</div>
-
-
-<!-- CONTACT -->
-
-<div class="col-lg-3">
-
-<h3 class="footer-title">Connect With Us</h3>
-
-
-<div class="footer-contact">
-
-<div class="mb-2">
-
-<i class="fa-solid fa-school me-2"></i>
-
-For Schools, Colleges &amp; Universities
-
-</div>
-
-
-<div class="mb-2">
-
-<i class="fa-solid fa-cloud me-2"></i>
-
-Smart Substitute System
-
-</div>
-
-</div>
-
-
-<!-- SOCIAL ICONS -->
-
-<div class="mt-3 d-flex gap-3">
-
+<div class="footer-socials">
 
 <a href="https://wa.me/923352528514"
 target="_blank"
 rel="noopener noreferrer"
-aria-label="Chat with EduPlus on WhatsApp"
-title="Chat on WhatsApp"
-class="social-link"
-style="font-size:1.5rem;color:#25D366;text-decoration:none;">
-
-<i class="fa-brands fa-whatsapp"></i>
-
-</a>
-
+aria-label="Open WhatsApp">WhatsApp</a>
 
 <a href="mailto:mariamkhan2k26@gmail.com"
-aria-label="Email EduPlus"
-title="Email Us"
-class="social-link"
-style="font-size:1.5rem;color:#EA4335;text-decoration:none;">
+aria-label="Send an email">Email</a>
 
-<i class="fa-solid fa-envelope"></i>
+</div>
 
-</a>
 
+<div class="footer-logo-wrap">
+
+<div class="footer-logo" aria-label="EDUPLUS">
+
+<span style="--i:0">E</span>
+<span style="--i:1">D</span>
+<span style="--i:2">U</span>
+<span style="--i:3">P</span>
+<span style="--i:4">L</span>
+<span style="--i:5">U</span>
+<span style="--i:6">S</span>
 
 </div>
 
 </div>
 
+
+<div class="footer-bottom-info">
+
+<div class="footer-copyright">
+© 2026 — <strong>EduPlus.</strong> All rights reserved.
 </div>
 
-
-<!-- COPYRIGHT -->
-
-<div class="footer-bottom"
-style="border-top:1px solid rgba(255,255,255,0.1);margin-top:40px;padding-top:25px;padding-bottom:15px;">
-
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-center text-md-start">
-
-
-<p class="mb-0"
-style="color:#a0aec0;font-size:1rem;font-weight:500;">
-
-© 2026 <strong style="color:#fff;">EduPlus</strong>. All rights reserved.
-
-</p>
-
-
-<p class="mb-0"
-style="color:#a0aec0;font-size:1rem;font-weight:500;">
-
+<div class="footer-developer">
 Developed with
+<i class="fa-solid fa-heart" style="color:#20c58b"></i>
+by <strong>Mariam Khan.</strong>
+</div>
 
-<i class="fa-solid fa-heart"
-style="color:#e53e3e;font-size:0.9rem;"></i>
+</div>
 
-by
 
-<a href="#"
-style="color:#fbbf24;text-decoration:none;font-weight:700;font-size:1.1rem;letter-spacing:0.5px;">
+<nav class="footer-nav" aria-label="Footer navigation">
 
-Mariam Khan
+<a href="#home">HOME</a>
+<a href="#about">ABOUT EDUPLUS</a>
+<a href="#schools">SCHOOLS</a>
+<a href="#how-it-works">HOW IT WORKS</a>
+<a href="#features">FEATURES</a>
+<a href="#pricing">PRICING</a>
+<a href="#faq">FAQ</a>
 
+</nav>
+
+
+<a href="#home" class="footer-top">
+TOP <i class="fa-solid fa-arrow-up"></i>
 </a>
-
-</p>
-
-
-</div>
-
-</div>
-
 
 </div>
 
@@ -2532,6 +2574,41 @@ Mariam Khan
 <!-- BOOTSTRAP JAVASCRIPT -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+
+// Reveal the footer smoothly when it enters the screen.
+
+const eduPlusFooter = document.querySelector("#contact");
+
+if (eduPlusFooter && "IntersectionObserver" in window) {
+
+    const footerObserver = new IntersectionObserver((entries) => {
+
+        entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+                eduPlusFooter.classList.add("show-footer");
+
+                footerObserver.unobserve(eduPlusFooter);
+
+            }
+
+        });
+
+    }, { threshold: 0.12 });
+
+    footerObserver.observe(eduPlusFooter);
+
+} else if (eduPlusFooter) {
+
+    eduPlusFooter.classList.add("show-footer");
+
+}
+
+</script>
 
 
 </body>
