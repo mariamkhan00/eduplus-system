@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <meta name="description" content="EduPlus Smart Substitute System for Pakistani schools, colleges and universities.">
+
 <title>EduPlus | Smart Substitute System</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
+
 <style>
+
 :root {
 --navy:#102b4e;
 --deep:#0b203b;
@@ -26,7 +34,9 @@
 --green:#176b4a;
 }
 
-* {box-sizing:border-box}
+* {
+box-sizing:border-box;
+}
 
 html {
 scroll-behavior:smooth;
@@ -45,11 +55,14 @@ width:100%;
 display:block;
 }
 
-a {text-decoration:none}
+a {
+text-decoration:none;
+}
 
 h1,h2,h3,h4 {
 font-family:"Playfair Display",serif;
 }
+
 
 /* TOP BAR */
 
@@ -64,6 +77,7 @@ padding:9px 0;
 color:white;
 margin-left:18px;
 }
+
 
 /* NAVBAR */
 
@@ -112,6 +126,9 @@ margin:0 7px;
 color:var(--gold-dark)!important;
 }
 
+
+/* BUTTONS */
+
 .btn-gold,.btn-navy {
 display:inline-flex;
 align-items:center;
@@ -144,7 +161,8 @@ background:var(--blue);
 color:white;
 }
 
-/* HERO */
+
+/* HERO SECTION */
 
 .hero {
 position:relative;
@@ -169,6 +187,7 @@ content:"";
 position:absolute;
 inset:0;
 z-index:1;
+
 background:linear-gradient(
 90deg,
 #f5f8fc 0%,
@@ -252,6 +271,7 @@ font-size:19px;
 color:var(--blue);
 }
 
+
 /* GENERAL SECTIONS */
 
 .section {
@@ -290,6 +310,7 @@ font-size:12px;
 font-weight:800;
 color:var(--navy);
 }
+
 
 /* SCHOOL CATEGORIES */
 
@@ -333,6 +354,7 @@ color:var(--muted);
 line-height:1.6;
 }
 
+
 /* ABOUT */
 
 .about-copy {
@@ -372,6 +394,7 @@ color:var(--green);
 margin-top:3px;
 }
 
+
 /* IMAGE GALLERY */
 
 .gallery-card {
@@ -409,6 +432,7 @@ color:var(--muted);
 line-height:1.7;
 margin:0;
 }
+
 
 /* FEATURES AND PROCESS */
 
@@ -459,6 +483,7 @@ color:var(--gold-dark);
 margin-bottom:17px;
 }
 
+
 /* STATISTICS */
 
 .stats-strip {
@@ -493,6 +518,7 @@ font-size:11px;
 color:var(--muted);
 }
 
+
 /* BANNER */
 
 .banner {
@@ -510,6 +536,7 @@ align-items:center;
 content:"";
 position:absolute;
 inset:0;
+
 background:linear-gradient(
 90deg,
 var(--navy),
@@ -534,6 +561,7 @@ font-size:13px;
 color:#dce6f1;
 line-height:1.8;
 }
+
 
 /* PRICING */
 
@@ -625,6 +653,7 @@ font-size:12px;
 background:var(--gold);
 }
 
+
 /* FAQ */
 
 .accordion-item {
@@ -652,6 +681,7 @@ color:var(--muted);
 line-height:1.8;
 padding:0 5px 20px;
 }
+
 
 /* FOOTER */
 
@@ -742,30 +772,10 @@ gap:15px;
 flex-wrap:wrap;
 }
 
-/* RESPONSIVE */
+
+/* TABLET RESPONSIVE */
 
 @media(max-width:991px) {
-.hero {
-min-height:660px;
-align-items:flex-start;
-}
-
-.hero-photo {
-width:100%;
-opacity:.3;
-}
-
-.hero:before {
-background:linear-gradient(
-90deg,
-rgba(245,248,252,.97),
-rgba(245,248,252,.76)
-);
-}
-
-.hero-content {
-padding-top:90px;
-}
 
 .navbar-collapse {
 padding:15px 0;
@@ -778,20 +788,116 @@ padding:9px 0;
 .section {
 padding:60px 0;
 }
+
 }
 
-@media(max-width:575px) {
+
+/* MOBILE RESPONSIVE */
+
+@media(max-width:767px) {
+
+/* HERO MAIN CONTAINER */
+
 .hero {
-min-height:620px;
+display:flex;
+flex-direction:column;
+align-items:stretch;
+min-height:auto !important;
+height:auto;
+padding:0 !important;
+background:#f5f8fc;
+overflow:hidden;
 }
+
+/* HERO IMAGE FIX */
+
+.hero-photo {
+position:relative;
+inset:auto;
+display:block;
+width:100%;
+height:auto;
+max-height:none;
+object-fit:contain;
+object-position:center;
+opacity:1;
+}
+
+/* REMOVE DESKTOP OVERLAY */
+
+.hero:before {
+display:none;
+}
+
+/* HERO CONTENT */
+
+.hero-content {
+position:relative;
+width:100%;
+padding:30px 12px 35px !important;
+margin:0 auto;
+}
+
+.hero-content > .col-lg-7 {
+width:100%;
+}
+
+/* HERO HEADING */
 
 .hero h1 {
-font-size:3rem;
+font-size:clamp(2.4rem,9vw,3rem) !important;
+line-height:1.05;
+margin-bottom:15px;
 }
 
-.trust-row {
-gap:14px;
+/* HERO DESCRIPTION */
+
+.hero p {
+font-size:14px;
+line-height:1.75;
+max-width:100%;
 }
+
+/* HERO BUTTONS */
+
+.hero-actions {
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:20px;
+}
+
+.hero-actions a {
+padding:12px 17px;
+font-size:13px;
+}
+
+/* HERO QUOTE */
+
+.hero-note {
+font-size:16px;
+margin-top:22px;
+line-height:1.5;
+}
+
+/* TRUST FEATURES */
+
+.trust-row {
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+margin-top:25px;
+}
+
+.trust-item {
+font-size:11px;
+}
+
+.trust-item i {
+font-size:17px;
+}
+
+/* OTHER SECTIONS */
 
 .section-head {
 display:block;
@@ -813,55 +919,92 @@ padding:10px 15px;
 .copyright {
 display:block;
 }
+
 }
-/* Mobile fix for Hero Section */
-@media (max-width: 768px) {
-    .hero {
-        background-position: top center !important; 
-        padding-top: 120px !important;  
-        padding-bottom: 80px !important;
-        min-height: 100vh !important;
-    }
-    
-    .hero h1 {
-        font-size: 3rem !important; 
-    }
+
+
+/* SMALL MOBILE SCREENS */
+
+@media(max-width:380px) {
+
+.hero h1 {
+font-size:2.35rem !important;
 }
+
+.hero-actions {
+gap:8px;
+}
+
+.hero-actions a {
+padding:11px 14px;
+font-size:12px;
+}
+
+.trust-row {
+gap:12px;
+}
+
+}
+
 </style>
+
 </head>
 
+
 <body>
+
 
 <!-- TOP BAR -->
 
 <div class="topbar">
+
 <div class="container d-flex justify-content-between align-items-center">
+
 <div>
+
 <i class="fa-solid fa-graduation-cap me-2" style="color:var(--gold)"></i>
+
 EduPlus — Smart Substitute System
+
 </div>
 
 <div class="d-none d-md-block">
+
 <a href="#vision">Our Vision</a>
+
 <a href="#contact">Contact</a>
+
 </div>
+
 </div>
+
 </div>
+
 
 <!-- NAVIGATION -->
 
 <nav class="navbar navbar-expand-lg sticky-top">
+
 <div class="container">
 
 <a class="navbar-brand" href="#home">
+
 <span class="brand-mark">
+
 <i class="fa-solid fa-graduation-cap"></i>
+
 </span>
+
 <span>
+
 EduPlus
+
 <span class="brand-small">SMART SCHOOL MANAGEMENT</span>
+
 </span>
+
 </a>
+
 
 <button class="navbar-toggler border-0 shadow-none"
 type="button"
@@ -870,329 +1013,535 @@ data-bs-target="#mainNav"
 aria-label="Toggle navigation">
 
 <i class="fa-solid fa-bars" style="color:var(--navy);font-size:23px"></i>
+
 </button>
+
 
 <div class="collapse navbar-collapse" id="mainNav">
 
 <ul class="navbar-nav mx-auto align-items-lg-center">
+
 <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+
 <li class="nav-item"><a class="nav-link" href="#about">About EduPlus</a></li>
+
 <li class="nav-item"><a class="nav-link" href="#schools">Schools</a></li>
+
 <li class="nav-item"><a class="nav-link" href="#how-it-works">How It Works</a></li>
+
 <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+
 <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+
 <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+
 </ul>
 
+
 <a href="login.html" class="btn-gold mt-3 mt-lg-0">
+
 Login <i class="fa-solid fa-arrow-right"></i>
+
 </a>
 
 </div>
+
 </div>
+
 </nav>
+
 
 <!-- HERO SECTION -->
 
 <header class="hero" id="home">
 
 <img class="hero-photo"
+
 src="https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/WhatsApp%20Image%202026-11-02%20at%209.25.30%20PM.jpeg"
+
 alt="Pakistani Government School Building and Students">
 
+
 <div class="container hero-content">
+
 <div class="col-lg-7">
 
 <div class="eyebrow">LEARN · MANAGE · GROW</div>
 
+
 <h1>
+
 Smarter Schools.<br>
+
 <span>Brighter Futures.</span>
+
 </h1>
 
+
 <p>
+
 EduPlus is a modern, cloud-based Teacher Substitute &amp;
 Absentee Management System designed for Schools, Colleges,
 and Universities. Helping educational institutions automate
 teacher substitutions and manage daily school operations
 more efficiently.
+
 </p>
+
 
 <div class="hero-actions">
 
 <a href="register.html" class="btn-gold">
+
 Register Your School
+
 <i class="fa-solid fa-arrow-right"></i>
+
 </a>
+
 
 <a href="#how-it-works" class="btn-navy">
+
 <i class="fa-regular fa-circle-play"></i>
+
 How It Works
+
 </a>
 
 </div>
 
+
 <div class="hero-note">
+
 “When a teacher is absent, learning should continue.”
+
 </div>
+
 
 <div class="trust-row">
 
+
 <div class="trust-item">
+
 <i class="fa-solid fa-calendar-check"></i>
+
 <span>Smart Substitution</span>
+
 </div>
 
+
 <div class="trust-item">
+
 <i class="fa-solid fa-chart-line"></i>
+
 <span>Live Analytics</span>
+
 </div>
+
 
 <div class="trust-item">
+
 <i class="fa-solid fa-school"></i>
+
 <span>Multi-School Support</span>
+
+</div>
+
+
 </div>
 
 </div>
+
 </div>
-</div>
+
 </header>
+
 
 <!-- SCHOOL CATEGORIES -->
 
 <section class="section" id="schools">
+
 <div class="container">
 
 <div class="section-head">
+
 <div>
+
 <div class="eyebrow">EDUCATION FOR EVERY INSTITUTION</div>
 
 <h2>Supporting <span>School Communities</span></h2>
 
 <p>
+
 EduPlus is designed for Schools, Colleges, and Universities,
 with a focus on making teacher substitution and absentee
 management easier for educational institutions, including
 schools in Pakistan.
+
 </p>
+
 </div>
 
+
 <a class="small-link" href="#features">
+
 Explore EduPlus Features →
+
 </a>
+
 </div>
+
 
 <div class="row g-3">
 
+
 <div class="col-6 col-lg-3">
+
 <article class="program-card">
+
 <div class="program-visual">
+
 <i class="fa-solid fa-school"></i>
+
 </div>
+
 <div class="program-info">
+
 <h3>Government Schools</h3>
+
 <p>Organise teacher availability and substitution workflows.</p>
-</div>
-</article>
+
 </div>
 
+</article>
+
+</div>
+
+
 <div class="col-6 col-lg-3">
+
 <article class="program-card">
+
 <div class="program-visual">
+
 <i class="fa-solid fa-book-open"></i>
+
 </div>
+
 <div class="program-info">
+
 <h3>Private Schools</h3>
+
 <p>Manage timetables, absences and substitute assignments.</p>
-</div>
-</article>
+
 </div>
 
+</article>
+
+</div>
+
+
 <div class="col-6 col-lg-3">
+
 <article class="program-card">
+
 <div class="program-visual">
+
 <i class="fa-solid fa-user-graduate"></i>
+
 </div>
+
 <div class="program-info">
+
 <h3>Colleges</h3>
+
 <p>Support daily academic operations and reporting.</p>
+
 </div>
+
 </article>
+
 </div>
+
 
 <div class="col-6 col-lg-3">
+
 <article class="program-card">
+
 <div class="program-visual">
+
 <i class="fa-solid fa-chalkboard-user"></i>
+
 </div>
+
 <div class="program-info">
+
 <h3>Universities</h3>
+
 <p>Coordinate teaching schedules across departments.</p>
+
 </div>
+
 </article>
+
+</div>
+
+
 </div>
 
 </div>
-</div>
+
 </section>
+
 
 <!-- ABOUT EDUPLUS -->
 
 <section class="section section-soft" id="about">
+
 <div class="container">
 
 <div class="row align-items-center g-4">
 
 <div class="col-lg-9 mx-auto">
+
 <div class="about-copy">
 
 <div class="eyebrow">MORE THAN A TIMETABLE</div>
 
+
 <h2>
+
 Where School Management
+
 <span>Meets Technology</span>
+
 </h2>
 
+
 <p>
+
 EduPlus is a modern, cloud-based Teacher Substitute &amp;
 Absentee Management System designed for Schools, Colleges,
 and Universities.
+
 </p>
 
+
 <p>
+
 It automates the manual process of finding substitute teachers,
 ensures fair workload distribution, and provides detailed
 analytical reports for educational institutions.
+
 </p>
+
 
 <ul class="check-list">
 
+
 <li>
+
 <i class="fa-solid fa-circle-check"></i>
+
 Automatically finds available substitute teachers.
+
 </li>
 
+
 <li>
+
 <i class="fa-solid fa-circle-check"></i>
+
 Supports multiple schools with separate dashboards and databases.
+
 </li>
 
+
 <li>
+
 <i class="fa-solid fa-circle-check"></i>
+
 Provides monthly and yearly absence and substitution analytics.
+
 </li>
+
 
 </ul>
 
+
 <a href="#vision" class="btn-gold">
+
 Discover Our Vision →
+
 </a>
 
-</div>
+
 </div>
 
 </div>
+
 </div>
+
+</div>
+
 </section>
+
 
 <!-- PAKISTANI SCHOOL GALLERY -->
 
 <section class="section" id="school-gallery">
+
 <div class="container">
 
 <div class="section-head">
+
 <div>
+
 <div class="eyebrow">LEARNING ENVIRONMENTS</div>
+
 <h2>For Pakistan’s <span>Schools & Students</span></h2>
+
 <p>
+
 EduPlus is designed to support organised teaching and
 school operations across educational institutions.
+
 </p>
+
 </div>
+
 </div>
+
 
 <div class="row g-3">
 
+
 <div class="col-md-6 col-lg-4">
+
 <div class="gallery-card">
 
 <img
+
 src="https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/download.jpg"
+
 alt="Pakistani Government School Classroom"
+
 loading="lazy">
 
+
 <div class="gallery-info">
+
 <h3>Classroom Learning</h3>
+
 <p>
+
 A supportive classroom environment where teaching
 continues every day.
+
 </p>
+
 </div>
 
 </div>
+
 </div>
+
 
 <div class="col-md-6 col-lg-4">
+
 <div class="gallery-card">
 
 <img
+
 src="https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/download%20(1).jpg"
+
 alt="School Campus Building"
+
 loading="lazy">
 
+
 <div class="gallery-info">
+
 <h3>School Campuses</h3>
+
 <p>
+
 A welcoming campus for students, teachers and
 school communities.
+
 </p>
+
 </div>
 
 </div>
+
 </div>
+
 
 <div class="col-md-6 col-lg-4">
+
 <div class="gallery-card">
 
 <img
+
 src="https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/Punjab%20Announces%20One-Year%20PWDP%20Volunteer%20Program%20for%20Skilled%20Youth.jpg"
+
 alt="Students Working on Computers"
+
 loading="lazy">
 
+
 <div class="gallery-info">
+
 <h3>Digital Learning</h3>
+
 <p>
+
 Technology can help institutions organise information
 and daily activities.
+
 </p>
+
 </div>
 
 </div>
+
+</div>
+
+
 </div>
 
 </div>
-</div>
+
 </section>
+
 
 <!-- VISION -->
 
 <section class="section" id="vision">
+
 <div class="container">
 
 <div class="row align-items-center g-4">
+
 
 <div class="col-lg-5">
 
 <div class="eyebrow">OUR VISION</div>
 
+
 <h2 style="font-size:clamp(2rem,3vw,2.8rem);color:var(--navy);font-weight:800;line-height:1.1">
 
 A more organised day for every
+
 <span style="color:var(--gold-dark)">
+
 educational institution.
+
 </span>
 
 </h2>
+
 
 <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-top:17px">
 
@@ -1202,109 +1551,191 @@ analytical reports for educational institutions.
 
 </p>
 
+
 <a href="#how-it-works" class="btn-navy">
+
 See How EduPlus Works →
+
 </a>
 
 </div>
 
+
 <div class="col-lg-7">
+
 <div class="row g-3">
 
-<div class="col-6">
-<div class="step-card">
-<div class="feature-icon">
-<i class="fa-solid fa-scale-balanced"></i>
-</div>
-<h3>Fair Workload</h3>
-<p>Assign available teachers based on the lowest workload.</p>
-</div>
-</div>
 
 <div class="col-6">
+
 <div class="step-card">
+
 <div class="feature-icon">
+
+<i class="fa-solid fa-scale-balanced"></i>
+
+</div>
+
+<h3>Fair Workload</h3>
+
+<p>Assign available teachers based on the lowest workload.</p>
+
+</div>
+
+</div>
+
+
+<div class="col-6">
+
+<div class="step-card">
+
+<div class="feature-icon">
+
 <i class="fa-solid fa-chart-pie"></i>
+
 </div>
+
 <h3>Clear Insights</h3>
+
 <p>Review monthly and yearly absence and substitution reports.</p>
+
 </div>
+
 </div>
+
 
 <div class="col-12">
+
 <div class="step-card">
+
 <div class="feature-icon">
+
 <i class="fa-solid fa-school"></i>
+
 </div>
+
 <h3>One Platform for Institutions</h3>
+
 <p>
+
 Support schools, colleges and universities through a
 cloud-based system with separate school dashboards
 and databases.
+
 </p>
-</div>
+
 </div>
 
 </div>
+
+
 </div>
 
 </div>
+
 </div>
+
+</div>
+
 </section>
+
 
 <!-- STATISTICS -->
 
 <div class="stats-strip">
+
 <div class="container">
+
 <div class="row g-2">
 
+
 <div class="col-6 col-lg-3">
+
 <div class="stat">
+
 <i class="fa-solid fa-school"></i>
+
 <div>
+
 <strong>Multi-School</strong>
+
 <span>Support (SaaS)</span>
-</div>
-</div>
+
 </div>
 
+</div>
+
+</div>
+
+
 <div class="col-6 col-lg-3">
+
 <div class="stat">
+
 <i class="fa-solid fa-chart-column"></i>
+
 <div>
+
 <strong>Live</strong>
+
 <span>Dashboards &amp; Analytics</span>
-</div>
-</div>
+
 </div>
 
+</div>
+
+</div>
+
+
 <div class="col-6 col-lg-3">
+
 <div class="stat">
+
 <i class="fa-solid fa-mobile-screen-button"></i>
+
 <div>
+
 <strong>PWA</strong>
+
 <span>Installable &amp; Offline</span>
+
 </div>
+
 </div>
+
 </div>
+
 
 <div class="col-6 col-lg-3">
+
 <div class="stat">
+
 <i class="fa-solid fa-book-open"></i>
+
 <div>
+
 <strong>Interactive</strong>
+
 <span>Tutorials</span>
-</div>
-</div>
+
 </div>
 
 </div>
+
 </div>
+
+
 </div>
+
+</div>
+
+</div>
+
 
 <!-- BANNER -->
 
 <section class="section">
+
 <div class="container">
 
 <div class="banner">
@@ -1312,223 +1743,383 @@ and databases.
 <div class="banner-content">
 
 <div class="eyebrow" style="color:#f7ca65">
+
 SMARTER SCHOOL OPERATIONS
+
 </div>
+
 
 <h2>Keep Every Class Moving Forward</h2>
 
+
 <p>
+
 When a teacher is absent, EduPlus automatically finds another
 teacher to take their place, so no class is left without a teacher.
+
 </p>
 
+
 <a href="register.html" class="btn-gold">
+
 Get Started →
+
 </a>
 
+
 </div>
+
 </div>
+
 </div>
+
 </section>
+
 
 <!-- HOW IT WORKS -->
 
 <section class="section section-soft" id="how-it-works">
+
 <div class="container">
 
 <div class="section-head">
+
 <div>
+
 <div class="eyebrow">SIMPLE THREE-STEP PROCESS</div>
+
 <h2>How It <span>Works</span></h2>
+
 <p>
+
 Automating your school's daily operations with intelligent algorithms.
+
 </p>
+
 </div>
+
 </div>
+
 
 <div class="row g-3">
 
+
 <div class="col-md-4">
+
 <div class="step-card">
+
 <div class="step-number">01</div>
+
 <h3>Register School</h3>
+
 <p>
+
 Create your school account and add your teachers,
 classes and timetable effortlessly.
+
 </p>
-</div>
+
 </div>
 
+</div>
+
+
 <div class="col-md-4">
+
 <div class="step-card">
+
 <div class="step-number">02</div>
+
 <h3>Mark Absent</h3>
+
 <p>
+
 If a teacher is absent, just select their name
 on the dashboard with one click.
+
 </p>
+
 </div>
+
 </div>
+
 
 <div class="col-md-4">
+
 <div class="step-card">
+
 <div class="step-number">03</div>
+
 <h3>Smart Suggest</h3>
+
 <p>
+
 EduPlus instantly finds the best available free
 teacher for that specific period.
+
 </p>
-</div>
+
 </div>
 
 </div>
+
+
 </div>
+
+</div>
+
 </section>
+
 
 <!-- FEATURES -->
 
 <section class="section" id="features">
+
 <div class="container">
 
 <div class="section-head">
+
 <div>
+
 <div class="eyebrow">TOOLS FOR EDUCATIONAL INSTITUTIONS</div>
+
 <h2>Powerful <span>Features</span></h2>
+
 <p>
+
 Comprehensive tools designed to make school administration easier.
+
 </p>
+
 </div>
+
 </div>
+
 
 <div class="row g-3">
 
+
 <div class="col-md-6 col-lg-4">
+
 <div class="feature-card">
+
 <div class="feature-icon">
+
 <i class="fa-solid fa-file-arrow-up"></i>
+
 </div>
+
 <h3>Easy Data Upload</h3>
+
 <p>
+
 Upload your school's PDF/Excel timetable and data fills
 automatically. No manual entry required.
+
 </p>
-</div>
+
 </div>
 
-<div class="col-md-6 col-lg-4">
-<div class="feature-card">
-<div class="feature-icon">
-<i class="fa-solid fa-robot"></i>
 </div>
+
+
+<div class="col-md-6 col-lg-4">
+
+<div class="feature-card">
+
+<div class="feature-icon">
+
+<i class="fa-solid fa-robot"></i>
+
+</div>
+
 <h3>Smart Algorithm</h3>
+
 <p>
+
 Finds the teacher with the lowest workload to balance
 substitutions perfectly.
+
 </p>
-</div>
+
 </div>
 
-<div class="col-md-6 col-lg-4">
-<div class="feature-card">
-<div class="feature-icon">
-<i class="fa-brands fa-whatsapp"></i>
 </div>
+
+
+<div class="col-md-6 col-lg-4">
+
+<div class="feature-card">
+
+<div class="feature-icon">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</div>
+
 <h3>WhatsApp Alerts</h3>
+
 <p>
+
 Get instant WhatsApp notifications for absent teachers
 and substitution assignments.
+
 </p>
-</div>
+
 </div>
 
-<div class="col-md-6 col-lg-4">
-<div class="feature-card">
-<div class="feature-icon">
-<i class="fa-solid fa-chart-line"></i>
 </div>
+
+
+<div class="col-md-6 col-lg-4">
+
+<div class="feature-card">
+
+<div class="feature-icon">
+
+<i class="fa-solid fa-chart-line"></i>
+
+</div>
+
 <h3>Analytics &amp; Reports</h3>
+
 <p>
+
 Get beautiful graphs showing absentees. Download
 PDF/Excel reports for management.
+
 </p>
-</div>
+
 </div>
 
-<div class="col-md-6 col-lg-4">
-<div class="feature-card">
-<div class="feature-icon">
-<i class="fa-solid fa-network-wired"></i>
 </div>
+
+
+<div class="col-md-6 col-lg-4">
+
+<div class="feature-card">
+
+<div class="feature-icon">
+
+<i class="fa-solid fa-network-wired"></i>
+
+</div>
+
 <h3>Multi-Branch Support</h3>
+
 <p>
+
 One platform for multiple branches. Perfect for
 large school networks and colleges.
+
 </p>
+
 </div>
+
 </div>
+
 
 <div class="col-md-6 col-lg-4">
+
 <div class="feature-card">
+
 <div class="feature-icon">
+
 <i class="fa-solid fa-brain"></i>
+
 </div>
+
 <h3>AI Assistant</h3>
+
 <p>
+
 Premium AI matches free teachers not just by free period,
 but by subject expertise.
+
 </p>
-</div>
+
 </div>
 
 </div>
+
+
 </div>
+
+</div>
+
 </section>
+
 
 <!-- PRICING -->
 
 <section class="section" id="pricing">
+
 <div class="container">
 
 <div class="section-head">
+
 <div>
+
 <div class="eyebrow">PLANS FOR YOUR INSTITUTION</div>
+
 <h2>Simple <span>Pricing</span></h2>
+
 <p>Start free for 2 months. Upgrade when you are ready.</p>
-</div>
+
 </div>
 
+</div>
+
+
 <div class="row g-3 justify-content-center">
+
 
 <!-- FREE TRIAL -->
 
 <div class="col-md-6 col-lg-4">
+
 <div class="plan-card">
 
 <h3>Free Trial</h3>
 
 <div style="font-size:11px;color:var(--muted);font-weight:700">
+
 Basic / Starter
+
 </div>
+
 
 <div class="price">
+
 Rs. 0 <small>/ 2 Months</small>
+
 </div>
 
+
 <ul class="plan-features">
+
 <li><i class="fa-solid fa-circle-check"></i> Up to 20 Teachers</li>
+
 <li><i class="fa-solid fa-circle-check"></i> Upload via PDF/Excel</li>
+
 <li><i class="fa-solid fa-circle-check"></i> Smart Substitution</li>
+
 <li><i class="fa-solid fa-circle-check"></i> Basic Reports</li>
+
 </ul>
+
 
 <a href="register.html" class="btn-plan">Start Free</a>
 
 </div>
+
 </div>
+
 
 <!-- BASIC PLAN -->
 
 <div class="col-md-6 col-lg-4">
+
 <div class="plan-card featured">
 
 <div class="plan-tag">MOST POPULAR</div>
@@ -1536,227 +2127,413 @@ Rs. 0 <small>/ 2 Months</small>
 <h3>Basic Plan</h3>
 
 <div style="font-size:11px;color:var(--muted);font-weight:700">
+
 For Schools
+
 </div>
+
 
 <div class="price">
+
 Rs. 5,000 <small>/ Month</small>
+
 </div>
 
+
 <ul class="plan-features">
+
 <li><i class="fa-solid fa-circle-check"></i> Up to 50 Teachers</li>
+
 <li><i class="fa-solid fa-circle-check"></i> Single Shift</li>
+
 <li><i class="fa-solid fa-circle-check"></i> WhatsApp Alerts</li>
+
 <li><i class="fa-solid fa-circle-check"></i> Teacher Self-Service Portal</li>
+
 <li><i class="fa-solid fa-circle-check"></i> Monthly Reports &amp; Graphs</li>
+
 <li><i class="fa-solid fa-circle-check"></i> Export Data (PDF/Excel)</li>
+
 </ul>
+
 
 <a href="register.html" class="btn-plan">Upgrade to Basic</a>
 
 </div>
+
 </div>
+
 
 <!-- PREMIUM PLAN -->
 
 <div class="col-md-6 col-lg-4">
+
 <div class="plan-card">
 
 <h3>Premium Plan</h3>
 
 <div style="font-size:11px;color:var(--muted);font-weight:700">
+
 For Colleges / Universities
+
 </div>
+
 
 <div class="price">
+
 Rs. 10,000 <small>/ Month</small>
+
 </div>
 
+
 <ul class="plan-features">
+
 <li><i class="fa-solid fa-circle-check"></i> Unlimited Teachers</li>
+
 <li><i class="fa-solid fa-circle-check"></i> Dual Shifts (Morning &amp; Evening)</li>
+
 <li><i class="fa-solid fa-circle-check"></i> Multi-Branch Support</li>
+
 <li><i class="fa-solid fa-circle-check"></i> AI Substitute Assistant</li>
+
 <li><i class="fa-solid fa-circle-check"></i> Advanced Analytics &amp; Custom Graphs</li>
+
 <li><i class="fa-solid fa-circle-check"></i> Export Data (PDF/Excel)</li>
+
 <li><i class="fa-solid fa-circle-check"></i> 24/7 Priority Support</li>
+
 </ul>
+
 
 <a href="register.html" class="btn-plan">Upgrade to Premium</a>
 
 </div>
+
+</div>
+
+
 </div>
 
 </div>
-</div>
+
 </section>
+
 
 <!-- FAQ -->
 
 <section class="section section-soft" id="faq">
+
 <div class="container" style="max-width:900px">
 
 <div class="text-center mb-4">
+
 <div class="eyebrow">NEED TO KNOW MORE?</div>
 
+
 <h2 style="font-size:2.5rem;color:var(--navy);font-weight:800">
+
 Frequently Asked
+
 <span style="color:var(--gold-dark)">Questions</span>
+
 </h2>
+
 </div>
+
 
 <div class="accordion" id="faqAccordion">
 
+
 <div class="accordion-item">
+
 <h2 class="accordion-header">
+
 <button class="accordion-button collapsed"
 type="button"
 data-bs-toggle="collapse"
 data-bs-target="#faq1">
+
 How does the substitute system work?
+
 </button>
+
 </h2>
+
 
 <div id="faq1" class="accordion-collapse collapse"
 data-bs-parent="#faqAccordion">
 
 <div class="accordion-body">
+
 When a teacher is marked absent, our system automatically
 checks the timetable and finds a free teacher who has no
 class in that specific period and assigns them as a substitute.
+
 </div>
 
 </div>
+
 </div>
+
 
 <div class="accordion-item">
+
 <h2 class="accordion-header">
+
 <button class="accordion-button collapsed"
 type="button"
 data-bs-toggle="collapse"
 data-bs-target="#faq2">
+
 How do we add our school's data?
+
 </button>
+
 </h2>
+
 
 <div id="faq2" class="accordion-collapse collapse"
 data-bs-parent="#faqAccordion">
 
 <div class="accordion-body">
+
 Once you register, you can simply upload your school's
 timetable in Excel or PDF format. Our system will
 automatically fill in the data.
+
 </div>
 
 </div>
+
 </div>
+
 
 <div class="accordion-item">
+
 <h2 class="accordion-header">
+
 <button class="accordion-button collapsed"
 type="button"
 data-bs-toggle="collapse"
 data-bs-target="#faq3">
+
 Is it approved for Government schools?
+
 </button>
+
 </h2>
+
 
 <div id="faq3" class="accordion-collapse collapse"
 data-bs-parent="#faqAccordion">
 
 <div class="accordion-body">
+
 Yes, EduPlus is built to generate proper monthly PDF reports
 and statistics which are exactly what government officials
 and management need for auditing.
+
 </div>
 
 </div>
+
+</div>
+
+
 </div>
 
 </div>
-</div>
+
 </section>
 
-<!-- ===== FINAL FOOTER ===== -->
+
+<!-- FOOTER -->
+
 <footer id="contact">
-    <div class="container">
-        <div class="row g-4">
-            
-            <!-- Column 1: Brand -->
-            <div class="col-lg-4">
-                <a class="footer-brand" href="#home">
-                    <i class="fa-solid fa-graduation-cap"></i> EduPlus
-                </a>
-                <p class="footer-desc mt-3">
-                    Smart Substitute System. Automate your timetable, track absentees, and manage substitute teachers efficiently.
-                </p>
-            </div>
 
-            <!-- Column 2: Navigation -->
-            <div class="col-6 col-lg-2">
-                <h3 class="footer-title">Navigation</h3>
-                <ul class="footer-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About EduPlus</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                </ul>
-            </div>
+<div class="container">
 
-            <!-- Column 3: Project -->
-            <div class="col-6 col-lg-3">
-                <h3 class="footer-title">Project</h3>
-                <ul class="footer-links">
-                    <li><a href="#vision">Our Vision</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="register.html">Register School</a></li>
-                </ul>
-            </div>
+<div class="row g-4">
 
-            <!-- Column 4: Connect -->
-            <div class="col-lg-3">
-                <h3 class="footer-title">Connect With Us</h3>
-                <div class="footer-contact">
-                    <div class="mb-2">
-                        <i class="fa-solid fa-school me-2"></i> For Schools, Colleges &amp; Universities
-                    </div>
-                    <div class="mb-2">
-                        <i class="fa-solid fa-cloud me-2"></i> Smart Substitute System
-                    </div>
-                </div>
-                
-                <!-- Icons -->
-                <div class="mt-3 d-flex gap-3">
-                    <a href="https://wa.me/923352528514" target="_blank" rel="noopener noreferrer" aria-label="Chat with EduPlus on WhatsApp" title="Chat on WhatsApp" class="social-link" style="font-size: 1.5rem; color: #25D366; text-decoration: none;">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </a>
-                    <a href="mailto:mariamkhan2k26@gmail.com" aria-label="Email EduPlus" title="Email Us" class="social-link" style="font-size: 1.5rem; color: #EA4335; text-decoration: none;">
-                        <i class="fa-solid fa-envelope"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
 
-        <!-- ===== BOTTOM COPYRIGHT BAR ===== -->
-        <div class="footer-bottom" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; padding-top: 25px; padding-bottom: 15px;">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-center text-md-start">
-                
-                <p class="mb-0" style="color: #a0aec0; font-size: 1rem; font-weight: 500;">
-                    © 2026 <strong style="color: #fff;">EduPlus</strong>. All rights reserved.
-                </p>
-                
-                <p class="mb-0" style="color: #a0aec0; font-size: 1rem; font-weight: 500;">
-                    Developed with <i class="fa-solid fa-heart" style="color: #e53e3e; font-size: 0.9rem;"></i> by 
-                    <a href="#" style="color: #fbbf24; text-decoration: none; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px;">Mariam Khan</a>
-                </p>
-            </div>
-        </div>
+<!-- BRAND -->
 
-    </div>
+<div class="col-lg-4">
+
+<a class="footer-brand" href="#home">
+
+<i class="fa-solid fa-graduation-cap"></i> EduPlus
+
+</a>
+
+
+<p class="footer-desc mt-3">
+
+Smart Substitute System. Automate your timetable, track absentees, and manage substitute teachers efficiently.
+
+</p>
+
+</div>
+
+
+<!-- NAVIGATION -->
+
+<div class="col-6 col-lg-2">
+
+<h3 class="footer-title">Navigation</h3>
+
+<ul class="footer-links">
+
+<li><a href="#home">Home</a></li>
+
+<li><a href="#about">About EduPlus</a></li>
+
+<li><a href="#how-it-works">How It Works</a></li>
+
+<li><a href="#features">Features</a></li>
+
+<li><a href="#pricing">Pricing</a></li>
+
+</ul>
+
+</div>
+
+
+<!-- PROJECT -->
+
+<div class="col-6 col-lg-3">
+
+<h3 class="footer-title">Project</h3>
+
+<ul class="footer-links">
+
+<li><a href="#vision">Our Vision</a></li>
+
+<li><a href="login.html">Login</a></li>
+
+<li><a href="register.html">Register School</a></li>
+
+</ul>
+
+</div>
+
+
+<!-- CONTACT -->
+
+<div class="col-lg-3">
+
+<h3 class="footer-title">Connect With Us</h3>
+
+
+<div class="footer-contact">
+
+<div class="mb-2">
+
+<i class="fa-solid fa-school me-2"></i>
+
+For Schools, Colleges &amp; Universities
+
+</div>
+
+
+<div class="mb-2">
+
+<i class="fa-solid fa-cloud me-2"></i>
+
+Smart Substitute System
+
+</div>
+
+</div>
+
+
+<!-- SOCIAL ICONS -->
+
+<div class="mt-3 d-flex gap-3">
+
+
+<a href="https://wa.me/923352528514"
+target="_blank"
+rel="noopener noreferrer"
+aria-label="Chat with EduPlus on WhatsApp"
+title="Chat on WhatsApp"
+class="social-link"
+style="font-size:1.5rem;color:#25D366;text-decoration:none;">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+
+<a href="mailto:mariamkhan2k26@gmail.com"
+aria-label="Email EduPlus"
+title="Email Us"
+class="social-link"
+style="font-size:1.5rem;color:#EA4335;text-decoration:none;">
+
+<i class="fa-solid fa-envelope"></i>
+
+</a>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- COPYRIGHT -->
+
+<div class="footer-bottom"
+style="border-top:1px solid rgba(255,255,255,0.1);margin-top:40px;padding-top:25px;padding-bottom:15px;">
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-center text-md-start">
+
+
+<p class="mb-0"
+style="color:#a0aec0;font-size:1rem;font-weight:500;">
+
+© 2026 <strong style="color:#fff;">EduPlus</strong>. All rights reserved.
+
+</p>
+
+
+<p class="mb-0"
+style="color:#a0aec0;font-size:1rem;font-weight:500;">
+
+Developed with
+
+<i class="fa-solid fa-heart"
+style="color:#e53e3e;font-size:0.9rem;"></i>
+
+by
+
+<a href="#"
+style="color:#fbbf24;text-decoration:none;font-weight:700;font-size:1.1rem;letter-spacing:0.5px;">
+
+Mariam Khan
+
+</a>
+
+</p>
+
+
+</div>
+
+</div>
+
+
+</div>
+
 </footer>
+
+
+<!-- BOOTSTRAP JAVASCRIPT -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+
 </body>
+
 </html>
