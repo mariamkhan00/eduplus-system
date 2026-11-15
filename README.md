@@ -29,4 +29,4 @@ To automate the manual process of finding substitute teachers, ensuring fair wor
 
 ## 👩‍💻 Developed By
 **Mariam Khan** 
-*For inquiries, please contact: [Your Email Address]*
+*For inquiries, please contact: mariamkhan2k26@gmail.com*
