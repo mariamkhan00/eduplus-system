@@ -1,14 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduPlus - Login</title>
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
+
     <style>
         :root {
             --bg-main: #050705;
@@ -34,18 +35,17 @@
             overflow-x: hidden;
             transition: background-color 1s ease;
             position: relative;
-            /* Cyber Grid Background */
-            background-image: 
+            background-image:
                 linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
         }
 
         body.light-on {
-            background-color: #07120B; /* Dark Green tint when light is on */
+            background-color: #07120B;
         }
 
-        /* ================= TOP CORNER LOGO ================= */
+        /* TOP CORNER LOGO */
         .top-logo {
             position: absolute;
             top: 25px;
@@ -62,25 +62,44 @@
             letter-spacing: -1px;
             transition: color 0.3s ease;
         }
-        .top-logo i { color: var(--neon); text-shadow: 0 0 10px var(--neon); }
 
-        /* Particles container */
+        .top-logo i {
+            color: var(--neon);
+            text-shadow: 0 0 10px var(--neon);
+        }
+
+        /* PARTICLES */
         .particles-container {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden; z-index: 0; pointer-events: none;
-        }
-        .particle {
-            position: absolute; background: var(--neon);
-            border-radius: 50%; filter: blur(1px);
-            animation: float 10s infinite ease-in-out;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
-            50% { transform: translateY(-50px) translateX(25px); opacity: 0.6; }
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        /* ================= MAIN WRAPPER ================= */
+        .particle {
+            position: absolute;
+            background: var(--neon);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.2;
+            }
+            50% {
+                transform: translateY(-50px) translateX(25px);
+                opacity: 0.6;
+            }
+        }
+
+        /* MAIN WRAPPER */
         .main-wrapper {
             display: flex;
             width: 100%;
@@ -90,7 +109,7 @@
             z-index: 10;
         }
 
-        /* ================= LAMP SECTION ================= */
+        /* LAMP SECTION */
         .lamp-side {
             flex: 1;
             position: relative;
@@ -105,22 +124,21 @@
             flex-direction: column;
             align-items: center;
             z-index: 10;
-            margin-top: -50px; 
+            margin-top: -50px;
         }
 
-        /* Cyberpunk Lamp Base */
         .lamp-base {
             width: 90px;
             height: 12px;
             background: linear-gradient(to bottom, #222, #050705);
             border-radius: 50%;
-            margin-top: 210px; 
+            margin-top: 210px;
             position: relative;
             z-index: 2;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.8), 0 0 10px rgba(57, 255, 20, 0.1);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.8),
+                        0 0 10px rgba(57,255,20,0.1);
         }
 
-        /* Cyberpunk Lamp Pole */
         .lamp-pole {
             position: absolute;
             bottom: 5px;
@@ -133,7 +151,6 @@
             border-radius: 4px;
         }
 
-        /* Cyberpunk Lamp Shade */
         .lamp-shade {
             width: 160px;
             height: 80px;
@@ -143,11 +160,11 @@
             position: relative;
             z-index: 3;
             transition: box-shadow 0.5s ease;
-            box-shadow: inset 0 -15px 25px rgba(0,0,0,0.8), 0 5px 15px rgba(0,0,0,0.5);
+            box-shadow: inset 0 -15px 25px rgba(0,0,0,0.8),
+                        0 5px 15px rgba(0,0,0,0.5);
             border-bottom: 2px solid #111;
         }
 
-        /* Bulb */
         .lamp-bulb {
             width: 40px;
             height: 40px;
@@ -157,11 +174,12 @@
             bottom: -20px;
             left: 50%;
             transform: translateX(-50%);
-            transition: background-color 0.5s ease, box-shadow 0.5s ease;
+            transition: background-color 0.5s ease,
+                        box-shadow 0.5s ease;
             z-index: 2;
         }
 
-        /* Pull String (Chain) */
+        /* PULL STRING */
         .pull-string-wrapper {
             position: absolute;
             top: 50px;
@@ -173,7 +191,7 @@
             z-index: 5;
             transition: transform 0.2s ease;
         }
-        
+
         .pull-string-wrapper:hover {
             transform: translateY(5px);
         }
@@ -183,6 +201,7 @@
             height: 80px;
             background-color: #666;
         }
+
         .pull-string::after {
             content: '';
             position: absolute;
@@ -203,7 +222,7 @@
             font-weight: 600;
             white-space: nowrap;
             animation: pulseText 1.5s infinite;
-            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+            text-shadow: 0 0 10px rgba(57,255,20,0.5);
             background: rgba(0,0,0,0.8);
             padding: 4px 10px;
             border-radius: 4px;
@@ -211,12 +230,21 @@
         }
 
         @keyframes pulseText {
-            0% { opacity: 0.5; transform: scale(0.95); }
-            50% { opacity: 1; transform: scale(1.05); }
-            100% { opacity: 0.5; transform: scale(0.95); }
+            0% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
         }
 
-        /* Light Beam (Neon Green Cone) */
+        /* LIGHT BEAM */
         .light-beam {
             position: absolute;
             top: 80px;
@@ -224,29 +252,34 @@
             height: 0;
             border-left: 350px solid transparent;
             border-right: 350px solid transparent;
-            border-top: 600px solid rgba(57, 255, 20, 0.0); 
+            border-top: 600px solid rgba(57,255,20,0);
             transition: border-top-color 1s ease;
             z-index: 1;
             pointer-events: none;
             filter: blur(15px);
         }
 
-        /* ======= WHEN LIGHT IS ON ======= */
+        /* LIGHT ON */
         body.light-on .lamp-shade {
-            box-shadow: inset 0 -15px 25px rgba(0,0,0,0.8), 0 -10px 40px rgba(57, 255, 20, 0.2);
+            box-shadow: inset 0 -15px 25px rgba(0,0,0,0.8),
+                        0 -10px 40px rgba(57,255,20,0.2);
         }
+
         body.light-on .lamp-bulb {
             background-color: #fff;
-            box-shadow: 0 0 40px 15px var(--neon), 0 0 80px 30px rgba(57, 255, 20, 0.4);
+            box-shadow: 0 0 40px 15px var(--neon),
+                        0 0 80px 30px rgba(57,255,20,0.4);
         }
+
         body.light-on .light-beam {
-            border-top-color: rgba(57, 255, 20, 0.1);
+            border-top-color: rgba(57,255,20,0.1);
         }
+
         body.light-on .click-text {
             display: none;
         }
 
-        /* ================= LOGIN FORM ================= */
+        /* LOGIN FORM */
         .form-side {
             flex: 1;
             display: flex;
@@ -256,27 +289,26 @@
         }
 
         .login-container {
-            background: rgba(5, 7, 5, 0.7);
+            background: rgba(5,7,5,0.7);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(57, 255, 20, 0.2);
+            border: 1px solid rgba(57,255,20,0.2);
             padding: 40px;
             border-radius: 20px;
             width: 420px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.8);
             z-index: 100;
-            
             opacity: 0;
             transform: translateY(40px) scale(0.95);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none; 
+            transition: all 0.8s cubic-bezier(0.175,0.885,0.32,1.275);
+            pointer-events: none;
         }
 
         body.light-on .login-container {
             opacity: 1;
             transform: translateY(0) scale(1);
             pointer-events: auto;
-            border: 1px solid rgba(57, 255, 20, 0.3);
-            box-shadow: 0 0 30px rgba(57, 255, 20, 0.05);
+            border: 1px solid rgba(57,255,20,0.3);
+            box-shadow: 0 0 30px rgba(57,255,20,0.05);
         }
 
         .login-container h2 {
@@ -312,8 +344,8 @@
         .input-group input {
             width: 100%;
             padding: 15px 15px 15px 45px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.08);
             border-radius: 8px;
             color: #fff;
             font-size: 1rem;
@@ -321,14 +353,16 @@
             transition: 0.3s;
         }
 
-        .input-group input::placeholder { color: #555; }
+        .input-group input::placeholder {
+            color: #555;
+        }
 
         .input-group input:focus {
             border-color: var(--neon);
-            background: rgba(0, 0, 0, 0.8);
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+            background: rgba(0,0,0,0.8);
+            box-shadow: 0 0 15px rgba(57,255,20,0.2);
         }
-        
+
         .input-group input:focus + i,
         .input-group input:not(:placeholder-shown) + i {
             color: var(--neon);
@@ -346,7 +380,7 @@
             cursor: pointer;
             transition: 0.3s;
             margin-top: 10px;
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+            box-shadow: 0 0 15px rgba(57,255,20,0.1);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -354,7 +388,7 @@
         .btn-login:hover {
             background: var(--neon);
             color: #000;
-            box-shadow: 0 0 30px rgba(57, 255, 20, 0.5);
+            box-shadow: 0 0 30px rgba(57,255,20,0.5);
             transform: translateY(-2px);
         }
 
@@ -374,10 +408,10 @@
 
         .register-link a:hover {
             text-decoration: underline;
-            text-shadow: 0 0 10px rgba(164, 255, 79, 0.5);
+            text-shadow: 0 0 10px rgba(164,255,79,0.5);
         }
-        
-        /* ================= MOBILE RESPONSIVE FIX ================= */
+
+        /* MOBILE RESPONSIVE */
         @media (max-width: 991px) {
             .main-wrapper {
                 flex-direction: column;
@@ -385,6 +419,7 @@
                 padding-top: 80px;
                 padding-bottom: 40px;
             }
+
             .lamp-side {
                 flex: none;
                 height: auto;
@@ -392,53 +427,213 @@
                 align-items: flex-start;
                 margin-bottom: 20px;
             }
+
             .lamp-container {
                 transform: scale(0.8);
                 margin-top: -20px;
             }
+
             .light-beam {
                 border-left-width: 180px;
                 border-right-width: 180px;
                 border-top-width: 350px;
             }
+
             .form-side {
                 flex: none;
                 padding: 0 15px;
                 width: 100%;
             }
-            .login-container { 
-                width: 100%; 
+
+            .login-container {
+                width: 100%;
                 padding: 30px 20px;
             }
-            .top-logo { 
-                top: 20px; 
-                left: 20px; 
-                font-size: 1.5rem; 
+
+            .top-logo {
+                top: 20px;
+                left: 20px;
+                font-size: 1.5rem;
                 z-index: 9999;
+            }
+        }
+
+        /* EDUPLUS HOME-PAGE COLOUR THEME */
+        :root {
+            --bg-main: #050705;
+            --neon: #f2b632;
+            --lime: #d99a12;
+            --text-main: #1d2b3c;
+            --text-muted: #687789;
+            --navy: #102b4e;
+            --deep: #0b203b;
+            --blue: #1d568b;
+            --soft: #f4f7fb;
+            --line: #e6ebf1;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            background-image:
+                linear-gradient(rgba(242,182,50,.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(242,182,50,.035) 1px, transparent 1px);
+        }
+
+        body.light-on {
+            background-color: var(--soft);
+        }
+
+        .top-logo {
+            color: #fff;
+        }
+
+        .top-logo i {
+            color: var(--gold, #f2b632);
+            text-shadow: 0 0 10px rgba(242,182,50,.45);
+        }
+
+        body.light-on .top-logo {
+            color: var(--navy);
+        }
+
+        .particle {
+            background: var(--neon);
+        }
+
+        .pull-string::after {
+            background-color: var(--neon);
+            box-shadow: 0 0 15px rgba(242,182,50,.75);
+        }
+
+        .click-text {
+            color: var(--neon);
+            border-color: rgba(242,182,50,.4);
+            text-shadow: 0 0 10px rgba(242,182,50,.35);
+        }
+
+        .light-beam {
+            border-top-color: rgba(242,182,50,0);
+        }
+
+        body.light-on .lamp-shade {
+            box-shadow: inset 0 -15px 25px rgba(0,0,0,.8),
+                        0 -10px 40px rgba(242,182,50,.2);
+        }
+
+        body.light-on .lamp-bulb {
+            background-color: #fff8df;
+            box-shadow: 0 0 40px 15px rgba(242,182,50,.9),
+                        0 0 80px 30px rgba(242,182,50,.35);
+        }
+
+        body.light-on .light-beam {
+            border-top-color: rgba(242,182,50,.12);
+        }
+
+        .login-container {
+            background: rgba(255,255,255,.96);
+            border: 1px solid var(--line);
+            box-shadow: 0 25px 55px rgba(16,43,78,.13);
+        }
+
+        body.light-on .login-container {
+            background: #fff;
+            border: 1px solid var(--line);
+            box-shadow: 0 22px 50px rgba(16,43,78,.12);
+        }
+
+        .login-container h2 {
+            color: var(--navy);
+        }
+
+        .login-container p {
+            color: var(--text-muted);
+        }
+
+        .input-group i {
+            color: #7b8998;
+        }
+
+        .input-group input {
+            background: #f4f7fb;
+            border: 1px solid #e2e8f0;
+            color: var(--ink, #1d2b3c);
+        }
+
+        .input-group input::placeholder {
+            color: #8995a3;
+        }
+
+        .input-group input:focus {
+            border-color: var(--neon);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(242,182,50,.18);
+        }
+
+        .input-group input:focus + i,
+        .input-group input:not(:placeholder-shown) + i {
+            color: var(--gold-dark, #d99a12);
+        }
+
+        .btn-login {
+            background: var(--neon);
+            color: var(--deep);
+            border: 1px solid var(--neon);
+            box-shadow: 0 8px 18px rgba(242,182,50,.2);
+        }
+
+        .btn-login:hover {
+            background: #ffd16a;
+            color: var(--deep);
+            box-shadow: 0 10px 24px rgba(242,182,50,.28);
+        }
+
+        .register-link {
+            color: var(--text-muted);
+        }
+
+        .register-link a {
+            color: var(--blue);
+        }
+
+        .register-link a:hover {
+            color: var(--gold-dark, #d99a12);
+            text-shadow: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .particle,
+            .click-text {
+                animation: none;
             }
         }
     </style>
 </head>
+
 <body id="bodyElement">
 
-    <!-- Particles Background -->
+    <!-- PARTICLES BACKGROUND -->
     <div class="particles-container" id="particles"></div>
 
-    <!-- Corner Logo -->
-    <a href="index.html" class="top-logo"><i class="fas fa-graduation-cap"></i> EduPlus</a>
+    <!-- CORNER LOGO -->
+    <a href="index.html" class="top-logo">
+        <i class="fas fa-graduation-cap"></i> EduPlus
+    </a>
 
     <div class="main-wrapper">
-        
+
         <!-- LEFT: LAMP -->
         <div class="lamp-side">
             <div class="lamp-container">
                 <div class="lamp-shade">
                     <div class="lamp-bulb"></div>
+
                     <div class="pull-string-wrapper" id="pullString">
                         <div class="pull-string"></div>
                         <div class="click-text">Click to turn on</div>
                     </div>
                 </div>
+
                 <div class="light-beam"></div>
                 <div class="lamp-pole"></div>
                 <div class="lamp-base"></div>
@@ -450,61 +645,69 @@
             <div class="login-container">
                 <h2>Welcome Back</h2>
                 <p>Enter your details to access your account</p>
-                
+
                 <form id="loginForm" onsubmit="handleLogin(event)">
                     <div class="input-group">
                         <input type="email" id="email" placeholder="Email Address" required>
                         <i class="fas fa-envelope"></i>
                     </div>
+
                     <div class="input-group">
                         <input type="password" id="password" placeholder="Password" required>
                         <i class="fas fa-lock"></i>
                     </div>
-                    
-                    <button type="submit" class="btn-login" id="loginBtn">Sign In</button>
+
+                    <button type="submit" class="btn-login" id="loginBtn">
+                        Sign In
+                    </button>
                 </form>
 
                 <div class="register-link">
-                    Don't have an account? <a href="register.html">Register here</a>
+                    Don't have an account?
+                    <a href="register.html">Register here</a>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- JavaScript Logic -->
+    <!-- JAVASCRIPT -->
     <script>
-        // --- Generate Particles ---
+        // Generate Particles
         const particlesContainer = document.getElementById('particles');
-        for(let i=0; i<15; i++) {
+
+        for (let i = 0; i < 15; i++) {
             let particle = document.createElement('div');
             particle.classList.add('particle');
+
             let size = Math.random() * 4 + 1;
+
             particle.style.width = `${size}px`;
             particle.style.height = `${size}px`;
             particle.style.left = `${Math.random() * 100}%`;
             particle.style.top = `${Math.random() * 100}%`;
             particle.style.animationDelay = `${Math.random() * 5}s`;
             particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+
             particlesContainer.appendChild(particle);
         }
 
         const pullString = document.getElementById('pullString');
         const body = document.body;
 
-        // 1. Manual Click
+        // Manual Click
         pullString.addEventListener('click', () => {
             body.classList.toggle('light-on');
         });
 
-        // 2. Scroll Auto Light
+        // Scroll Auto Light
         window.addEventListener('scroll', () => {
             body.classList.add('light-on');
         }, { once: true });
 
-        // 3. Mobile Touch Auto Light
+        // Mobile Touch Auto Light
         window.addEventListener('touchstart', () => {
-            if(!body.classList.contains('light-on')) {
+            if (!body.classList.contains('light-on')) {
                 body.classList.add('light-on');
             }
         }, { once: true });
@@ -512,8 +715,9 @@
         // Fake Login
         function handleLogin(event) {
             event.preventDefault();
+
             const btn = document.getElementById('loginBtn');
-            
+
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
             btn.disabled = true;
             btn.style.color = '#fff';
@@ -522,7 +726,7 @@
                 btn.innerHTML = '<i class="fas fa-check"></i> Success!';
                 btn.style.background = 'var(--neon)';
                 btn.style.color = '#000';
-                
+
                 localStorage.setItem('eduplus_user', JSON.stringify({
                     name: "Mariam Khan",
                     school_name: "Al-Noor Public School"
@@ -531,8 +735,10 @@
                 setTimeout(() => {
                     window.location.href = "dashboard.html";
                 }, 1000);
+
             }, 1500);
         }
     </script>
+
 </body>
 </html>
