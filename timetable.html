@@ -3,438 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Timetable - EduPlus</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<meta name="description" content="Manage your school timetable with EduPlus Smart School Management.">
+<title>Timetable | EduPlus</title>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 <style>
-    /* === THEME VARIABLES === */
-    :root {
-        --primary: #6D28D9;
-        --primary-hover: #5B21B6;
-        --secondary: #F97316;
-        --bg-color: #F8FAFC;
-        --text-color: #1E293B;
-        --card-bg: #FFFFFF;
-        --border-color: #E2E8F0;
-        --sidebar-bg: #FFFFFF;
-        --sidebar-hover: #F1F5F9;
-        --table-row-hover: #f8fafc;
-        --muted-text: #64748b;
-    }
-
-    body.dark-mode {
-        --bg-color: #0F172A;
-        --text-color: #F1F5F9;
-        --card-bg: #1E293B;
-        --border-color: #334155;
-        --primary: #8B5CF6;
-        --primary-hover: #7C3AED;
-        --secondary: #FB923C;
-        --sidebar-bg: #1E293B;
-        --sidebar-hover: #334155;
-        --table-row-hover: #334155;
-        --muted-text: #94a3b8;
-    }
-
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        margin: 0;
-        overflow-x: hidden;
-        transition: all 0.3s ease;
-    }
-
-    /* === SIDEBAR === */
-    .sidebar {
-        width: 260px; height: 100vh; background-color: var(--sidebar-bg);
-        border-right: 1px solid var(--border-color); position: fixed;
-        top: 0; left: 0; z-index: 1000; transition: all 0.3s ease;
-        display: flex; flex-direction: column;
-    }
-    .sidebar-brand {
-        padding: 20px; font-size: 1.5rem; font-weight: 800;
-        color: var(--primary); text-decoration: none;
-        display: flex; align-items: center; gap: 10px;
-        border-bottom: 1px solid var(--border-color);
-    }
-    .sidebar-menu { list-style: none; padding: 15px 10px; margin: 0; flex: 1; overflow-y: auto; }
-    .sidebar-menu li { margin-bottom: 5px; }
-    .sidebar-menu a {
-        display: flex; align-items: center; gap: 15px; padding: 12px 15px;
-        color: var(--text-color); text-decoration: none; border-radius: 10px;
-        font-weight: 500; transition: 0.2s;
-    }
-    .sidebar-menu a:hover { background-color: var(--sidebar-hover); color: var(--primary); }
-    .sidebar-menu a.active { background-color: var(--primary); color: white; }
-    .sidebar-menu a i { width: 20px; text-align: center; }
-
-    /* === MAIN CONTENT === */
-    .main-content { margin-left: 260px; padding: 20px; transition: all 0.3s ease; min-height: 100vh; }
-
-    /* === TOP NAVBAR === */
-    .top-navbar {
-        background-color: var(--card-bg); border-radius: 15px; padding: 15px 25px;
-        display: flex; justify-content: space-between; align-items: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
-        margin-bottom: 25px;
-    }
-    .school-info h4 { margin: 0; font-weight: 700; font-size: 1.2rem; }
-    .school-info p { margin: 0; font-size: 0.85rem; color: var(--muted-text); }
-    .top-nav-right { display: flex; align-items: center; gap: 20px; }
-    .icon-btn { background: transparent; border: none; font-size: 1.2rem; color: var(--text-color); cursor: pointer; position: relative; }
-    .icon-btn:hover { color: var(--primary); }
-    .user-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 10px; border-radius: 20px; transition: 0.2s; }
-    .user-profile:hover { background-color: var(--sidebar-hover); }
-    .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
-    .mobile-toggle { display: none; background: transparent; border: none; font-size: 1.5rem; color: var(--text-color); cursor: pointer; }
-
-    /* === PAGE CONTENT === */
-    .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
-    .page-header h2 { font-weight: 800; margin: 0; }
-
-    .btn-upload {
-        background-color: var(--secondary); color: white; border: none;
-        padding: 10px 20px; border-radius: 10px; font-weight: 600;
-        display: flex; align-items: center; gap: 8px; transition: 0.3s;
-    }
-    .btn-upload:hover { background-color: #EA580C; transform: translateY(-2px); }
-
-    .form-card {
-        background-color: var(--card-bg); border-radius: 15px; padding: 25px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
-        margin-bottom: 25px;
-    }
-
-    .form-label { color: var(--text-color); font-weight: 600; }
-    .form-control, .form-select {
-        padding: 12px; border-radius: 10px; border: 1px solid var(--border-color);
-        background-color: var(--bg-color); color: var(--text-color);
-    }
-    .form-control:focus, .form-select:focus {
-        border-color: var(--primary); box-shadow: none;
-        background-color: var(--bg-color); color: var(--text-color);
-    }
-    .form-control::placeholder { color: var(--muted-text); }
-
-    .btn-add-schedule {
-        background-color: var(--primary); color: white; border: none;
-        padding: 12px 20px; border-radius: 10px; font-weight: 700;
-        width: 100%; transition: 0.3s;
-    }
-    .btn-add-schedule:hover { background-color: var(--primary-hover); }
-
-    /* === TIMETABLE TABLE === */
-    .table-card {
-        background-color: var(--card-bg); border-radius: 15px; padding: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
-    }
-
-    /* ===== DARK MODE TABLE FIX ===== */
-    .table {
-        margin: 0;
-        --bs-table-color: var(--text-color);
-        --bs-table-bg: transparent;
-        --bs-table-border-color: var(--border-color);
-        --bs-table-hover-color: var(--text-color);
-        --bs-table-hover-bg: var(--table-row-hover);
-        color: var(--text-color) !important;
-    }
-    .table thead th {
-        background-color: var(--bg-color) !important;
-        border-bottom: 2px solid var(--border-color) !important;
-        color: var(--text-color) !important;
-        font-weight: 700; padding: 15px;
-    }
-    .table tbody td {
-        padding: 15px; vertical-align: middle;
-        background-color: transparent !important;
-        border-bottom: 1px solid var(--border-color) !important;
-        color: var(--text-color) !important;
-    }
-    .table tbody tr:hover { background-color: var(--table-row-hover) !important; }
-    .table tbody tr:hover td {
-        color: var(--text-color) !important;
-        background-color: transparent !important;
-    }
-    /* ================================ */
-
-    .class-badge { background-color: rgba(109, 40, 217, 0.15); color: var(--primary); padding: 5px 12px; border-radius: 20px; font-weight: 600; display: inline-block; }
-    .subject-badge { background-color: rgba(249, 115, 22, 0.15); color: var(--secondary); padding: 5px 12px; border-radius: 20px; font-weight: 600; display: inline-block; }
-
-    .action-btn { background: transparent; border: none; font-size: 1rem; cursor: pointer; padding: 8px; border-radius: 8px; transition: 0.2s; }
-    .btn-delete { color: #dc2626; }
-    .btn-delete:hover { background-color: rgba(220, 38, 38, 0.15); }
-
-    /* === RESPONSIVE === */
-    @media (max-width: 991px) {
-        .sidebar { left: -260px; }
-        .sidebar.active { left: 0; }
-        .main-content { margin-left: 0; }
-        .mobile-toggle { display: block; }
-    }
+:root{--navy:#102b4e;--deep:#0b203b;--blue:#1d568b;--gold:#f2b632;--gold-dark:#d99a12;--ink:#1d2b3c;--muted:#687789;--soft:#f4f7fb;--line:#e6ebf1;--green:#176b4a;--white:#fff;--sidebar-width:264px;--shadow:0 12px 35px rgba(16,43,78,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--soft);color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden;transition:background .25s,color .25s}a{text-decoration:none}button{font-family:inherit}
+.sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar-width);background:var(--white);border-right:1px solid var(--line);z-index:1050;display:flex;flex-direction:column;transition:transform .3s;box-shadow:8px 0 30px rgba(16,43,78,.035)}
+.brand{display:flex;align-items:center;gap:12px;padding:24px 22px 21px;border-bottom:1px solid var(--line);color:var(--navy)}.brand-icon{width:43px;height:43px;border-radius:13px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-size:22px}.brand-name{font-size:23px;font-weight:800;line-height:1}.brand-sub{display:block;color:#78879a;font-size:8px;letter-spacing:1.55px;font-weight:800;margin-top:6px}
+.menu-label{padding:24px 24px 9px;color:#9aa6b4;font-size:10px;font-weight:800;letter-spacing:1.8px}.side-menu{list-style:none;margin:0;padding:0 13px;overflow-y:auto;flex:1}.side-menu li{margin:4px 0}.side-menu a{display:flex;align-items:center;gap:13px;padding:12px 14px;border-radius:11px;color:#526176;font-size:13px;font-weight:700;transition:.2s}.side-menu a i{width:19px;text-align:center;font-size:15px;color:#8391a2}.side-menu a:hover{background:#f7f4eb;color:var(--navy)}.side-menu a.active{background:var(--navy);color:#fff;box-shadow:0 7px 18px rgba(16,43,78,.16)}.side-menu a.active i{color:var(--gold)}.side-bottom{padding:15px 17px 20px;border-top:1px solid var(--line)}.help-card{padding:15px;border-radius:14px;background:linear-gradient(135deg,#102b4e,#1d568b);color:#fff}.help-card i{color:var(--gold);font-size:19px}.help-card strong{display:block;font-size:12px;margin:9px 0 4px}.help-card p{font-size:10px;color:#d5e1ed;margin:0 0 10px;line-height:1.5}.help-card a{color:var(--gold);font-size:11px;font-weight:800}
+.main{margin-left:var(--sidebar-width);min-height:100vh;padding:25px 30px 35px;max-width:calc(100% - var(--sidebar-width))}.overlay{display:none;position:fixed;inset:0;background:rgba(8,24,43,.45);z-index:1040}.overlay.show{display:block}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:25px}.top-left{display:flex;align-items:center;gap:13px}.mobile-toggle{display:none;border:1px solid var(--line);background:#fff;color:var(--navy);width:42px;height:42px;border-radius:12px;font-size:17px}.breadcrumb-line{font-size:11px;color:#8996a5;margin-bottom:4px}.breadcrumb-line span{color:var(--gold-dark);font-weight:800}.school-name{color:var(--navy);font-size:16px;font-weight:800;margin:0}.top-right{display:flex;align-items:center;gap:12px}.date-chip{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:30px;padding:10px 14px;color:#627187;font-size:11px;font-weight:700}.date-chip i{color:var(--gold-dark)}.round-btn{width:41px;height:41px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--navy);display:grid;place-items:center;cursor:pointer}.profile{display:flex;align-items:center;gap:10px;padding:4px 9px 4px 4px;border-radius:30px;background:#fff;border:1px solid var(--line)}.avatar{width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:800}.profile-name{font-size:11px;font-weight:800;color:var(--navy)}.profile-role{font-size:9px;color:#8a97a7;margin-top:3px}
+.hero{position:relative;overflow:hidden;border-radius:20px;padding:27px 30px;background:linear-gradient(110deg,#102b4e,#173e68 64%,#1d568b);color:#fff;box-shadow:0 16px 35px rgba(16,43,78,.13);margin-bottom:20px}.hero:after{content:"";position:absolute;width:230px;height:230px;border:1px solid rgba(255,255,255,.13);border-radius:50%;right:40px;top:-135px;box-shadow:0 0 0 30px rgba(255,255,255,.025),0 0 0 60px rgba(255,255,255,.02)}.hero-inner{position:relative;z-index:1;max-width:690px}.kicker{color:#f7d47e;font-size:10px;letter-spacing:2px;font-weight:800;margin-bottom:8px}.hero h1{font-family:"Playfair Display",serif;font-size:clamp(27px,3vw,37px);font-weight:700;margin:0 0 8px}.hero p{font-size:12px;line-height:1.7;color:#d8e4ef;max-width:570px;margin:0}.hero-icon{position:absolute;right:9%;top:50%;transform:translateY(-50%);width:105px;height:105px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);display:grid;place-items:center;color:var(--gold);font-size:43px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-bottom:22px}.stat{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px 17px;box-shadow:0 5px 18px rgba(16,43,78,.025)}.stat-icon{width:36px;height:36px;border-radius:11px;display:grid;place-items:center}.blue-bg{background:#eaf2fa;color:#1d568b}.gold-bg{background:#fff4d9;color:#b77d06}.green-bg{background:#eaf6ef;color:#258158}.stat-label{font-size:10px;color:#7d8a99;font-weight:700;margin-top:10px}.stat-number{font-size:25px;color:var(--navy);font-weight:800;line-height:1.2}.stat-note{font-size:9px;color:#8996a5;margin-top:3px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:23px 0 13px}.section-head h2{color:var(--navy);font-size:16px;font-weight:800;margin:0}.section-head p{font-size:10px;color:#8a97a7;margin:4px 0 0}.btn-gold{border:0;display:inline-flex;align-items:center;gap:9px;padding:11px 17px;border-radius:30px;background:var(--gold);color:var(--deep);font-size:11px;font-weight:800;transition:.2s}.btn-gold:hover{background:#ffd16a;color:var(--deep);transform:translateY(-2px)}.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:10px 15px;border:1px solid var(--line);border-radius:30px;background:#fff;color:var(--navy);font-size:11px;font-weight:800}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:15px;padding:13px;margin-bottom:14px}.toolbar-left,.toolbar-right{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.filter-select,.search-input{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:#526176;font:inherit;font-size:11px;outline:none}.search-wrap{position:relative;min-width:210px}.search-wrap i{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#93a0af;font-size:12px}.search-input{padding-left:35px;width:260px}.filter-select:focus,.search-input:focus{border-color:var(--gold-dark);box-shadow:0 0 0 3px rgba(242,182,50,.15)}
+.week-strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;margin-bottom:15px}.day-tab{border:1px solid var(--line);border-radius:13px;background:#fff;padding:11px 8px;text-align:center;cursor:pointer;transition:.2s;color:#627187}.day-tab strong{display:block;font-size:11px;color:var(--navy)}.day-tab span{display:block;font-size:9px;color:#8996a5;margin-top:4px}.day-tab.active{background:var(--navy);border-color:var(--navy);box-shadow:0 6px 16px rgba(16,43,78,.14)}.day-tab.active strong,.day-tab.active span{color:#fff}.day-tab:hover:not(.active){border-color:#e8c56d;background:#fffaf0}
+.table-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:5px 17px 12px;box-shadow:0 5px 18px rgba(16,43,78,.025)}.table-wrap{overflow-x:auto}.schedule-table{width:100%;border-collapse:collapse;min-width:760px}.schedule-table th{text-align:left;padding:15px 11px;border-bottom:1px solid var(--line);font-size:9px;letter-spacing:.7px;color:#8996a5;font-weight:800;white-space:nowrap}.schedule-table td{padding:13px 11px;border-bottom:1px solid #f0f2f5;font-size:11px;color:#526176;vertical-align:middle}.schedule-table tr:last-child td{border-bottom:0}.schedule-table tbody tr:hover{background:#fbfcfe}.period-badge{display:inline-block;padding:6px 9px;border-radius:8px;background:#eaf2fa;color:#1d568b;font-size:9px;font-weight:800}.class-badge{display:inline-block;padding:6px 10px;border-radius:20px;background:#fff4d9;color:#936706;font-size:9px;font-weight:800}.teacher-cell{display:flex;align-items:center;gap:8px}.teacher-avatar{width:29px;height:29px;border-radius:9px;background:#eaf2fa;color:var(--navy);display:grid;place-items:center;font-size:10px;font-weight:800}.subject-name{color:var(--navy);font-weight:800}.action-btn{width:30px;height:30px;border:0;border-radius:9px;background:#f1f5f9;color:#56708c;display:inline-grid;place-items:center;cursor:pointer;margin-right:4px}.action-btn:hover{background:#eaf2fa;color:var(--navy)}.action-btn.delete:hover{background:#fff0ef;color:#c04c48}.empty-state{text-align:center;padding:38px 15px;color:#8996a5}.empty-state i{font-size:27px;color:#c2ccd7;margin-bottom:10px}.empty-state strong{display:block;color:var(--navy);font-size:13px;margin-bottom:4px}.empty-state p{font-size:10px;margin:0}
+.tip-card{display:flex;gap:12px;align-items:flex-start;background:#fffaf0;border:1px solid #f3e3b9;border-radius:13px;padding:13px 15px;margin-top:14px}.tip-card i{color:#bd850c;margin-top:2px}.tip-card strong{display:block;color:var(--navy);font-size:11px}.tip-card p{margin:3px 0 0;color:#7e8791;font-size:10px;line-height:1.5}.footer-note{text-align:center;color:#9aa5b2;font-size:9px;padding:24px 0 4px}
+.modal-content{border:1px solid var(--line);border-radius:17px;background:#fff;color:var(--ink)}.modal-header,.modal-footer{border-color:var(--line)}.modal-title{font-family:"Playfair Display",serif;color:var(--navy);font-weight:700}.form-label{font-size:11px;font-weight:800;color:var(--navy)}.form-control,.form-select{padding:11px 12px;border:1px solid var(--line);border-radius:10px;font-family:"DM Sans",sans-serif;font-size:12px}.form-control:focus,.form-select:focus{border-color:var(--gold-dark);box-shadow:0 0 0 3px rgba(242,182,50,.15)}
+body.dark-mode{--soft:#0b203b;--white:#102b4e;--ink:#eaf0f6;--line:#29415c;color:#eaf0f6}body.dark-mode .sidebar,body.dark-mode .stat,body.dark-mode .toolbar,body.dark-mode .table-card,body.dark-mode .date-chip,body.dark-mode .profile,body.dark-mode .round-btn,body.dark-mode .mobile-toggle,body.dark-mode .filter-select,body.dark-mode .search-input,body.dark-mode .modal-content,body.dark-mode .day-tab,body.dark-mode .btn-outline{background:#102b4e;border-color:#29415c;color:#eaf0f6}body.dark-mode .brand,body.dark-mode .school-name,body.dark-mode .section-head h2,body.dark-mode .stat-number,body.dark-mode .subject-name,body.dark-mode .empty-state strong,body.dark-mode .modal-title,body.dark-mode .form-label{color:#f2f6fb}body.dark-mode .side-menu a{color:#c1cedb}body.dark-mode .side-menu a.active{background:#1d568b;color:#fff}body.dark-mode .side-menu a:hover{background:#1b3b5e}body.dark-mode .stat-label,body.dark-mode .stat-note,body.dark-mode .section-head p,body.dark-mode .result-count{color:#afbdcb}body.dark-mode .schedule-table td{color:#c1cedb;border-color:#29415c}body.dark-mode .schedule-table th{color:#aab9c8;border-color:#29415c}body.dark-mode .schedule-table tbody tr:hover{background:#153657}body.dark-mode .day-tab strong{color:#eaf0f6}body.dark-mode .day-tab span{color:#afbdcb}body.dark-mode .day-tab.active{background:#1d568b}body.dark-mode .day-tab.active strong,body.dark-mode .day-tab.active span{color:#fff}body.dark-mode .teacher-avatar{background:#1b3b5e;color:#f2b632}body.dark-mode .action-btn{background:#1b3b5e;color:#d9e4ef}body.dark-mode .tip-card{background:#1c3550;border-color:#42516a}body.dark-mode .tip-card strong{color:#f2f6fb}body.dark-mode .tip-card p{color:#bfccda}body.dark-mode .form-control,body.dark-mode .form-select{background:#0b203b;color:#eaf0f6;border-color:#29415c}body.dark-mode .btn-close{filter:invert(1)}
+@media(max-width:1100px){.main{padding:22px}.hero-icon{right:5%;opacity:.7}}
+@media(max-width:900px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0;max-width:100%;padding:18px}.mobile-toggle{display:grid;place-items:center}}
+@media(max-width:650px){.main{padding:13px}.topbar{align-items:flex-start;margin-bottom:17px}.date-chip{display:none}.profile-name,.profile-role{display:none}.top-right{gap:7px}.hero{padding:23px 20px}.hero h1{font-size:28px;max-width:250px}.hero p{max-width:270px}.hero-icon{width:75px;height:75px;font-size:30px;right:12px;opacity:.45}.stats{grid-template-columns:1fr 1fr;gap:9px}.stat{padding:12px}.stat-number{font-size:22px}.toolbar-left,.toolbar-right{width:100%}.search-wrap,.search-input{width:100%;min-width:100%}.filter-select{flex:1;min-width:0}.week-strip{grid-template-columns:repeat(3,minmax(0,1fr))}.section-head{align-items:flex-start}.section-head .btn-gold{padding:9px 12px;font-size:10px}}
+@media print{.sidebar,.topbar,.hero,.stats,.section-head,.toolbar,.tip-card,.footer-note,.action-col{display:none!important}.main{margin:0;max-width:100%;padding:0}.table-card{border:0;box-shadow:none}.schedule-table{min-width:0}.schedule-table th,.schedule-table td{color:#111!important}}
 </style>
 </head>
 <body>
-
-    <!-- === SIDEBAR === -->
-    <div class="sidebar" id="sidebar">
-        <a href="dashboard.html" class="sidebar-brand"><i class="fas fa-graduation-cap"></i> EduPlus</a>
-        <ul class="sidebar-menu">
-            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="find-substitute.html"><i class="fas fa-search"></i> Find Substitute</a></li>
-            <li><a href="teachers.html"><i class="fas fa-users"></i> All Teachers</a></li>
-            <li><a href="timetable.html" class="active"><i class="fas fa-calendar-alt"></i> Timetable</a></li>
-            <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports & Analytics</a></li>
-            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
-            <li class="mt-4"><a href="login.html" style="color: #dc2626;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-        </ul>
-    </div>
-
-    <!-- === MAIN CONTENT === -->
-    <div class="main-content">
-
-        <!-- Top Navbar -->
-        <div class="top-navbar">
-            <div class="d-flex align-items-center gap-3">
-                <button class="mobile-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-                <div class="school-info">
-                    <h4>Manage Timetable</h4>
-                    <p>Add classes manually or upload your schedule</p>
-                </div>
-            </div>
-            <div class="top-nav-right">
-                <button class="icon-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
-                <div class="user-profile">
-                    <div class="user-avatar" id="userAvatar">M</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Page Header & Upload Button -->
-        <div class="page-header">
-            <h2>Class Schedule</h2>
-            <button class="btn-upload" onclick="uploadFileAlert()">
-                <i class="fas fa-file-upload"></i> Upload Excel/PDF
-            </button>
-        </div>
-
-        <!-- Manual Entry Form -->
-        <div class="form-card">
-            <h5 class="fw-bold mb-4"><i class="fas fa-plus-circle me-2" style="color: var(--primary);"></i> Add Class Manually</h5>
-            <form id="timetableForm" onsubmit="addToTimetable(event)">
-                <div class="row g-3">
-                    <div class="col-md-3">
-                        <label class="form-label">Day</label>
-                        <select class="form-select" id="day" required>
-                            <option value="Monday">Monday</option>
-                            <option value="Tuesday">Tuesday</option>
-                            <option value="Wednesday">Wednesday</option>
-                            <option value="Thursday">Thursday</option>
-                            <option value="Friday">Friday</option>
-                            <option value="Saturday">Saturday</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label class="form-label">Period</label>
-                        <select class="form-select" id="period" required>
-                            <option value="1">1st</option>
-                            <option value="2">2nd</option>
-                            <option value="3">3rd</option>
-                            <option value="4">4th</option>
-                            <option value="5">5th</option>
-                            <option value="6">6th</option>
-                            <option value="7">7th</option>
-                            <option value="8">8th</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Class</label>
-                        <input type="text" class="form-control" id="class" placeholder="e.g. 10-A" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Subject</label>
-                        <input type="text" class="form-control" id="subject" placeholder="e.g. Mathematics" required>
-                    </div>
-                    <div class="col-md-8">
-                        <label class="form-label">Teacher</label>
-                        <select class="form-select" id="teacher" required>
-                            <option value="" disabled selected>Select Teacher</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 d-flex align-items-end">
-                        <button type="submit" class="btn-add-schedule">
-                            <i class="fas fa-plus me-2"></i> Add to Schedule
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Timetable Data Table -->
-        <div class="table-card">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Day</th>
-                            <th>Period</th>
-                            <th>Class</th>
-                            <th>Subject</th>
-                            <th>Teacher</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="timetableBody">
-                        <!-- Data will be loaded here by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        // === THEME TOGGLE ===
-        function toggleTheme() {
-            const body = document.body;
-            const icon = document.getElementById('theme-icon');
-            body.classList.toggle('dark-mode');
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('eduplus_theme', 'dark');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                localStorage.setItem('eduplus_theme', 'light');
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
-        }
-
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-        }
-
-        // === LOCAL STORAGE DATA ===
-        let timetableData = [];
-        let teachersData = [];
-
-        // === LOAD TEACHERS FOR DROPDOWN ===
-        function loadTeachersDropdown() {
-            const savedTeachers = localStorage.getItem('eduplus_teachers');
-            if (savedTeachers) {
-                teachersData = JSON.parse(savedTeachers);
-            } else {
-                teachersData = [
-                    { name: "Mr. Ahmed Ali", subject: "Mathematics" },
-                    { name: "Ms. Fatima Khan", subject: "English" }
-                ];
-            }
-
-            const dropdown = document.getElementById('teacher');
-            dropdown.innerHTML = '<option value="" disabled selected>Select Teacher</option>';
-
-            teachersData.forEach(t => {
-                dropdown.innerHTML += `<option value="${t.name}">${t.name} (${t.subject})</option>`;
-            });
-        }
-
-        // === RENDER TABLE ===
-        function renderTimetable() {
-            const savedTimetable = localStorage.getItem('eduplus_timetable');
-            if (savedTimetable) {
-                timetableData = JSON.parse(savedTimetable);
-            }
-
-            const tbody = document.getElementById('timetableBody');
-            tbody.innerHTML = '';
-
-            if (timetableData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4" style="color: var(--muted-text);">No schedule added yet. Add your first class above.</td></tr>';
-                return;
-            }
-
-            const dayOrder = { "Monday": 1, "Tuesday": 2, "Wednesday": 3, "Thursday": 4, "Friday": 5, "Saturday": 6 };
-            timetableData.sort((a, b) => {
-                if (dayOrder[a.day] !== dayOrder[b.day]) return dayOrder[a.day] - dayOrder[b.day];
-                return parseInt(a.period) - parseInt(b.period);
-            });
-
-            timetableData.forEach((entry, index) => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td><strong>${entry.day}</strong></td>
-                        <td>${entry.period}</td>
-                        <td><span class="class-badge">${entry.class}</span></td>
-                        <td><span class="subject-badge">${entry.subject}</span></td>
-                        <td>${entry.teacher}</td>
-                        <td>
-                            <button class="action-btn btn-delete" onclick="deleteEntry(${index})" title="Delete">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        // === ADD TO TIMETABLE ===
-        function addToTimetable(event) {
-            event.preventDefault();
-
-            const day = document.getElementById('day').value;
-            const period = document.getElementById('period').value;
-            const className = document.getElementById('class').value.trim();
-            const subject = document.getElementById('subject').value.trim();
-            const teacher = document.getElementById('teacher').value;
-
-            if (!className || !subject || !teacher) {
-                alert('Please fill all fields!');
-                return;
-            }
-
-            const newEntry = { day, period, class: className, subject, teacher };
-            timetableData.push(newEntry);
-            localStorage.setItem('eduplus_timetable', JSON.stringify(timetableData));
-
-            document.getElementById('timetableForm').reset();
-            loadTeachersDropdown();
-            renderTimetable();
-        }
-
-        // === DELETE ENTRY ===
-        function deleteEntry(index) {
-            if (confirm("Are you sure you want to remove this class from the timetable?")) {
-                timetableData.splice(index, 1);
-                localStorage.setItem('eduplus_timetable', JSON.stringify(timetableData));
-                renderTimetable();
-            }
-        }
-
-        // === UPLOAD ALERT ===
-        function uploadFileAlert() {
-            alert("Feature Coming Soon!\n\nYe feature hum Google Apps Script se connect karne ke baad activate karenge, jahan aap Excel/PDF upload karenge aur data khud bhar jayega.");
-        }
-
-        // === LOAD ON START ===
-        document.addEventListener("DOMContentLoaded", () => {
-            const savedTheme = localStorage.getItem('eduplus_theme');
-            const icon = document.getElementById('theme-icon');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            }
-
-            const userStr = localStorage.getItem('eduplus_user');
-            if (userStr) {
-                const user = JSON.parse(userStr);
-                document.getElementById('userAvatar').innerText = (user.name || "A").charAt(0).toUpperCase();
-            }
-
-            loadTeachersDropdown();
-            renderTimetable();
-        });
-    </script>
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+ <a class="brand" href="index.html"><span class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></span><span><span class="brand-name">EduPlus</span><span class="brand-sub">SMART SCHOOL MANAGEMENT</span></span></a>
+ <div class="menu-label">MAIN MENU</div>
+ <ul class="side-menu">
+  <li><a href="dashboard.html"><i class="fa-solid fa-grid-2"></i> Dashboard</a></li>
+  <li><a href="find-substitute.html"><i class="fa-solid fa-user-clock"></i> Find Substitute</a></li>
+  <li><a href="teachers.html"><i class="fa-solid fa-users"></i> All Teachers</a></li>
+  <li><a class="active" href="timetable.html"><i class="fa-regular fa-calendar-days"></i> Timetable</a></li>
+  <li><a href="reports.html"><i class="fa-solid fa-chart-pie"></i> Reports &amp; Analytics</a></li>
+  <li><a href="settings.html"><i class="fa-solid fa-sliders"></i> Settings</a></li>
+  <div class="menu-label">ACCOUNT</div>
+  <li><a href="index.html"><i class="fa-solid fa-globe"></i> Visit Website</a></li>
+  <li><a href="login.html" onclick="return confirmLogout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+ </ul>
+ <div class="side-bottom"><div class="help-card"><i class="fa-regular fa-envelope"></i><strong>Need assistance?</strong><p>Organise your school day with a clear weekly class schedule.</p><a href="index.html#contact">Contact Us <i class="fa-solid fa-arrow-right"></i></a></div></div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="top-left"><button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button><div><div class="breadcrumb-line">Workspace / <span>Timetable</span></div><h2 class="school-name" id="schoolName">Your School</h2></div></div><div class="top-right"><div class="date-chip"><i class="fa-regular fa-calendar"></i><span id="todayDate">Today</span></div><button class="round-btn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme"><i class="fa-regular fa-moon" id="theme-icon"></i></button><div class="profile"><div class="avatar" id="userAvatar">A</div><div><div class="profile-name" id="adminName">Administrator</div><div class="profile-role">School Administrator</div></div></div></div></header>
+<section class="hero"><div class="hero-inner"><div class="kicker">PLAN · ORGANISE · TEACH</div><h1>Your School, <span style="color:#f2b632">In Sync.</span></h1><p>Create and manage your weekly class timetable in one simple place. Add lessons, assign teachers, filter by day and print a clean schedule for your staff.</p></div><div class="hero-icon"><i class="fa-solid fa-calendar-days"></i></div></section>
+<section class="stats">
+ <article class="stat"><span class="stat-icon blue-bg"><i class="fa-solid fa-calendar-check"></i></span><div class="stat-label">Scheduled Classes</div><div class="stat-number" id="totalClasses">0</div><div class="stat-note">Entries in your timetable</div></article>
+ <article class="stat"><span class="stat-icon green-bg"><i class="fa-solid fa-user-tie"></i></span><div class="stat-label">Teachers Assigned</div><div class="stat-number" id="assignedTeachers">0</div><div class="stat-note">Different teachers on schedule</div></article>
+ <article class="stat"><span class="stat-icon gold-bg"><i class="fa-solid fa-layer-group"></i></span><div class="stat-label">Classes / Sections</div><div class="stat-number" id="classGroups">0</div><div class="stat-note">Different class groups scheduled</div></article>
+</section>
+<div class="section-head"><div><h2>Weekly Timetable</h2><p>Choose a day to view its lessons, or see the full week</p></div><div class="toolbar-right"><button class="btn-outline" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button><button class="btn-outline" onclick="exportCSV()"><i class="fa-solid fa-file-csv"></i> Export CSV</button></div></div>
+<div class="week-strip" id="weekStrip"></div>
+<section class="toolbar"><div class="toolbar-left"><div class="search-wrap"><i class="fa-solid fa-magnifying-glass"></i><input class="search-input" id="searchInput" type="search" placeholder="Search class, subject or teacher..." oninput="renderTimetable()"></div></div><div class="toolbar-right"><select class="filter-select" id="dayFilter" onchange="setDayFilter(this.value)"><option value="all">All days</option><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option></select><button class="btn-gold" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> Add Class</button></div></section>
+<section class="table-card"><div class="table-wrap"><table class="schedule-table"><thead><tr><th>DAY</th><th>PERIOD</th><th>CLASS</th><th>SUBJECT</th><th>TEACHER</th><th class="action-col">ACTIONS</th></tr></thead><tbody id="timetableBody"></tbody></table></div><div class="empty-state" id="emptyState" hidden><i class="fa-regular fa-calendar-xmark"></i><strong>No classes found</strong><p>Add a lesson or change your search and day filter.</p></div></section>
+<div class="tip-card"><i class="fa-regular fa-lightbulb"></i><div><strong>Keep your timetable up to date</strong><p>Choose the day, period, class, subject and teacher when adding a lesson. Your changes are saved in this browser on this device. They are not automatically shared with other devices.</p></div></div>
+<footer class="footer-note">© 2026 EduPlus · Smart School Management System · Developed by Mariam Khan</footer>
+</main>
+<div class="modal fade" id="classModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header px-4 py-3"><div><div class="kicker" style="color:#b77d06;margin:0 0 3px">CLASS SCHEDULE</div><h5 class="modal-title mb-0" id="modalTitle">Add a Class</h5></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body p-4"><form id="timetableForm" onsubmit="saveClass(event)"><input type="hidden" id="editIndex" value="-1"><div class="row g-3"><div class="col-md-6"><label class="form-label" for="day">Day *</label><select class="form-select" id="day" required><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option></select></div><div class="col-md-6"><label class="form-label" for="period">Period *</label><select class="form-select" id="period" required><option value="1">1st Period</option><option value="2">2nd Period</option><option value="3">3rd Period</option><option value="4">4th Period</option><option value="5">5th Period</option><option value="6">6th Period</option><option value="7">7th Period</option><option value="8">8th Period</option></select></div><div class="col-md-6"><label class="form-label" for="className">Class / Section *</label><input class="form-control" id="className" type="text" placeholder="e.g. 10-A" maxlength="35" required></div><div class="col-md-6"><label class="form-label" for="subject">Subject *</label><input class="form-control" id="subject" type="text" placeholder="e.g. Mathematics" maxlength="50" required></div><div class="col-12"><label class="form-label" for="teacher">Teacher *</label><select class="form-select" id="teacher" required><option value="">Select a teacher</option></select><div class="form-text" id="teacherHint">Teachers are loaded from your EduPlus teacher directory.</div></div></div></form></div><div class="modal-footer px-4 py-3"><button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button><button type="submit" form="timetableForm" class="btn-gold"><i class="fa-solid fa-check"></i> Save Class</button></div></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const DAYS=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const DAY_ORDER=Object.fromEntries(DAYS.map((d,i)=>[d,i]));
+let timetableData=[],teachersData=[],classModal,selectedDay="all";
+function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function readJSON(key,fallback){try{const v=JSON.parse(localStorage.getItem(key));return v??fallback}catch(e){return fallback}}
+function saveData(){localStorage.setItem("eduplus_timetable",JSON.stringify(timetableData))}
+function loadData(){const raw=readJSON("eduplus_timetable",[]);timetableData=Array.isArray(raw)?raw.filter(x=>x&&x.day&&x.period!==undefined&&x.class&&x.subject&&x.teacher):[];const ts=readJSON("eduplus_teachers",[]);teachersData=Array.isArray(ts)?ts.filter(t=>t&&t.name&&t.status!=="Inactive"):[]}
+function applyTheme(theme){document.body.classList.toggle("dark-mode",theme==="dark");const i=document.getElementById("theme-icon");if(i){i.classList.toggle("fa-moon",theme!=="dark");i.classList.toggle("fa-sun",theme==="dark")}localStorage.setItem("eduplus_theme",theme)}
+function toggleTheme(){applyTheme(document.body.classList.contains("dark-mode")?"light":"dark")}
+function toggleSidebar(){document.getElementById("sidebar").classList.toggle("open");document.getElementById("overlay").classList.toggle("show")}
+function closeSidebar(){document.getElementById("sidebar").classList.remove("open");document.getElementById("overlay").classList.remove("show")}
+function confirmLogout(){return confirm("Are you sure you want to log out?")}
+function periodLabel(p){const n=Number(p);const suffix=n===1?"st":n===2?"nd":n===3?"rd":"th";return Number.isFinite(n)?`${n}${suffix} Period`:String(p)}
+function initials(name){return String(name||"T").trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase()}
+function loadTeacherOptions(selected=""){const el=document.getElementById("teacher");el.innerHTML='<option value="">Select a teacher</option>';if(!teachersData.length){el.innerHTML+='<option value="Teacher to be assigned">Teacher to be assigned</option>';document.getElementById("teacherHint").textContent="No active teachers found. Add teachers in All Teachers first, or use Teacher to be assigned.";return}teachersData.forEach(t=>{const op=document.createElement("option");op.value=t.name;op.textContent=t.name+(t.subject?` · ${t.subject}`:"");el.appendChild(op)});if(selected&&!Array.from(el.options).some(o=>o.value===selected)){const op=document.createElement("option");op.value=selected;op.textContent=selected+" (not in active directory)";el.appendChild(op)}el.value=selected;document.getElementById("teacherHint").textContent="Choose an active teacher from your EduPlus teacher directory."}
+function updateStats(){document.getElementById("totalClasses").textContent=timetableData.length;document.getElementById("assignedTeachers").textContent=new Set(timetableData.map(x=>x.teacher)).size;document.getElementById("classGroups").textContent=new Set(timetableData.map(x=>String(x.class).trim().toLowerCase())).size}
+function setDayFilter(day){selectedDay=day;document.getElementById("dayFilter").value=day;renderWeekStrip();renderTimetable()}
+function renderWeekStrip(){const counts=Object.fromEntries(DAYS.map(d=>[d,timetableData.filter(x=>x.day===d).length]));document.getElementById("weekStrip").innerHTML=`<button class="day-tab ${selectedDay==="all"?"active":""}" onclick="setDayFilter('all')"><strong>Full Week</strong><span>${timetableData.length} lessons</span></button>`+DAYS.map(d=>`<button class="day-tab ${selectedDay===d?"active":""}" onclick="setDayFilter('${d}')"><strong>${d.slice(0,3)}</strong><span>${counts[d]} ${counts[d]===1?"lesson":"lessons"}</span></button>`).join("")}
+function renderTimetable(){const q=document.getElementById("searchInput").value.trim().toLowerCase();const rows=timetableData.map((x,index)=>({...x,_index:index})).filter(x=>(selectedDay==="all"||x.day===selectedDay)&&[x.day,x.period,x.class,x.subject,x.teacher].join(" ").toLowerCase().includes(q)).sort((a,b)=>(DAY_ORDER[a.day]??99)-(DAY_ORDER[b.day]??99)||Number(a.period)-Number(b.period));const body=document.getElementById("timetableBody");body.innerHTML=rows.map((x,i)=>`<tr><td><strong>${escapeHTML(x.day)}</strong></td><td><span class="period-badge">${escapeHTML(periodLabel(x.period))}</span></td><td><span class="class-badge">${escapeHTML(x.class)}</span></td><td><span class="subject-name">${escapeHTML(x.subject)}</span></td><td><div class="teacher-cell"><span class="teacher-avatar">${escapeHTML(initials(x.teacher))}</span>${escapeHTML(x.teacher)}</div></td><td class="action-col"><button class="action-btn" onclick="editClass(${x._index})" title="Edit class" aria-label="Edit class"><i class="fa-solid fa-pen"></i></button><button class="action-btn delete" onclick="deleteEntry(${x._index})" title="Delete class" aria-label="Delete class"><i class="fa-solid fa-trash"></i></button></td></tr>`).join("");document.getElementById("emptyState").hidden=rows.length!==0;updateStats();renderWeekStrip()}
+function openAddModal(){document.getElementById("timetableForm").reset();document.getElementById("editIndex").value="-1";document.getElementById("modalTitle").textContent="Add a Class";loadTeacherOptions();classModal.show()}
+function editClass(index){const x=timetableData[index];if(!x)return;document.getElementById("day").value=x.day;document.getElementById("period").value=String(x.period);document.getElementById("className").value=x.class;document.getElementById("subject").value=x.subject;document.getElementById("editIndex").value=String(index);loadTeacherOptions(x.teacher);document.getElementById("modalTitle").textContent="Edit Class Details";classModal.show()}
+function saveClass(e){e.preventDefault();const day=document.getElementById("day").value,period=document.getElementById("period").value,className=document.getElementById("className").value.trim(),subject=document.getElementById("subject").value.trim(),teacher=document.getElementById("teacher").value,index=Number(document.getElementById("editIndex").value);if(!className||!subject||!teacher){alert("Please complete all required fields.");return}const duplicate=timetableData.some((x,i)=>i!==index&&x.day===day&&String(x.period)===String(period)&&String(x.class).toLowerCase()===className.toLowerCase());if(duplicate){alert("This class already has an entry for the selected day and period. Please check the timetable.");return}const entry={day,period,class:className,subject,teacher};if(index>=0&&timetableData[index])timetableData[index]=entry;else timetableData.push(entry);saveData();selectedDay=day;document.getElementById("dayFilter").value=day;document.getElementById("searchInput").value="";classModal.hide();renderTimetable()}
+function deleteEntry(index){const x=timetableData[index];if(!x)return;if(confirm(`Remove ${x.subject} for ${x.class} on ${x.day}?`)){timetableData.splice(index,1);saveData();renderTimetable()}}
+function exportCSV(){if(!timetableData.length){alert("There are no timetable entries to export yet.");return}const headers=["Day","Period","Class","Subject","Teacher"];const data=[headers,...timetableData.slice().sort((a,b)=>(DAY_ORDER[a.day]??99)-(DAY_ORDER[b.day]??99)||Number(a.period)-Number(b.period)).map(x=>[x.day,periodLabel(x.period),x.class,x.subject,x.teacher])];const csv=data.map(row=>row.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8;"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="eduplus-timetable.csv";a.click();URL.revokeObjectURL(url)}
+document.addEventListener("DOMContentLoaded",()=>{classModal=new bootstrap.Modal(document.getElementById("classModal"));loadData();if(localStorage.getItem("eduplus_theme")==="dark")applyTheme("dark");document.getElementById("todayDate").textContent=new Intl.DateTimeFormat("en-PK",{weekday:"short",day:"numeric",month:"short",year:"numeric"}).format(new Date());try{const raw=readJSON("eduplus_user",null);if(raw){const name=raw.name||"Administrator";document.getElementById("adminName").textContent=name;document.getElementById("userAvatar").textContent=name.trim().charAt(0).toUpperCase()||"A";document.getElementById("schoolName").textContent=raw.school_name||"Your School"}}catch(e){}renderTimetable()});
+</script>
 </body>
 </html>
