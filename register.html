@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#050705">
     <title>EduPlus - Register</title>
+
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/favicon.png">
 
     <!-- Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
     <style>
@@ -62,7 +64,7 @@
             background-color: #0b203b;
         }
 
-        /* ================= TOP CORNER LOGO ================= */
+        /* TOP CORNER LOGO */
 
         .top-logo {
             position: absolute;
@@ -90,7 +92,7 @@
             color: var(--gold);
         }
 
-        /* ================= PARTICLES ================= */
+        /* PARTICLES */
 
         .particles-container {
             position: absolute;
@@ -122,7 +124,7 @@
             }
         }
 
-        /* ================= MAIN WRAPPER ================= */
+        /* MAIN WRAPPER */
 
         .main-wrapper {
             display: flex;
@@ -133,7 +135,7 @@
             z-index: 10;
         }
 
-        /* ================= LAMP SECTION ================= */
+        /* LAMP SECTION */
 
         .lamp-side {
             flex: 1;
@@ -308,7 +310,7 @@
             display: none;
         }
 
-        /* ================= REGISTER FORM ================= */
+        /* REGISTER FORM */
 
         .form-side {
             flex: 1;
@@ -420,7 +422,7 @@
             color: var(--gold-dark);
         }
 
-        /* ================= REGISTER BUTTON ================= */
+        /* REGISTER BUTTON */
 
         .btn-register {
             width: 100%;
@@ -482,7 +484,7 @@
             min-width: 0;
         }
 
-        /* ================= MOBILE RESPONSIVE ================= */
+        /* MOBILE RESPONSIVE */
 
         @media (max-width: 991px) {
             .main-wrapper {
@@ -664,8 +666,23 @@
 
     </div>
 
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- JavaScript Logic -->
     <script>
+
+        // ================= SUPABASE CONNECTION =================
+
+        const SUPABASE_URL = "https://xgszqeqjvdewdzleodhi.supabase.co";
+
+        const SUPABASE_KEY = "sb_publishable_oVzzbEGaxdmlBuopShnSEg_jBX0V9eg";
+
+        const supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
 
         // ================= GENERATE PARTICLES =================
 
@@ -687,6 +704,7 @@
 
             particlesContainer.appendChild(particle);
         }
+
 
         // ================= LAMP INTERACTION =================
 
@@ -710,37 +728,109 @@
             }
         }, { once: true });
 
-        // ================= REGISTER FORM =================
 
-        function handleRegister(event) {
+        // ================= REAL SUPABASE REGISTRATION =================
+
+        async function handleRegister(event) {
 
             event.preventDefault();
 
             const btn = document.getElementById("registerBtn");
 
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+            const institutionType = document.getElementById("instType").value.trim();
+            const schoolName = document.getElementById("schoolName").value.trim();
+            const adminName = document.getElementById("adminName").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            // Check empty fields
+            if (
+                !institutionType ||
+                !schoolName ||
+                !adminName ||
+                !phone ||
+                !email ||
+                !password
+            ) {
+                alert("Please complete all registration fields.");
+                return;
+            }
+
+            // Button loading state
             btn.disabled = true;
-            btn.style.color = "#fff";
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
 
-            setTimeout(() => {
+            try {
 
-                btn.innerHTML = '<i class="fas fa-check"></i> Success!';
+                const { data, error } = await supabaseClient.auth.signUp({
+
+                    email: email,
+                    password: password,
+
+                    options: {
+
+                        // Redirect after email verification
+                        emailRedirectTo: window.location.origin +
+                            window.location.pathname.replace(
+                                /register\.html$/,
+                                "login.html"
+                            ),
+
+                        // These details are used by the database trigger
+                        data: {
+                            school_name: schoolName,
+                            admin_name: adminName,
+                            institution_type: institutionType,
+                            phone: phone
+                        }
+                    }
+                });
+
+                if (error) {
+                    throw error;
+                }
+
+                if (!data.user) {
+                    throw new Error("Registration could not be completed. Please try again.");
+                }
+
+                // Success button state
+                btn.innerHTML = '<i class="fas fa-check"></i> Account Created!';
+
                 btn.style.background = "var(--green)";
                 btn.style.borderColor = "var(--green)";
                 btn.style.color = "#fff";
 
-                const schoolName = document.getElementById("schoolName").value;
+                alert(
+                    "Registration successful!\n\n" +
+                    "Your institution account has been created.\n\n" +
+                    "Please check your email and click the verification link.\n\n" +
+                    "After verifying your email, return to EduPlus and log in."
+                );
 
-                localStorage.setItem("eduplus_user", JSON.stringify({
-                    name: "Admin",
-                    school_name: schoolName
-                }));
-
+                // Redirect to login page
                 setTimeout(() => {
                     window.location.href = "login.html";
-                }, 1500);
+                }, 1200);
 
-            }, 1500);
+            } catch (error) {
+
+                console.error("Registration error:", error);
+
+                alert(
+                    "Registration failed:\n\n" +
+                    (error.message || "Please try again.")
+                );
+
+                // Restore button
+                btn.disabled = false;
+                btn.innerHTML = "Sign Up";
+
+                btn.style.background = "";
+                btn.style.borderColor = "";
+                btn.style.color = "";
+            }
         }
 
     </script>
