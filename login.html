@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#050705">
     <title>EduPlus - Login</title>
+
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mariamkhan00/eduplus-system/main/favicon.png">
 
     <!-- Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
     <style>
@@ -632,26 +634,48 @@
 
     </div>
 
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- JavaScript Logic -->
     <script>
+
+        // ================= SUPABASE CONNECTION =================
+
+        const SUPABASE_URL = "https://xgszqeqjvdewzdleodhi.supabase.co";
+
+        const SUPABASE_KEY = "sb_publishable_oVzzbEGaxdmlBuopShnSEg_jBX0V9eg";
+
+        const supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
         // ================= GENERATE PARTICLES =================
+
         const particlesContainer = document.getElementById("particles");
 
         for (let i = 0; i < 15; i++) {
+
             let particle = document.createElement("div");
             particle.classList.add("particle");
 
             let size = Math.random() * 4 + 1;
+
             particle.style.width = `${size}px`;
             particle.style.height = `${size}px`;
             particle.style.left = `${Math.random() * 100}%`;
             particle.style.top = `${Math.random() * 100}%`;
             particle.style.animationDelay = `${Math.random() * 5}s`;
             particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+
             particlesContainer.appendChild(particle);
         }
 
+
         // ================= LAMP INTERACTION =================
+
         const pullString = document.getElementById("pullString");
         const body = document.body;
 
@@ -672,35 +696,168 @@
             }
         }, { once: true });
 
-        // ================= LOGIN FORM =================
-        function handleLogin(event) {
+
+        // ================= REAL SUPABASE LOGIN =================
+
+        async function handleLogin(event) {
+
             event.preventDefault();
 
             const btn = document.getElementById("loginBtn");
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            if (!email || !password) {
+                alert("Please enter your email and password.");
+                return;
+            }
+
             btn.disabled = true;
+
+            btn.innerHTML =
+                '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+
             btn.style.color = "#fff";
 
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-check"></i> Success!';
+            let authenticated = false;
+
+            try {
+
+                // STEP 1: Authenticate user
+
+                const { data: loginData, error: loginError } =
+                    await supabaseClient.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+
+                if (loginError) {
+                    throw loginError;
+                }
+
+                if (!loginData.user) {
+                    throw new Error("User authentication failed.");
+                }
+
+                authenticated = true;
+
+                const user = loginData.user;
+
+
+                // STEP 2: Get school membership
+
+                const { data: membership, error: memberError } =
+                    await supabaseClient
+                        .from("school_members")
+                        .select("school_id, role")
+                        .eq("user_id", user.id)
+                        .maybeSingle();
+
+                if (memberError) {
+                    throw memberError;
+                }
+
+                if (!membership) {
+                    throw new Error(
+                        "School membership not found. Please contact support."
+                    );
+                }
+
+
+                // STEP 3: Get school information
+
+                const { data: school, error: schoolError } =
+                    await supabaseClient
+                        .from("schools")
+                        .select("*")
+                        .eq("id", membership.school_id)
+                        .single();
+
+                if (schoolError) {
+                    throw schoolError;
+                }
+
+                if (!school) {
+                    throw new Error("School information could not be found.");
+                }
+
+
+                // STEP 4: Save account information locally
+
+                localStorage.setItem(
+                    "eduplus_user",
+                    JSON.stringify({
+
+                        id: user.id,
+
+                        email: user.email,
+
+                        name: school.admin_name || "Admin",
+
+                        school_name: school.school_name,
+
+                        school_id: school.id,
+
+                        institution_type: school.institution_type,
+
+                        phone: school.contact_phone,
+
+                        role: membership.role
+
+                    })
+                );
+
+
+                // STEP 5: Show success
+
+                btn.innerHTML =
+                    '<i class="fas fa-check"></i> Success!';
+
                 btn.style.background = "var(--green)";
                 btn.style.borderColor = "var(--green)";
                 btn.style.color = "#fff";
 
-                // Keep the existing demo-login behavior
-                const savedUser = localStorage.getItem("eduplus_user");
-                if (!savedUser) {
-                    localStorage.setItem("eduplus_user", JSON.stringify({
-                        name: "Admin",
-                        school_name: "EduPlus Institution"
-                    }));
+
+                alert(
+                    "Login successful!\n\n" +
+                    "Welcome to " + school.school_name + "!"
+                );
+
+
+                // STEP 6: Open dashboard
+
+                window.location.href = "dashboard.html";
+
+
+            } catch (error) {
+
+                console.error("Login error:", error);
+
+                // Sign out if authentication worked
+                // but school information could not be loaded
+
+                if (authenticated) {
+                    await supabaseClient.auth.signOut();
                 }
 
-                setTimeout(() => {
-                    window.location.href = "dashboard.html";
-                }, 1200);
-            }, 1500);
+                alert(
+                    "Login failed:\n\n" +
+                    (error.message || "Please check your details and try again.")
+                );
+
+                btn.disabled = false;
+
+                btn.innerHTML = "Sign In";
+
+                btn.style.background = "";
+                btn.style.borderColor = "";
+                btn.style.color = "";
+
+            }
         }
+
     </script>
+
 </body>
 </html>
