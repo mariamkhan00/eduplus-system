@@ -649,6 +649,19 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_KEY
 );
 
+// TEMPORARY SUPABASE CONNECTION TEST
+fetch(SUPABASE_URL + "/auth/v1/health", {
+    headers: {
+        apikey: SUPABASE_KEY
+    }
+})
+.then(response => {
+    console.log("Supabase HTTP Status:", response.status);
+    return response.text();
+})
+.then(data => console.log("Supabase Response:", data))
+.catch(error => console.error("Supabase Connection Error:", error));
+
 
         // ================= GENERATE PARTICLES =================
 
